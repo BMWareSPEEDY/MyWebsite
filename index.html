@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayansh Paliwal - Personal Blog & Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+        --primary-color: #ff3c38; /* 🔥 Bold red */
+        --secondary-color: #0057ff; /* 💙 Strong blue */
+        --accent-color: #ff6f91; /* Soft reddish-pink accent */
+        --text-primary: #1a1a2e; /* Deep navy/black for high contrast */
+        --text-secondary: #3d3d5c; /* Softer bluish text */
+        --bg-primary: #ffffff; /* Clean white background */
+        --bg-secondary: #f0f4ff; /* Very light blue */
+        --border-color: #dbe2ef; /* Soft border */
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Red to Blue gradient */
+        }
+
+
+        [data-theme="dark"] {
+        --text-primary: #f5f5f5;
+        --text-secondary: #c0c0c0;
+        --bg-primary: #121212;
+        --bg-secondary: #1e1e2e;
+        --border-color: #333;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--bg-primary);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Home Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .welcome-intro {
+            background: var(--bg-secondary);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .welcome-intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .featured-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .post-card {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .profile-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--primary-color);
+        }
+
+        .about-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .interest-tag {
+            background: var(--gradient);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .fun-fact {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* School Section */
+        .school-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .subjects-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .subject-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Achievements Section */
+        .timeline {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 30px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 30px);
+        }
+
+        .timeline-content {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid var(--bg-primary);
+        }
+
+        /* Hobbies Section */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hobby-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .hobby-card:hover {
+            transform: scale(1.02);
+        }
+
+        .hobby-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .hobby-content {
+            padding: 1.5rem;
+        }
+
+        .hobby-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Blog Section */
+        .blog-posts {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-post {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .blog-post h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-info {
+            margin-top: 1rem;
+        }
+
+        .footer-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--border-color);
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 50px;
+                margin-right: 0;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+        .category-section {
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 0.5rem;
+}
+
+.category-icon {
+    font-size: 2rem;
+    margin-right: 0.75rem;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievement-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #3498db;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-card h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.achievement-date {
+    color: #7f8c8d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.achievement-card p:last-child {
+    color: #34495e;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+    }
+    
+    .achievement-card {
+        padding: 1.25rem;
+    }
+}
+
+/* Add some color variations for different categories */
+.category-section:nth-child(2) .achievement-card {
+    border-left-color: #e74c3c;
+}
+
+.category-section:nth-child(3) .achievement-card {
+    border-left-color: #27ae60;
+}
+
+.category-section:nth-child(4) .achievement-card {
+    border-left-color: #f39c12;
+}
+
+.category-section:nth-child(5) .achievement-card {
+    border-left-color: #9b59b6;
+}
+    </style>
+</head>
+<body data-theme="light">
+    <header>
+        <nav>
+            <div class="logo">Ayansh Paliwal</div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-section="about">About Me</a></li>
+                <li><a href="#" class="nav-link" data-section="school">School</a></li>
+                <li><a href="#" class="nav-link" data-section="achievements">Achievements</a></li>
+                <li><a href="#" class="nav-link" data-section="hobbies">Hobbies</a></li>
+                <li><a href="#" class="nav-link" data-section="blog">Blog</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Welcome to My Blogging Space</h1>
+            </div>
+            
+            <div class="container">
+                <div class="welcome-intro">
+                    <h2>Hi, I'm Ayansh!</h2>
+                    <p>Passionate about creating cutting-edge applications, competing in robotics championships, and pushing the boundaries of what's possible with technology. From mobile apps to game development, I turn ideas into reality through code. </p>
+                </div>
+
+                <h2>Featured Posts</h2>
+                    <div class="featured-posts">
+                        <div class="post-card" onclick="openBlogFromHome('programming')">
+                            <h3>TISB Hacks</h3>
+                            <p>Won TISB Hacks, an inter-school competition where teams of 2-5 built applications based on a set theme...</p>
+                            <small>Programming Journey</small>
+                        </div>
+
+                        <div class="post-card" onclick="openBlogFromHome('sciencefair')">
+                            <h3>Science Fair Victory</h3>
+                            <p>Our Cas-9 model and presentation won first place in my school's, TISB, annual science fair competition...</p>
+                            <small>March 21, 2025</small>
+                        </div>
+                        
+                        <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
+                            <h3>Odyssey of the Mind State Finals</h3>
+                            <p>Led my team to state-level competition, showing leadership qualities by dividing tasks and tracking progress when things were falling apart...</p>
+                            <small>2022-23 Competition</small>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h1>About Me</h1>
+                <div class="about-content">
+                    <div>
+                        <img src="assets/profile_picture.jpeg" alt="Ayansh Paliwal" class="profile-photo">
+                    </div>
+                    <div class="about-text">
+                        <h2>Hello, I'm Ayansh Paliwal</h2>
+                        <p>I'm a dedicated student with a passion for technology, programming, and creative problem-solving. Based in India, I'm constantly exploring new technologies and working on innovative projects that challenge me to grow as a developer.</p>
+                        <br>
+                        <p>My journey includes mastering all 10 levels of abacus by age 11, programming in multiple languages since age 10, and building robots for competitions. I'm also passionate about sports, holding a Red belt in Karate and winning awards in swimming.</p>
+                        <br>
+                        <p>I believe in the power of continuous learning and enjoy sharing my knowledge with others. My goal is to use technology to create meaningful solutions that can make a positive impact on the world, especially in areas like education and sustainability.</p>
+                        <br>
+                        <h3>My Interests</h3>
+                        <div class="interests">
+                            <span class="interest-tag">Python & Java</span>
+                            <span class="interest-tag">Mobile App Development</span>
+                            <span class="interest-tag">Game Development</span>
+                            <span class="interest-tag">Competitive Programming</span>
+                            <span class="interest-tag">Competitive Robotics</span>
+                        </div>
+
+                        <div class="fun-fact">
+                            <h4>Fun Fact</h4>
+                            <p>"Code is like humor. When you have to explain it, it's bad." - This quote by Cory House reminds me to write clean, self-explanatory code that speaks for itself!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- School Section -->
+        <section id="school" class="section">
+            <div class="container">
+                <h1>School Life</h1>
+                <div class="school-info">
+                    <div class="info-card">
+                        <h3>Current Education</h3>
+                        <p><strong>Grade:</strong> 8th Grade</p>
+                        <p><strong>School:</strong> TISB: The International School Bangalore</p>
+                        <p><strong>Location:</strong> India</p>
+                        <p><strong>Focus:</strong> Computer Science, Mathematics & Physics</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Favorite Subjects</h3>
+                        <div class="subjects-list">
+                            <div class="subject-item">
+                                <i class="fas fa-code" style="color: var(--primary-color);"></i>
+                                <h4>Computer Science</h4>
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-calculator" style="color: var(--primary-color);"></i>
+                                <h4>Mathematics</h4>
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-flask" style="color: var(--primary-color);"></i>
+                                <h4>Physics</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <div class="container">
+                <h1>My Achievements</h1>
+                <!-- Robotics Category -->
+        <div class="category-section">
+            <h2 class="category-title">
+                <span class="category-icon">🤖</span>
+                Robotics
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3>MateROV Competition</h3>
+                    <p class="achievement-date">May 17–18, 2025</p>
+                    <p>Won first place in the regional MateROV competition. Built an underwater ROV capable of completing complex missions. Gained valuable exposure to underwater robotics. Competed at the international level in Alpena, Michigan, placing 28th globally.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <h3>Techkriti at IIT Kanpur</h3>
+                    <p class="achievement-date">March 28, 2025</p>
+                    <p>Participated in three events at IIT Kanpur's Techkriti: placed 2nd in IARC, 10th in Robowars (category), and 12th in Manoeuvre. Connected with like-minded peers and explored diverse applications of robotics such as flying, combat, and racing.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Science & Innovation Category -->
+        <div class="category-section">
+            <h2 class="category-title">
+                <span class="category-icon">🔬</span>
+                Science & Innovation
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3>Science Fair Victory</h3>
+                    <p class="achievement-date">March 21, 2025</p>
+                    <p>Won first place at TISB Science Fair for a Cas-9 model, demonstrating innovation, teamwork, and leadership.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <h3>Odyssey of the Mind – State Finals</h3>
+                    <p class="achievement-date">2022–23</p>
+                    <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sports Category -->
+        <div class="category-section">
+            <h2 class="category-title">
+                <span class="category-icon">🏆</span>
+                Sports
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3>State-Level Karate Tournament</h3>
+                    <p class="achievement-date">October 2023</p>
+                    <p>Secured 2nd place in both Sparring and Form categories, reflecting over two years of dedicated training.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <h3>Multi-Sport Awards</h3>
+                    <p class="achievement-date">Since Age 7</p>
+                    <p>Won awards at zonal and state levels in roller skating and swimming, along with achievements in school sports.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Skills Category -->
+        <div class="category-section">
+            <h2 class="category-title">
+                <span class="category-icon">🧮</span>
+                Academic Skills
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3>Abacus Mastery</h3>
+                    <p class="achievement-date">Ages 7–11</p>
+                    <p>Completed all 10 levels of abacus training, enhancing mental math and pattern recognition skills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>       
+
+<!-- Hobbies Section -->
+<section id="hobbies" class="section">
+  <div class="container">
+    <h1>My Hobbies & Interests</h1>
+    <div class="hobbies-grid">
+      <div class="hobby-card">
+        <div class="hobby-image">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="hobby-content">
+          <h3>Robotics & Arduino</h3>
+          <p>I started tinkering with robots early on — from basic VEX bots to advanced custom designs. Representing Robot Revolution at the state level was a proud moment for me. I taught myself Arduino through YouTube, building cool, functional projects that solved real problems.</p>
+        </div>
+      </div>
+
+      <div class="hobby-card">
+        <div class="hobby-image">
+          <i class="fas fa-code"></i>
+        </div>
+        <div class="hobby-content">
+          <h3>Programming</h3>
+          <p>I started coding at age 10, diving into Python, and JavaScript. Since then, I have expanded my knowlange to learning kotlin and dart for app development, C++ for game development. I also taught myself the Arduino Programming Language. I love how coding turns ideas into real tools and games, and it’s my favorite way to solve problems creatively.</p>
+        </div>
+      </div>
+
+      <div class="hobby-card">
+        <div class="hobby-image">
+          <i class="fas fa-fist-raised"></i>
+        </div>
+        <div class="hobby-content">
+          <h3>Martial Arts</h3>
+          <p>I trained in Karate at Moo Duk Kwan and earned my red belt after more than 2 years of consistent effort. I’ve competed and won at multiple regional tournaments — it’s taught me resilience, focus, and confidence.</p>
+        </div>
+      </div>
+
+      <div class="hobby-card">
+        <div class="hobby-image">
+          <i class="fas fa-running"></i>
+        </div>
+        <div class="hobby-content">
+          <h3>Sports & Athletics</h3>
+          <p>Sports have always been a big part of my life. From roller skating and competitive swimming to soccer, I’ve trained and competed since I was 7. I’ve earned medals at zonal and state levels, and I enjoy pushing my physical limits.</p>
+        </div>
+      </div>
+
+      <div class="hobby-card">
+        <div class="hobby-image">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <div class="hobby-content">
+          <h3>Mental Mathematics</h3>
+          <p>I completed all 10 levels of abacus training, and it unlocked crazy-fast mental math skills. I love working with numbers and solving puzzles using patterns — it's like mental gymnastics for me.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" class="section">
+    <div class="container">
+      <h1>My Blog</h1>
+      <div class="blog-posts">
+        <div class="blog-post" onclick="openPopup('odyssey')">
+          <h3>Leading Through Challenges: My Odyssey of the Mind Experience</h3>
+          <div class="blog-meta">Published on March 15, 2025</div>
+          <p>Click to read more about how I led my team through challenges in the Odyssey of the Mind competition.</p>
+        </div>
+  
+        <div class="blog-post" onclick="openPopup('sciencefair')">
+          <h3>Science Fair Victory</h3>
+          <div class="blog-meta">Published on March 21, 2025</div>
+          <p>Learn how I led a team to win first place in the Science Fair at TISB with our Cas-9 model, focusing on leadership and presentation.</p>
+        </div>
+  
+        <div class="blog-post" onclick="openPopup('materov')">
+          <h3>Building an Underwater Robot for MateROV</h3>
+          <div class="blog-meta">Published on June 23, 2025</div>
+          <p>How I built and competed with an underwater ROV in MateROV, leading to an international experience in the U.S.</p>
+        </div>
+  
+        <div class="blog-post" onclick="openPopup('techkriti')">
+          <h3>My Techkriti IIT Kanpur Experience</h3>
+          <div class="blog-meta">Published on March 30, 2025</div>
+          <p>A deep dive into my first time competing in Robowars, IARC, and Manouver at one of India's biggest techfests — Techkriti.</p>
+        </div>
+
+        <div class="blog-post" onclick="openPopup('TISB_Hacks')">
+            <h3>TISB Hacks</h3>
+            <div class="blog-meta">Published on January 26, 2025</div>
+            <p>My first inter-school competition where me and my friend, make an app that solved a problem.</p>
+        </div>
+      </div>
+    </div>
+  </section>  
+
+<!-- Blog Popup (Fullscreen) -->
+<div id="blog-popup" class="popup">
+  <div class="popup-content">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <h2 id="popup-title"></h2>
+    <div class="popup-meta" id="popup-meta"></div>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
+</div>
+
+<!-- Styles for Popup + Blog -->
+<style>
+.scaled-blog-image {
+  max-width: 100%;
+  height: auto;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.blog-post {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.blog-post:hover {
+  transform: scale(1.02);
+}
+.blog-post img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.popup-content {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  animation: slideUp 0.4s ease;
+  box-shadow: var(--shadow);
+}
+
+.popup-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.popup-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.popup-body p,
+.popup-body img {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.popup-body img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+</style>
+
+<!-- Blog JavaScript -->
+<script>
+const blogPopupData = {
+  odyssey: {
+    title: "Leading Through Challenges: My Odyssey of the Mind Experience",
+    meta: "Published on March 15, 2025",
+    body: `
+      <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
+      <img src="https://via.placeholder.com/800x400" alt="Odyssey Team Photo">
+      <p>I was responsible for organizing tasks, ensuring timely submissions, and keeping the team spirit alive.</p>
+    `
+  },
+  materov: {
+    title: "MATE ROV Competition",
+    meta: "Published on June 23, 2025",
+    body: `
+      <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 28th globally—a strong showing for our first time at the event.</p>
+      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
+      <p>This competition marked my first experience in underwater robotics, providing valuable exposure and learning opportunities. </p>
+`
+  },
+  techkriti: {
+    title: "Techkriti Techfest Experience",
+    meta: "Published on March 30, 2025",
+    body: `
+      <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned 2nd place in IARC, placed 10th in our category in Robowars, and secured 12th place in Manouver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics. It also greatly expanded my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
+
+<img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
+<br>
+<p>This event was a fantastic platform for learning and growth, and I look forward to participating in more such competitions in the future.</p>
+
+`
+  },
+  TISB_Hacks: {
+    title: "TISB Hacks",
+    meta: "Published on January 26, 2025",
+    body: `
+      <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format. This is the github project link for the app: https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani</p>
+      <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate"style="transform: rotate(90deg); max-width: 100%; height: auto;">
+      <p>This event was a fun experience that helped to learn and challenge myself </p>
+`
+  },
+  sciencefair: {
+    title: "Science Fair Victory",
+    meta: "Published on March 21, 2025",
+    body: `
+      <p>After two months of hard work, my team of five and I won first place in the Science Fair under the Still Model category. As the team leader, I was responsible for designing the model. I used Blender, a 3D modeling software, and with some help from the internet for reference images, I created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes. This helped me expand my biology and chemistry knowlange beyond the sylabus. It was a unique experience, and I felt incredibly proud and happy when we won.</p>
+
+      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
+
+      <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
+`
+  },
+};
+
+function openPopup(id) {
+  const data = blogPopupData[id];
+  if (!data) return;
+  document.getElementById('popup-title').innerText = data.title;
+  document.getElementById('popup-meta').innerText = data.meta;
+  document.getElementById('popup-body').innerHTML = data.body;
+  document.getElementById('blog-popup').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('blog-popup').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+</script>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Ayansh Paliwal</h3>
+            <p>Student | Developer | Creator</p>
+            
+            <div class="social-links">
+                <a href="mailto:ayanshpaliwal2012@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/BMWareSPEEDY" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            
+            <div class="footer-info">
+                <p><a href="mailto:ayanshpaliwal2012@gmail.com">ayanshpaliwal2012@gmail.com</a></p>
+                <p>&copy; 2025 Ayansh Paliwal. Made with ❤️ and lots of work.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinksContainer = document.querySelector('.nav-links');
+
+        // Section switching
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                navLinks.forEach(nl => nl.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Show corresponding section
+                const targetSection = link.getAttribute('data-section');
+                document.getElementById(targetSection).classList.add('active');
+                
+                // Close mobile menu if open
+                navLinksContainer.classList.remove('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Mobile menu toggle
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            if (navLinksContainer.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Load saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+            }
+        }
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Add animation on scroll for timeline items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items and cards for animation
+        document.querySelectorAll('.timeline-item, .post-card, .hobby-card, .info-card').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+
+        // Add typing effect to hero text (optional enhancement)
+        const heroTitle = document.querySelector('.hero h1');
+        const heroText = "Welcome to My Digital Space";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < heroText.length) {
+                heroTitle.textContent = heroText.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Start typing effect when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                heroTitle.textContent = '';
+                charIndex = 0;
+                typeWriter();
+            }, 500);
+        });
+
+        // Add click effect to buttons and cards
+        document.querySelectorAll('.post-card, .hobby-card, .info-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Form submission handling (for future contact forms)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            // Add form handling logic here
+            alert('Thank you for your message! I\'ll get back to you soon.');
+        }
+
+        // Add some interactive easter eggs
+        let clickCount = 0;
+        document.querySelector('.logo').addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 5) {
+                alert('🎉 You found the easter egg! Thanks for exploring my site!');
+                clickCount = 0;
+            }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                navLinksContainer.classList.remove('active');
+                mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        // Performance optimization: lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        function openBlogFromHome(postId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+
+            // Show blog section
+            document.getElementById('blog').classList.add('active');
+
+            // Scroll to blog
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Optional: Highlight specific post
+            const blogPosts = {
+                odyssey: "Leading Through Challenges: My Odyssey of the Mind Experience",
+                sciencefair: "Science Fair Victory",
+                TISB_Hacks: "My Journey with Competitive Programming"
+            };
+
+            setTimeout(() => {
+                const blog = document.getElementById('blog');
+                const posts = blog.querySelectorAll('.blog-post');
+                posts.forEach(post => {
+                    if (post.querySelector('h3')?.textContent.includes(blogPosts[postId])) {
+                        post.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        post.style.outline = '3px solid var(--primary-color)';
+                        setTimeout(() => post.style.outline = '', 2000);
+                    }
+                });
+            }, 500);
+        }
+
+    </script>
+</body>
+</html>
