@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +9,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-        --primary-color: #ff3c38; /* 🔥 Bold red */
-        --secondary-color: #0057ff; /* 💙 Strong blue */
-        --accent-color: #ff6f91; /* Soft reddish-pink accent */
-        --text-primary: #1a1a2e; /* Deep navy/black for high contrast */
-        --text-secondary: #3d3d5c; /* Softer bluish text */
-        --bg-primary: #ffffff; /* Clean white background */
-        --bg-secondary: #f0f4ff; /* Very light blue */
-        --border-color: #dbe2ef; /* Soft border */
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Red to Blue gradient */
+            /* Modern, refined palette */
+            --primary-color: #e02737;
+            /* Softer, modern red */
+            --secondary-color: #009dff;
+            /* Muted, professional blue */
+            --accent-color: #a8dadc;
+            /* Soft cyan/teal for accents */
+            --text-primary: #1d3557;
+            /* Deep navy for text */
+            --text-secondary: #4a5568;
+            /* Grayish-blue for secondary text */
+            --bg-primary: #f8fafc;
+            /* Very light cool gray/white */
+            --bg-secondary: rgba(255, 255, 255, 0.8);
+            /* Glass effect base */
+            --border-color: rgba(203, 213, 225, 0.6);
+            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            /* Softer, deeper shadow */
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --gradient: linear-gradient(135deg, #ff0015 0%, #009dff 100%);
         }
 
 
         [data-theme="dark"] {
-        --text-primary: #f5f5f5;
-        --text-secondary: #c0c0c0;
-        --bg-primary: #121212;
-        --bg-secondary: #1e1e2e;
-        --border-color: #333;
+            --text-primary: #f1faee;
+            --text-secondary: #a8dadc;
+            --bg-primary: #0f172a;
+            /* Deep blue-gray-black */
+            --bg-secondary: rgba(30, 41, 59, 0.7);
+            /* Dark glass */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
         }
 
 
@@ -161,27 +175,192 @@
         }
 
         /* Home Section */
-        .hero {
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-            padding: 6rem 2rem;
-            margin-bottom: 4rem;
+        /* Hero Section - Split Layout */
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            min-height: 100vh;
+            overflow: hidden;
+            margin-bottom: 0;
+            /* Removing margin as it covers full screen */
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-backdrop {
+            position: relative;
+            background: url('assets/hero_bg.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* Dark overlay for text readability */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .hero-sidebar {
+            background: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-name {
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .skill-tag i {
+            color: var(--secondary-color);
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 900px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                /* Stack vertically */
+                min-height: auto;
+            }
+
+            .hero-backdrop {
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
         }
 
         .welcome-intro {
@@ -206,7 +385,9 @@
         }
 
         .post-card {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 15px;
             padding: 2rem;
             box-shadow: var(--shadow);
@@ -279,9 +460,12 @@
 
         .info-card {
             background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
         }
 
         .info-card h3 {
@@ -336,10 +520,13 @@
 
         .timeline-content {
             background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
             position: relative;
+            box-shadow: var(--shadow);
         }
 
         .timeline-marker {
@@ -472,10 +659,219 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Scroll-triggered animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section entrance animations */
+        .section {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Hero content animations */
+        .hero-content h2 {
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .hero-content h1 {
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+
+        .hero-content p {
+            animation: slideInLeft 1.2s ease 0.4s both;
+        }
+
+        .hero-sidebar {
+            animation: slideInRight 1s ease 0.3s both;
+        }
+
+        /* Skill tag stagger animation */
+        .skill-tag {
+            animation: scaleIn 0.5s ease both;
+        }
+
+        .skill-tag:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .skill-tag:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .skill-tag:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .skill-tag:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .skill-tag:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .skill-tag:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .skill-tag:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .skill-tag:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .skill-tag:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .skill-tag:nth-child(10) {
+            animation-delay: 0.55s;
+        }
+
+        .skill-tag:nth-child(11) {
+            animation-delay: 0.6s;
+        }
+
+        .skill-tag:nth-child(12) {
+            animation-delay: 0.65s;
+        }
+
+        /* Card hover enhancements */
+        .post-card,
+        .hobby-card,
+        .achievement-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .post-card:hover,
+        .achievement-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hobby-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline item animations */
+        .timeline-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .timeline-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .timeline-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .timeline-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .timeline-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .timeline-item:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        /* Navigation link hover effect */
+        .nav-links a {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Button animations */
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Popup entrance */
+        .popup {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-content {
+            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Responsive Design */
@@ -528,110 +924,124 @@
                 padding: 1rem;
             }
         }
+
         .category-section {
-    margin-bottom: 3rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.category-title {
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: #2c3e50;
-    border-bottom: 3px solid #3498db;
-    padding-bottom: 0.5rem;
-}
+        [data-theme="dark"] .category-section {
+            background: var(--bg-primary);
+            /* Or a slightly lighter dark shade */
+            box-shadow: none;
+            border: 1px solid var(--border-color);
+        }
 
-.category-icon {
-    font-size: 2rem;
-    margin-right: 0.75rem;
-}
+        .category-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
 
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.5rem;
-}
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 0.75rem;
+        }
 
-.achievement-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #3498db;
-}
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
 
-.achievement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+        .achievement-card {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #3498db;
+            cursor: pointer;
+        }
 
-.achievement-card h3 {
-    color: #2c3e50;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
 
-.achievement-date {
-    color: #7f8c8d;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+        .achievement-card h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
 
-.achievement-card p:last-child {
-    color: #34495e;
-    line-height: 1.6;
-    margin: 0;
-}
+        .achievement-date {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .category-section {
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-    }
-    
-    .category-title {
-        font-size: 1.5rem;
-    }
-    
-    .achievement-card {
-        padding: 1.25rem;
-    }
-}
+        .achievement-card p:last-child {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.9;
+        }
 
-/* Add some color variations for different categories */
-.category-section:nth-child(2) .achievement-card {
-    border-left-color: #e74c3c;
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
 
-.category-section:nth-child(3) .achievement-card {
-    border-left-color: #27ae60;
-}
+            .category-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
 
-.category-section:nth-child(4) .achievement-card {
-    border-left-color: #f39c12;
-}
+            .category-title {
+                font-size: 1.5rem;
+            }
 
-.category-section:nth-child(5) .achievement-card {
-    border-left-color: #9b59b6;
-}
+            .achievement-card {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Add some color variations for different categories */
+        .category-section:nth-child(2) .achievement-card {
+            border-left-color: #e74c3c;
+        }
+
+        .category-section:nth-child(3) .achievement-card {
+            border-left-color: #27ae60;
+        }
+
+        .category-section:nth-child(4) .achievement-card {
+            border-left-color: #f39c12;
+        }
+
+        .category-section:nth-child(5) .achievement-card {
+            border-left-color: #9b59b6;
+        }
     </style>
 </head>
+
 <body data-theme="light">
     <header>
         <nav>
@@ -657,37 +1067,89 @@
 
     <main>
         <!-- Home Section -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>Welcome to My Blogging Space</h1>
+        <section id="home" class="section active" style="padding-top: 0; max-width: 100%; margin: 0; width: 100%;">
+            <div class="hero-container">
+                <div class="hero-backdrop">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2>HELLO, I'M</h2>
+                        <h1>Ayansh Paliwal.</h1>
+                        <p>Student | Developer | Creator</p>
+                    </div>
+                </div>
+                <div class="hero-sidebar">
+                    <img src="assets/profile_picture.jpeg" alt="Ayansh Paliwal" class="hero-profile-img">
+                    <div class="hero-name">Ayansh Paliwal.</div>
+                    <div class="hero-bio">
+                        Passionate about creating cutting-edge applications, competing in robotics championships, and
+                        pushing the boundaries of what's possible with technology.
+                    </div>
+
+                    <div class="hero-buttons">
+                        <!-- "Contact" changed to "About" as per user request -->
+                        <a href="#" class="btn btn-white"
+                            onclick="document.querySelector('[data-section=\'about\']').click()">About Me</a>
+                        <a href="#" class="btn btn-outline"
+                            onclick="document.querySelector('[data-section=\'blog\']').click()">View Projects</a>
+                    </div>
+
+                    <div class="footer-info" style="margin-top: 2rem;">
+                        <a href="mailto:ayanshpaliwal2012@gmail.com"
+                            style="color: white; text-decoration: underline; font-size: 0.9rem;">ayanshpaliwal2012@gmail.com</a>
+                    </div>
+                </div>
             </div>
-            
+            <!-- Skills Section -->
+            <section id="skills" class="section active" style="display: block; margin-top: 4rem;">
+                <div class="container">
+                    <h1>My Skills</h1>
+                    <div class="skills-grid">
+                        <div class="skill-tag"><i class="fas fa-microchip"></i> Microcontrollers</div>
+                        <div class="skill-tag"><i class="fas fa-project-diagram"></i> Project Development</div>
+                        <div class="skill-tag"><i class="fab fa-java"></i> Java</div>
+                        <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-tag"><i class="fas fa-code"></i> C++</div>
+                        <div class="skill-tag"><i class="fab fa-android"></i> Kotlin</div>
+                        <div class="skill-tag"><i class="fas fa-mobile-alt"></i> Dart</div>
+                        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
+                        <div class="skill-tag"><i class="fas fa-robot"></i> Robotics</div>
+                        <div class="skill-tag"><i class="fas fa-users"></i> Leadership</div>
+                        <div class="skill-tag"><i class="fas fa-brain"></i> Problem Solving</div>
+                    </div>
+                </div>
+            </section>
             <div class="container">
                 <div class="welcome-intro">
                     <h2>Hi, I'm Ayansh!</h2>
-                    <p>Passionate about creating cutting-edge applications, competing in robotics championships, and pushing the boundaries of what's possible with technology. From mobile apps to game development, I turn ideas into reality through code. </p>
+                    <p>Passionate about creating cutting-edge applications, competing in robotics championships, and
+                        pushing the boundaries of what's possible with technology. From mobile apps to game development,
+                        I turn ideas into reality through code. </p>
                 </div>
 
-                <h2>Featured Posts</h2>
-                    <div class="featured-posts">
-                        <div class="post-card" onclick="openBlogFromHome('programming')">
-                            <h3>TISB Hacks</h3>
-                            <p>Won TISB Hacks, an inter-school competition where teams of 2-5 built applications based on a set theme...</p>
-                            <small>Programming Journey</small>
-                        </div>
-
-                        <div class="post-card" onclick="openBlogFromHome('sciencefair')">
-                            <h3>Science Fair Victory</h3>
-                            <p>Our Cas-9 model and presentation won first place in my school's, TISB, annual science fair competition...</p>
-                            <small>March 21, 2025</small>
-                        </div>
-                        
-                        <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
-                            <h3>Odyssey of the Mind State Finals</h3>
-                            <p>Led my team to state-level competition, showing leadership qualities by dividing tasks and tracking progress when things were falling apart...</p>
-                            <small>2022-23 Competition</small>
-                        </div>
+                <h2 style="margin-top: 4rem;">Featured Projects</h2>
+                <div class="featured-posts">
+                    <!-- Project 1: TISB Hacks (Programming) -->
+                    <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
+                        <h3>Meteor Tracking App</h3>
+                        <p>Developed a meteor tracking app using flutter and dart for TISB Hacks...</p>
+                        <small>Programming & Mobile Dev</small>
                     </div>
+
+                    <!-- Project 2: Science Fair (Science) -->
+                    <div class="post-card" onclick="openBlogFromHome('sciencefair')">
+                        <h3>Cas-9 Model</h3>
+                        <p>Won 1st Place at TISB Science Fair for building a detailed Cas-9 enzyme model...</p>
+                        <small>Science & Innovation</small>
+                    </div>
+
+                    <!-- Project 3: MateROV (Robotics) -->
+                    <div class="post-card" onclick="openBlogFromHome('materov')">
+                        <h3>Underwater ROV</h3>
+                        <p>Built an underwater robot for the MateROV competition, placing 28th globally...</p>
+                        <small>Robotics & Engineering</small>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -701,11 +1163,17 @@
                     </div>
                     <div class="about-text">
                         <h2>Hello, I'm Ayansh Paliwal</h2>
-                        <p>I'm a dedicated student with a passion for technology, programming, and creative problem-solving. Based in India, I'm constantly exploring new technologies and working on innovative projects that challenge me to grow as a developer.</p>
+                        <p>I'm a dedicated student with a passion for technology, programming, and creative
+                            problem-solving. Based in India, I'm constantly exploring new technologies and working on
+                            innovative projects that challenge me to grow as a developer.</p>
                         <br>
-                        <p>My journey includes mastering all 10 levels of abacus by age 11, programming in multiple languages since age 10, and building robots for competitions. I'm also passionate about sports, holding a Red belt in Karate and winning awards in swimming.</p>
+                        <p>My journey includes mastering all 10 levels of abacus by age 11, programming in multiple
+                            languages since age 10, and building robots for competitions. I'm also passionate about
+                            sports, holding a Red belt in Karate and winning awards in swimming.</p>
                         <br>
-                        <p>I believe in the power of continuous learning and enjoy sharing my knowledge with others. My goal is to use technology to create meaningful solutions that can make a positive impact on the world, especially in areas like education and sustainability.</p>
+                        <p>I believe in the power of continuous learning and enjoy sharing my knowledge with others. My
+                            goal is to use technology to create meaningful solutions that can make a positive impact on
+                            the world, especially in areas like education and sustainability.</p>
                         <br>
                         <h3>My Interests</h3>
                         <div class="interests">
@@ -718,7 +1186,8 @@
 
                         <div class="fun-fact">
                             <h4>Fun Fact</h4>
-                            <p>"Code is like humor. When you have to explain it, it's bad." - This quote by Cory House reminds me to write clean, self-explanatory code that speaks for itself!</p>
+                            <p>"Code is like humor. When you have to explain it, it's bad." - This quote by Cory House
+                                reminds me to write clean, self-explanatory code that speaks for itself!</p>
                         </div>
                     </div>
                 </div>
@@ -728,7 +1197,8 @@
         <!-- School Section -->
         <section id="school" class="section">
             <div class="container">
-                <h1>School Life</h1>
+                <h1>School Life & Education Journey</h1>
+
                 <div class="school-info">
                     <div class="info-card">
                         <h3>Current Education</h3>
@@ -756,6 +1226,67 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Education Timeline -->
+                <div class="timeline">
+                    <!-- TISB -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>The International School Bangalore (TISB)</h3>
+                            <p class="achievement-date">Grade 7 - Present</p>
+                            <p>Bangalore, India</p>
+                            <p>Currently pursuing middle school education with a strong focus on sciences and
+                                technology. Engaging in robotics competitions and competitive programming.</p>
+                        </div>
+                    </div>
+
+                    <!-- Millburn Middle School -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Millburn Middle School</h3>
+                            <p class="achievement-date">Grade 6</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Transitioned to middle school, participating in advanced math tracks and club activities.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Washington School Millburn -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Washington School Millburn</h3>
+                            <p class="achievement-date">Grade 5</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Completed elementary education with distinction.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wyoming School Millburn -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Wyoming Ementary School Millburn</h3>
+                            <p class="achievement-date">Grades 3 - 4</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Foundational years in the Millburn public school system.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mantan International School -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Mantan International School</h3>
+                            <p class="achievement-date">Pre KG - Grade 3</p>
+                            <p>Early Education</p>
+                            <p>Started educational journey in an international environment, fostering early curiosity
+                                and social skills.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -764,325 +1295,360 @@
             <div class="container">
                 <h1>My Achievements</h1>
                 <!-- Robotics Category -->
-        <div class="category-section">
-            <h2 class="category-title">
-                <span class="category-icon">🤖</span>
-                Robotics
-            </h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>MateROV Competition</h3>
-                    <p class="achievement-date">May 17–18, 2025</p>
-                    <p>Won first place in the regional MateROV competition. Built an underwater ROV capable of completing complex missions. Gained valuable exposure to underwater robotics. Competed at the international level in Alpena, Michigan, placing 28th globally.</p>
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon">🤖</span>
+                        Robotics
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('materov')">
+                            <h3>MateROV Competition</h3>
+                            <p class="achievement-date">May 17–18, 2025</p>
+                            <p>Won first place in the regional MateROV competition. Built an underwater ROV capable of
+                                completing complex missions. Gained valuable exposure to underwater robotics. Competed
+                                at the international level in Alpena, Michigan, placing 28th globally.</p>
+                        </div>
+
+                        <div class="achievement-card" onclick="openBlogFromHome('techkriti')">
+                            <h3>Techkriti at IIT Kanpur</h3>
+                            <p class="achievement-date">March 28, 2025</p>
+                            <p>Participated in three events at IIT Kanpur's Techkriti: placed 2nd in IARC, 10th in
+                                Robowars (category), and 12th in Manoeuvre. Connected with like-minded peers and
+                                explored diverse applications of robotics such as flying, combat, and racing.</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="achievement-card">
-                    <h3>Techkriti at IIT Kanpur</h3>
-                    <p class="achievement-date">March 28, 2025</p>
-                    <p>Participated in three events at IIT Kanpur's Techkriti: placed 2nd in IARC, 10th in Robowars (category), and 12th in Manoeuvre. Connected with like-minded peers and explored diverse applications of robotics such as flying, combat, and racing.</p>
+
+                <!-- Science & Innovation Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon">🔬</span>
+                        Science & Innovation
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('sciencefair')">
+                            <h3>Science Fair Victory</h3>
+                            <p class="achievement-date">March 21, 2025</p>
+                            <p>Won first place at TISB Science Fair for a Cas-9 model, demonstrating innovation,
+                                teamwork, and leadership.</p>
+                        </div>
+
+                        <div class="achievement-card" onclick="openBlogFromHome('odyssey')">
+                            <h3>Odyssey of the Mind – State Finals</h3>
+                            <p class="achievement-date">2022–23</p>
+                            <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed
+                                qualifying for the World Finals.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Sports Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon">🏆</span>
+                        Sports
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card">
+                            <h3>State-Level Karate Tournament</h3>
+                            <p class="achievement-date">October 2023</p>
+                            <p>Secured 2nd place in both Sparring and Form categories, reflecting over two years of
+                                dedicated training.</p>
+                        </div>
+
+                        <div class="achievement-card">
+                            <h3>Multi-Sport Awards</h3>
+                            <p class="achievement-date">Since Age 7</p>
+                            <p>Won awards at zonal and state levels in roller skating and swimming, along with
+                                achievements in school sports.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Skills Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon">🧮</span>
+                        Academic Skills
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card">
+                            <h3>Abacus Mastery</h3>
+                            <p class="achievement-date">Ages 7–11</p>
+                            <p>Completed all 10 levels of abacus training, enhancing mental math and pattern recognition
+                                skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="section">
+            <div class="container">
+                <h1>My Hobbies & Interests</h1>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Robotics & Arduino</h3>
+                            <p>I started tinkering with robots early on — from basic VEX bots to advanced custom
+                                designs. Representing Robot Revolution at the state level was a proud moment for me. I
+                                taught myself Arduino through YouTube, building cool, functional projects that solved
+                                real problems.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Programming</h3>
+                            <p>I started coding at age 10, diving into Python, and JavaScript. Since then, I have
+                                expanded my knowlange to learning kotlin and dart for app development, C++ for game
+                                development. I also taught myself the Arduino Programming Language. I love how coding
+                                turns ideas into real tools and games, and it’s my favorite way to solve problems
+                                creatively.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Martial Arts</h3>
+                            <p>I trained in Karate at Moo Duk Kwan and earned my red belt after more than 2 years of
+                                consistent effort. I’ve competed and won at multiple regional tournaments — it’s taught
+                                me resilience, focus, and confidence.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Sports & Athletics</h3>
+                            <p>Sports have always been a big part of my life. From roller skating and competitive
+                                swimming to soccer, I’ve trained and competed since I was 7. I’ve earned medals at zonal
+                                and state levels, and I enjoy pushing my physical limits.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Mental Mathematics</h3>
+                            <p>I completed all 10 levels of abacus training, and it unlocked crazy-fast mental math
+                                skills. I love working with numbers and solving puzzles using patterns — it's like
+                                mental gymnastics for me.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="container">
+                <h1>My Blog</h1>
+                <div class="blog-posts">
+                    <div class="blog-post" onclick="openPopup('odyssey')">
+                        <h3>Leading Through Challenges: My Odyssey of the Mind Experience</h3>
+                        <div class="blog-meta">Published on March 15, 2025</div>
+                        <p>Click to read more about how I led my team through challenges in the Odyssey of the Mind
+                            competition.</p>
+                    </div>
+
+                    <div class="blog-post" onclick="openPopup('sciencefair')">
+                        <h3>Science Fair Victory</h3>
+                        <div class="blog-meta">Published on March 21, 2025</div>
+                        <p>Learn how I led a team to win first place in the Science Fair at TISB with our Cas-9 model,
+                            focusing on leadership and presentation.</p>
+                    </div>
+
+                    <div class="blog-post" onclick="openPopup('materov')">
+                        <h3>Building an Underwater Robot for MateROV</h3>
+                        <div class="blog-meta">Published on June 23, 2025</div>
+                        <p>How I built and competed with an underwater ROV in MateROV, leading to an international
+                            experience in the U.S.</p>
+                    </div>
+
+                    <div class="blog-post" onclick="openPopup('techkriti')">
+                        <h3>My Techkriti IIT Kanpur Experience</h3>
+                        <div class="blog-meta">Published on March 30, 2025</div>
+                        <p>A deep dive into my first time competing in Robowars, IARC, and Manouver at one of India's
+                            biggest techfests — Techkriti.</p>
+                    </div>
+
+                    <div class="blog-post" onclick="openPopup('TISB_Hacks')">
+                        <h3>TISB Hacks</h3>
+                        <div class="blog-meta">Published on January 26, 2025</div>
+                        <p>My first inter-school competition where me and my friend, make an app that solved a problem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Popup (Fullscreen) -->
+        <div id="blog-popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closePopup()">&times;</button>
+                <h2 id="popup-title"></h2>
+                <div class="popup-meta" id="popup-meta"></div>
+                <div class="popup-body" id="popup-body"></div>
             </div>
         </div>
 
-        <!-- Science & Innovation Category -->
-        <div class="category-section">
-            <h2 class="category-title">
-                <span class="category-icon">🔬</span>
-                Science & Innovation
-            </h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>Science Fair Victory</h3>
-                    <p class="achievement-date">March 21, 2025</p>
-                    <p>Won first place at TISB Science Fair for a Cas-9 model, demonstrating innovation, teamwork, and leadership.</p>
-                </div>
-                
-                <div class="achievement-card">
-                    <h3>Odyssey of the Mind – State Finals</h3>
-                    <p class="achievement-date">2022–23</p>
-                    <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
-                </div>
-            </div>
-        </div>
+        <!-- Styles for Popup + Blog -->
+        <style>
+            .scaled-blog-image {
+                max-width: 100%;
+                height: auto;
+                width: 300px;
+                border-radius: 10px;
+            }
 
-        <!-- Sports Category -->
-        <div class="category-section">
-            <h2 class="category-title">
-                <span class="category-icon">🏆</span>
-                Sports
-            </h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>State-Level Karate Tournament</h3>
-                    <p class="achievement-date">October 2023</p>
-                    <p>Secured 2nd place in both Sparring and Form categories, reflecting over two years of dedicated training.</p>
-                </div>
-                
-                <div class="achievement-card">
-                    <h3>Multi-Sport Awards</h3>
-                    <p class="achievement-date">Since Age 7</p>
-                    <p>Won awards at zonal and state levels in roller skating and swimming, along with achievements in school sports.</p>
-                </div>
-            </div>
-        </div>
+            .blog-post {
+                background: var(--bg-secondary);
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin-bottom: 2rem;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            }
 
-        <!-- Academic Skills Category -->
-        <div class="category-section">
-            <h2 class="category-title">
-                <span class="category-icon">🧮</span>
-                Academic Skills
-            </h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>Abacus Mastery</h3>
-                    <p class="achievement-date">Ages 7–11</p>
-                    <p>Completed all 10 levels of abacus training, enhancing mental math and pattern recognition skills.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>       
+            .blog-post:hover {
+                transform: scale(1.02);
+            }
 
-<!-- Hobbies Section -->
-<section id="hobbies" class="section">
-  <div class="container">
-    <h1>My Hobbies & Interests</h1>
-    <div class="hobbies-grid">
-      <div class="hobby-card">
-        <div class="hobby-image">
-          <i class="fas fa-robot"></i>
-        </div>
-        <div class="hobby-content">
-          <h3>Robotics & Arduino</h3>
-          <p>I started tinkering with robots early on — from basic VEX bots to advanced custom designs. Representing Robot Revolution at the state level was a proud moment for me. I taught myself Arduino through YouTube, building cool, functional projects that solved real problems.</p>
-        </div>
-      </div>
+            .blog-post img {
+                width: 100%;
+                border-radius: 10px;
+                margin-bottom: 1rem;
+            }
 
-      <div class="hobby-card">
-        <div class="hobby-image">
-          <i class="fas fa-code"></i>
-        </div>
-        <div class="hobby-content">
-          <h3>Programming</h3>
-          <p>I started coding at age 10, diving into Python, and JavaScript. Since then, I have expanded my knowlange to learning kotlin and dart for app development, C++ for game development. I also taught myself the Arduino Programming Language. I love how coding turns ideas into real tools and games, and it’s my favorite way to solve problems creatively.</p>
-        </div>
-      </div>
+            .popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                z-index: 9999;
+                justify-content: center;
+                align-items: center;
+                animation: fadeIn 0.5s ease;
+            }
 
-      <div class="hobby-card">
-        <div class="hobby-image">
-          <i class="fas fa-fist-raised"></i>
-        </div>
-        <div class="hobby-content">
-          <h3>Martial Arts</h3>
-          <p>I trained in Karate at Moo Duk Kwan and earned my red belt after more than 2 years of consistent effort. I’ve competed and won at multiple regional tournaments — it’s taught me resilience, focus, and confidence.</p>
-        </div>
-      </div>
+            .popup-content {
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                width: 90%;
+                max-width: 900px;
+                max-height: 90vh;
+                overflow-y: auto;
+                border-radius: 20px;
+                padding: 2rem;
+                position: relative;
+                animation: slideUp 0.4s ease;
+                box-shadow: var(--shadow);
+            }
 
-      <div class="hobby-card">
-        <div class="hobby-image">
-          <i class="fas fa-running"></i>
-        </div>
-        <div class="hobby-content">
-          <h3>Sports & Athletics</h3>
-          <p>Sports have always been a big part of my life. From roller skating and competitive swimming to soccer, I’ve trained and competed since I was 7. I’ve earned medals at zonal and state levels, and I enjoy pushing my physical limits.</p>
-        </div>
-      </div>
+            .popup-content h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
 
-      <div class="hobby-card">
-        <div class="hobby-image">
-          <i class="fas fa-calculator"></i>
-        </div>
-        <div class="hobby-content">
-          <h3>Mental Mathematics</h3>
-          <p>I completed all 10 levels of abacus training, and it unlocked crazy-fast mental math skills. I love working with numbers and solving puzzles using patterns — it's like mental gymnastics for me.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            .popup-meta {
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                margin-bottom: 1rem;
+            }
 
-<!-- Blog Section -->
-<section id="blog" class="section">
-    <div class="container">
-      <h1>My Blog</h1>
-      <div class="blog-posts">
-        <div class="blog-post" onclick="openPopup('odyssey')">
-          <h3>Leading Through Challenges: My Odyssey of the Mind Experience</h3>
-          <div class="blog-meta">Published on March 15, 2025</div>
-          <p>Click to read more about how I led my team through challenges in the Odyssey of the Mind competition.</p>
-        </div>
-  
-        <div class="blog-post" onclick="openPopup('sciencefair')">
-          <h3>Science Fair Victory</h3>
-          <div class="blog-meta">Published on March 21, 2025</div>
-          <p>Learn how I led a team to win first place in the Science Fair at TISB with our Cas-9 model, focusing on leadership and presentation.</p>
-        </div>
-  
-        <div class="blog-post" onclick="openPopup('materov')">
-          <h3>Building an Underwater Robot for MateROV</h3>
-          <div class="blog-meta">Published on June 23, 2025</div>
-          <p>How I built and competed with an underwater ROV in MateROV, leading to an international experience in the U.S.</p>
-        </div>
-  
-        <div class="blog-post" onclick="openPopup('techkriti')">
-          <h3>My Techkriti IIT Kanpur Experience</h3>
-          <div class="blog-meta">Published on March 30, 2025</div>
-          <p>A deep dive into my first time competing in Robowars, IARC, and Manouver at one of India's biggest techfests — Techkriti.</p>
-        </div>
+            .popup-body p,
+            .popup-body img {
+                margin-bottom: 1rem;
+                line-height: 1.8;
+            }
 
-        <div class="blog-post" onclick="openPopup('TISB_Hacks')">
-            <h3>TISB Hacks</h3>
-            <div class="blog-meta">Published on January 26, 2025</div>
-            <p>My first inter-school competition where me and my friend, make an app that solved a problem.</p>
-        </div>
-      </div>
-    </div>
-  </section>  
+            .popup-body img {
+                max-width: 100%;
+                border-radius: 10px;
+            }
 
-<!-- Blog Popup (Fullscreen) -->
-<div id="blog-popup" class="popup">
-  <div class="popup-content">
-    <button class="close-btn" onclick="closePopup()">&times;</button>
-    <h2 id="popup-title"></h2>
-    <div class="popup-meta" id="popup-meta"></div>
-    <div class="popup-body" id="popup-body"></div>
-  </div>
-</div>
+            .close-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--text-secondary);
+                cursor: pointer;
+            }
 
-<!-- Styles for Popup + Blog -->
-<style>
-.scaled-blog-image {
-  max-width: 100%;
-  height: auto;
-  width: 300px;
-  border-radius: 10px;
-}
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
 
-.blog-post {
-  background: var(--bg-secondary);
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-.blog-post:hover {
-  transform: scale(1.02);
-}
-.blog-post img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
+                to {
+                    opacity: 1;
+                }
+            }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.5s ease;
-}
+            @keyframes slideUp {
+                from {
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
 
-.popup-content {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  width: 90%;
-  max-width: 900px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border-radius: 20px;
-  padding: 2rem;
-  position: relative;
-  animation: slideUp 0.4s ease;
-  box-shadow: var(--shadow);
-}
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        </style>
 
-.popup-content h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.popup-meta {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-.popup-body p,
-.popup-body img {
-  margin-bottom: 1rem;
-  line-height: 1.8;
-}
-
-.popup-body img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-</style>
-
-<!-- Blog JavaScript -->
-<script>
-const blogPopupData = {
-  odyssey: {
-    title: "Leading Through Challenges: My Odyssey of the Mind Experience",
-    meta: "Published on March 15, 2025",
-    body: `
+        <!-- Blog JavaScript -->
+        <script>
+            const blogPopupData = {
+                odyssey: {
+                    title: "Leading Through Challenges: My Odyssey of the Mind Experience",
+                    meta: "Published on March 15, 2025",
+                    body: `
+      <p>Odyssey of the Mind helps students unlock their creativity and become confident problem-solvers. Faced with challenges that demand original solutions, students learn to think outside the box without fear. The creative thinking and self-belief they develop in OM stays with them for life, empowering them in every area they pursue.</p>
       <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
+      <a href="https://odysseyofthemind.com/">Official website of Odyssey of the Mind</a>
+      <br>
       <img src="https://via.placeholder.com/800x400" alt="Odyssey Team Photo">
       <p>I was responsible for organizing tasks, ensuring timely submissions, and keeping the team spirit alive.</p>
     `
-  },
-  materov: {
-    title: "MATE ROV Competition",
-    meta: "Published on June 23, 2025",
-    body: `
-      <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 28th globally—a strong showing for our first time at the event.</p>
+                },
+                materov: {
+                    title: "MATE ROV Competition",
+                    meta: "Published on June 23, 2025",
+                    body: `
+      <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 35th globally — a strong showing for our first time at the event.</p>
       <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
       <p>This competition marked my first experience in underwater robotics, providing valuable exposure and learning opportunities. </p>
 `
-  },
-  techkriti: {
-    title: "Techkriti Techfest Experience",
-    meta: "Published on March 30, 2025",
-    body: `
+                },
+                techkriti: {
+                    title: "Techkriti Techfest Experience",
+                    meta: "Published on March 30, 2025",
+                    body: `
       <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned 2nd place in IARC, placed 10th in our category in Robowars, and secured 12th place in Manouver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics. It also greatly expanded my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
 
 <img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
@@ -1091,12 +1657,12 @@ const blogPopupData = {
 <p>This event was a fantastic platform for learning and growth, and I look forward to participating in more such competitions in the future.</p>
 
 `
-  },
-  TISB_Hacks: {
-    title: "TISB Hacks",
-    meta: "Published on January 26, 2025",
-    body: `
-      <p>TISB Hacks – Senior Coding is a competitive coding challenge for high school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It’s designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
+                },
+                TISB_Hacks: {
+                    title: "TISB Hacks",
+                    meta: "Published on January 26, 2025",
+                    body: `
+      <p>TISB Hacks – Senior Coding is a competitive coding challenge for school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It’s designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
       <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
       <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani">This is the github project link for the app</a>
       <br>
@@ -1105,35 +1671,35 @@ const blogPopupData = {
       <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate"style="transform: rotate(90deg); max-width: 100%; height: auto;">
       <p>This event was a fun experience that helped to learn and challenge myself </p>
 `
-  },
-  sciencefair: {
-    title: "Science Fair Victory",
-    meta: "Published on March 21, 2025",
-    body: `
+                },
+                sciencefair: {
+                    title: "Science Fair Victory",
+                    meta: "Published on March 21, 2025",
+                    body: `
       <p>After two months of hard work, my team of five and I won first place in the Science Fair under the Still Model category. As the team leader, I was responsible for designing the model. I used Blender, a 3D modeling software, and with some help from the internet for reference images, I created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes. This helped me expand my biology and chemistry knowlange beyond the sylabus. It was a unique experience, and I felt incredibly proud and happy when we won.</p>
 
       <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
 
       <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
 `
-  },
-};
+                },
+            };
 
-function openPopup(id) {
-  const data = blogPopupData[id];
-  if (!data) return;
-  document.getElementById('popup-title').innerText = data.title;
-  document.getElementById('popup-meta').innerText = data.meta;
-  document.getElementById('popup-body').innerHTML = data.body;
-  document.getElementById('blog-popup').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
+            function openPopup(id) {
+                const data = blogPopupData[id];
+                if (!data) return;
+                document.getElementById('popup-title').innerText = data.title;
+                document.getElementById('popup-meta').innerText = data.meta;
+                document.getElementById('popup-body').innerHTML = data.body;
+                document.getElementById('blog-popup').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
 
-function closePopup() {
-  document.getElementById('blog-popup').style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-</script>
+            function closePopup() {
+                document.getElementById('blog-popup').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        </script>
 
     </main>
 
@@ -1141,7 +1707,7 @@ function closePopup() {
         <div class="footer-content">
             <h3>Ayansh Paliwal</h3>
             <p>Student | Developer | Creator</p>
-            
+
             <div class="social-links">
                 <a href="mailto:ayanshpaliwal2012@gmail.com" aria-label="Email">
                     <i class="fas fa-envelope"></i>
@@ -1150,10 +1716,10 @@ function closePopup() {
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-            
+
             <div class="footer-info">
                 <p><a href="mailto:ayanshpaliwal2012@gmail.com">ayanshpaliwal2012@gmail.com</a></p>
-                <p>&copy; 2025 Ayansh Paliwal. Made with ❤️ and lots of work.</p>
+                <p>&copy; 2025 Ayansh Paliwal. Made with lots of hard work.</p>
             </div>
         </div>
     </footer>
@@ -1169,21 +1735,21 @@ function closePopup() {
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                
+
                 // Remove active class from all links and sections
                 navLinks.forEach(nl => nl.classList.remove('active'));
                 sections.forEach(section => section.classList.remove('active'));
-                
+
                 // Add active class to clicked link
                 link.classList.add('active');
-                
+
                 // Show corresponding section
                 const targetSection = link.getAttribute('data-section');
                 document.getElementById(targetSection).classList.add('active');
-                
+
                 // Close mobile menu if open
                 navLinksContainer.classList.remove('active');
-                
+
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
@@ -1213,7 +1779,7 @@ function closePopup() {
         themeToggle.addEventListener('click', () => {
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
+
             body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
@@ -1247,7 +1813,7 @@ function closePopup() {
 
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             if (scrollTop > lastScrollTop && scrollTop > 100) {
                 // Scrolling down
                 header.style.transform = 'translateY(-100%)';
@@ -1255,7 +1821,7 @@ function closePopup() {
                 // Scrolling up
                 header.style.transform = 'translateY(0)';
             }
-            
+
             lastScrollTop = scrollTop;
         });
 
@@ -1306,7 +1872,7 @@ function closePopup() {
 
         // Add click effect to buttons and cards
         document.querySelectorAll('.post-card, .hobby-card, .info-card').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 this.style.transform = 'scale(0.98)';
                 setTimeout(() => {
                     this.style.transform = '';
@@ -1370,7 +1936,9 @@ function closePopup() {
             const blogPosts = {
                 odyssey: "Leading Through Challenges: My Odyssey of the Mind Experience",
                 sciencefair: "Science Fair Victory",
-                TISB_Hacks: "My Journey with Competitive Programming"
+                TISB_Hacks: "TISB Hacks",
+                materov: "Building an Underwater Robot for MateROV",
+                techkriti: "My Techkriti IIT Kanpur Experience"
             };
 
             setTimeout(() => {
@@ -1388,4 +1956,5 @@ function closePopup() {
 
     </script>
 </body>
+
 </html>
