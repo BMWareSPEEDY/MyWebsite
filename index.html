@@ -175,27 +175,192 @@
         }
 
         /* Home Section */
-        .hero {
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-            padding: 6rem 2rem;
-            margin-bottom: 4rem;
+        /* Hero Section - Split Layout */
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            min-height: 100vh;
+            overflow: hidden;
+            margin-bottom: 0;
+            /* Removing margin as it covers full screen */
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-backdrop {
+            position: relative;
+            background: url('assets/hero_bg.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* Dark overlay for text readability */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .hero-sidebar {
+            background: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-name {
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .skill-tag i {
+            color: var(--secondary-color);
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 900px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                /* Stack vertically */
+                min-height: auto;
+            }
+
+            .hero-backdrop {
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
         }
 
         .welcome-intro {
@@ -501,6 +666,214 @@
             }
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Scroll-triggered animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section entrance animations */
+        .section {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Hero content animations */
+        .hero-content h2 {
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .hero-content h1 {
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+
+        .hero-content p {
+            animation: slideInLeft 1.2s ease 0.4s both;
+        }
+
+        .hero-sidebar {
+            animation: slideInRight 1s ease 0.3s both;
+        }
+
+        /* Skill tag stagger animation */
+        .skill-tag {
+            animation: scaleIn 0.5s ease both;
+        }
+
+        .skill-tag:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .skill-tag:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .skill-tag:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .skill-tag:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .skill-tag:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .skill-tag:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .skill-tag:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .skill-tag:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .skill-tag:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .skill-tag:nth-child(10) {
+            animation-delay: 0.55s;
+        }
+
+        .skill-tag:nth-child(11) {
+            animation-delay: 0.6s;
+        }
+
+        .skill-tag:nth-child(12) {
+            animation-delay: 0.65s;
+        }
+
+        /* Card hover enhancements */
+        .post-card,
+        .hobby-card,
+        .achievement-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .post-card:hover,
+        .achievement-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hobby-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline item animations */
+        .timeline-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .timeline-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .timeline-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .timeline-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .timeline-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .timeline-item:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        /* Navigation link hover effect */
+        .nav-links a {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Button animations */
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Popup entrance */
+        .popup {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-content {
+            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -560,13 +933,20 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
+        [data-theme="dark"] .category-section {
+            background: var(--bg-primary);
+            /* Or a slightly lighter dark shade */
+            box-shadow: none;
+            border: 1px solid var(--border-color);
+        }
+
         .category-title {
             display: flex;
             align-items: center;
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 1.5rem;
-            color: #2c3e50;
+            color: var(--text-primary);
             border-bottom: 3px solid #3498db;
             padding-bottom: 0.5rem;
         }
@@ -583,12 +963,16 @@
         }
 
         .achievement-card {
-            background: white;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
             border-left: 4px solid #3498db;
+            cursor: pointer;
         }
 
         .achievement-card:hover {
@@ -597,14 +981,14 @@
         }
 
         .achievement-card h3 {
-            color: #2c3e50;
+            color: var(--primary-color);
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
         .achievement-date {
-            color: #7f8c8d;
+            color: var(--text-secondary);
             font-weight: 600;
             font-size: 0.9rem;
             margin-bottom: 0.75rem;
@@ -613,9 +997,10 @@
         }
 
         .achievement-card p:last-child {
-            color: #34495e;
+            color: var(--text-primary);
             line-height: 1.6;
             margin: 0;
+            opacity: 0.9;
         }
 
         /* Responsive Design */
@@ -682,11 +1067,58 @@
 
     <main>
         <!-- Home Section -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>Welcome to My Blogging Space</h1>
-            </div>
+        <section id="home" class="section active" style="padding-top: 0; max-width: 100%; margin: 0; width: 100%;">
+            <div class="hero-container">
+                <div class="hero-backdrop">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2>HELLO, I'M</h2>
+                        <h1>Ayansh Paliwal.</h1>
+                        <p>Student | Developer | Creator</p>
+                    </div>
+                </div>
+                <div class="hero-sidebar">
+                    <img src="assets/profile_picture.jpeg" alt="Ayansh Paliwal" class="hero-profile-img">
+                    <div class="hero-name">Ayansh Paliwal.</div>
+                    <div class="hero-bio">
+                        Passionate about creating cutting-edge applications, competing in robotics championships, and
+                        pushing the boundaries of what's possible with technology.
+                    </div>
 
+                    <div class="hero-buttons">
+                        <!-- "Contact" changed to "About" as per user request -->
+                        <a href="#" class="btn btn-white"
+                            onclick="document.querySelector('[data-section=\'about\']').click()">About Me</a>
+                        <a href="#" class="btn btn-outline"
+                            onclick="document.querySelector('[data-section=\'blog\']').click()">View Projects</a>
+                    </div>
+
+                    <div class="footer-info" style="margin-top: 2rem;">
+                        <a href="mailto:ayanshpaliwal2012@gmail.com"
+                            style="color: white; text-decoration: underline; font-size: 0.9rem;">ayanshpaliwal2012@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Skills Section -->
+            <section id="skills" class="section active" style="display: block; margin-top: 4rem;">
+                <div class="container">
+                    <h1>My Skills</h1>
+                    <div class="skills-grid">
+                        <div class="skill-tag"><i class="fas fa-microchip"></i> Microcontrollers</div>
+                        <div class="skill-tag"><i class="fas fa-project-diagram"></i> Project Development</div>
+                        <div class="skill-tag"><i class="fab fa-java"></i> Java</div>
+                        <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-tag"><i class="fas fa-code"></i> C++</div>
+                        <div class="skill-tag"><i class="fab fa-android"></i> Kotlin</div>
+                        <div class="skill-tag"><i class="fas fa-mobile-alt"></i> Dart</div>
+                        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
+                        <div class="skill-tag"><i class="fas fa-robot"></i> Robotics</div>
+                        <div class="skill-tag"><i class="fas fa-users"></i> Leadership</div>
+                        <div class="skill-tag"><i class="fas fa-brain"></i> Problem Solving</div>
+                    </div>
+                </div>
+            </section>
             <div class="container">
                 <div class="welcome-intro">
                     <h2>Hi, I'm Ayansh!</h2>
@@ -695,27 +1127,35 @@
                         I turn ideas into reality through code. </p>
                 </div>
 
-                <h2>Featured Posts</h2>
+                <h2 style="margin-top: 4rem;">Featured Projects</h2>
                 <div class="featured-posts">
-                    <div class="post-card" onclick="openBlogFromHome('programming')">
-                        <h3>TISB Hacks</h3>
-                        <p>Won TISB Hacks, an inter-school competition where teams of 2-5 built applications based on a
-                            set theme...</p>
-                        <small>Programming Journey</small>
+                    <!-- Project 0: TISB Hacks 2026 -->
+                    <div class="post-card" onclick="openBlogFromHome('tisbhacks2026')">
+                        <h3>Verde - Student Marketplace</h3>
+                        <p>Built a Flutter-based mobile marketplace for TISB students to exchange items sustainably...
+                        </p>
+                        <small>Mobile Dev & Sustainability</small>
                     </div>
 
-                    <div class="post-card" onclick="openBlogFromHome('sciencefair')">
-                        <h3>Science Fair Victory</h3>
-                        <p>Our Cas-9 model and presentation won first place in my school's, TISB, annual science fair
-                            competition...</p>
-                        <small>March 21, 2025</small>
-                    </div>
-
+                    <!-- Project 1: TISB Hacks (Programming) -->
                     <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
-                        <h3>Odyssey of the Mind State Finals</h3>
-                        <p>Led my team to state-level competition, showing leadership qualities by dividing tasks and
-                            tracking progress when things were falling apart...</p>
-                        <small>2022-23 Competition</small>
+                        <h3>Meteor Tracking App</h3>
+                        <p>Developed a meteor tracking app using flutter and dart for TISB Hacks...</p>
+                        <small>Programming & Mobile Dev</small>
+                    </div>
+
+                    <!-- Project 2: Science Fair (Science) -->
+                    <div class="post-card" onclick="openBlogFromHome('sciencefair')">
+                        <h3>Cas-9 Model</h3>
+                        <p>Won 1st Place at TISB Science Fair for building a detailed Cas-9 enzyme model...</p>
+                        <small>Science & Innovation</small>
+                    </div>
+
+                    <!-- Project 3: MateROV (Robotics) -->
+                    <div class="post-card" onclick="openBlogFromHome('materov')">
+                        <h3>Underwater ROV</h3>
+                        <p>Built an underwater robot for the MateROV competition, placing 28th globally...</p>
+                        <small>Robotics & Engineering</small>
                     </div>
                 </div>
             </div>
@@ -836,7 +1276,7 @@
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
-                            <h3>Wyoming School Millburn</h3>
+                            <h3>Wyoming Ementary School Millburn</h3>
                             <p class="achievement-date">Grades 3 - 4</p>
                             <p>Millburn, NJ, USA</p>
                             <p>Foundational years in the Millburn public school system.</p>
@@ -865,11 +1305,11 @@
                 <!-- Robotics Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🤖</span>
+                        <span class="category-icon"></span>
                         Robotics
                     </h2>
                     <div class="achievements-grid">
-                        <div class="achievement-card">
+                        <div class="achievement-card" onclick="openBlogFromHome('materov')">
                             <h3>MateROV Competition</h3>
                             <p class="achievement-date">May 17–18, 2025</p>
                             <p>Won first place in the regional MateROV competition. Built an underwater ROV capable of
@@ -877,7 +1317,7 @@
                                 at the international level in Alpena, Michigan, placing 28th globally.</p>
                         </div>
 
-                        <div class="achievement-card">
+                        <div class="achievement-card" onclick="openBlogFromHome('techkriti')">
                             <h3>Techkriti at IIT Kanpur</h3>
                             <p class="achievement-date">March 28, 2025</p>
                             <p>Participated in three events at IIT Kanpur's Techkriti: placed 2nd in IARC, 10th in
@@ -890,18 +1330,18 @@
                 <!-- Science & Innovation Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🔬</span>
+                        <span class="category-icon"></span>
                         Science & Innovation
                     </h2>
                     <div class="achievements-grid">
-                        <div class="achievement-card">
+                        <div class="achievement-card" onclick="openBlogFromHome('sciencefair')">
                             <h3>Science Fair Victory</h3>
                             <p class="achievement-date">March 21, 2025</p>
                             <p>Won first place at TISB Science Fair for a Cas-9 model, demonstrating innovation,
                                 teamwork, and leadership.</p>
                         </div>
 
-                        <div class="achievement-card">
+                        <div class="achievement-card" onclick="openBlogFromHome('odyssey')">
                             <h3>Odyssey of the Mind – State Finals</h3>
                             <p class="achievement-date">2022–23</p>
                             <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed
@@ -913,7 +1353,7 @@
                 <!-- Sports Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🏆</span>
+                        <span class="category-icon"></span>
                         Sports
                     </h2>
                     <div class="achievements-grid">
@@ -936,7 +1376,7 @@
                 <!-- Academic Skills Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🧮</span>
+                        <span class="category-icon"></span>
                         Academic Skills
                     </h2>
                     <div class="achievements-grid">
@@ -1027,6 +1467,11 @@
             <div class="container">
                 <h1>My Blog</h1>
                 <div class="blog-posts">
+                    <div class="blog-post" onclick="openPopup('tisbhacks2026')">
+                        <h3>TISB Hacks 2026 Experience</h3>
+                        <div class="blog-meta">Published on February 14, 2026</div>
+                        <p>My experience at TISB Hacks 2026.</p>
+                    </div>
                     <div class="blog-post" onclick="openPopup('odyssey')">
                         <h3>Leading Through Challenges: My Odyssey of the Mind Experience</h3>
                         <div class="blog-meta">Published on March 15, 2025</div>
@@ -1110,8 +1555,9 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: rgba(0, 0, 0, 0.85);
-                backdrop-filter: blur(8px);
+                background: rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
                 z-index: 9999;
                 justify-content: center;
                 align-items: center;
@@ -1229,7 +1675,7 @@
                     title: "TISB Hacks",
                     meta: "Published on January 26, 2025",
                     body: `
-      <p>TISB Hacks – Senior Coding is a competitive coding challenge for high school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It’s designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
+      <p>TISB Hacks – Senior Coding is a competitive coding challenge for school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It’s designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
       <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
       <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani">This is the github project link for the app</a>
       <br>
@@ -1248,6 +1694,47 @@
       <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
 
       <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
+`
+                },
+                tisbhacks2026: {
+                    title: "TISB Hacks 2026 Experience: Building Verde",
+                    meta: "Published on February 14, 2026",
+                    body: `
+      <p>As a student at TISB, I noticed a common problem: there wasn’t a streamlined way for us to exchange textbooks, uniforms, or electronics within our own community. To solve this, I built <strong>Verde</strong>, a Flutter-based mobile marketplace designed specifically for student life. The goal was simple: create an app where students can list items they no longer need, earn "Eco-Points" for sustainable practices, and chat with buyers—all while staying within a safe, school-verified environment.</p>
+      
+      <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; justify-content: center;">
+          <img src="assets/tisbhacks1_page-0001.jpg" alt="EcoSwap UI 1" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          <img src="assets/tisbhacks1_page-0002.jpg" alt="EcoSwap UI 2" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      </div>
+
+      <h3>What I Built</h3>
+      <p>The core of the app uses <strong>Flutter</strong> for a smooth, cross-platform UI and <strong>Supabase</strong> as the backend for real-time data and authentication. However, as the user base grows, so do the risks of spam and scams. To address this, I implemented a dedicated <strong>Security & Integrity Layer</strong>:</p>
+      
+      <ul>
+          <li><strong>Anti-Spam Logic:</strong> I wrote custom PostgreSQL triggers that enforce a strict monthly limit of 5 listings per user. This ensures the feed stays high-quality and prevents bot-like behavior.</li>
+          <li><strong>Keyword Filtering:</strong> To maintain school compliance, I built a server-side "Spam Detector" that automatically flags and rejects listings containing prohibited keywords or suspicious "scammy" phrases.</li>
+          <li><strong>Student Accountability:</strong> I added a peer-to-peer reporting system. If a student encounters a "bad actor," they can flag the user directly from the item details. This lowers the user's "Trust Score" in the database and alerts moderators.</li>
+      </ul>
+      <br>
+      <h3>Key Technical Takeaways</h3>
+      <ul>
+          <li><strong>Database-First Security:</strong> I learned that the best place to enforce rules is the database, not the app. By using PostgreSQL Functions, I ensured that my security rules are "unhackable" from the frontend.</li>
+          <li><strong>Asynchronous UX:</strong> Managing real-time chats and image uploads required a deep dive into Flutter’s Future and Stream builders to keep the app responsive.</li>
+          <li><strong>The "Cold Boot" Challenge:</strong> I spent quite a bit of time debugging networking issues with the Android Emulator! I learned how to manage DNS settings and "Cold Boot" devices to ensure consistent connectivity.</li>
+      </ul>
+
+      <hr style="margin: 2rem 0; opacity: 0.1;">
+      
+      <p>This event was a fun experience that helped to learn and challenge myself. You can find the source code and a demo of the app below:</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+          <a href="https://github.com/BMWareSPEEDY/TISB-Swap.git" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #333; color: white;">
+              <i class="fab fa-github"></i> View on GitHub
+          </a>
+          <a href="https://vimeo.com/1155712588?share=copy&fl=sv&fe=ci" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #0088cc; color: white;">
+              <i class="fas fa-play"></i> Watch Demo Video
+          </a>
+      </div>
 `
                 },
             };
@@ -1286,7 +1773,7 @@
 
             <div class="footer-info">
                 <p><a href="mailto:ayanshpaliwal2012@gmail.com">ayanshpaliwal2012@gmail.com</a></p>
-                <p>&copy; 2025 Ayansh Paliwal. Made with ❤️ and lots of work.</p>
+                <p>&copy; 2025 Ayansh Paliwal. Made with lots of hard work.</p>
             </div>
         </div>
     </footer>
@@ -1503,7 +1990,10 @@
             const blogPosts = {
                 odyssey: "Leading Through Challenges: My Odyssey of the Mind Experience",
                 sciencefair: "Science Fair Victory",
-                TISB_Hacks: "My Journey with Competitive Programming"
+                TISB_Hacks: "TISB Hacks",
+                tisbhacks2026: "TISB Hacks 2026 Experience",
+                materov: "Building an Underwater Robot for MateROV",
+                techkriti: "My Techkriti IIT Kanpur Experience"
             };
 
             setTimeout(() => {
