@@ -1129,6 +1129,14 @@
 
                 <h2 style="margin-top: 4rem;">Featured Projects</h2>
                 <div class="featured-posts">
+                    <!-- Project 0: TISB Hacks 2026 -->
+                    <div class="post-card" onclick="openBlogFromHome('tisbhacks2026')">
+                        <h3>Verde - Student Marketplace</h3>
+                        <p>Built a Flutter-based mobile marketplace for TISB students to exchange items sustainably...
+                        </p>
+                        <small>Mobile Dev & Sustainability</small>
+                    </div>
+
                     <!-- Project 1: TISB Hacks (Programming) -->
                     <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
                         <h3>Meteor Tracking App</h3>
@@ -1297,7 +1305,7 @@
                 <!-- Robotics Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🤖</span>
+                        <span class="category-icon"></span>
                         Robotics
                     </h2>
                     <div class="achievements-grid">
@@ -1322,7 +1330,7 @@
                 <!-- Science & Innovation Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🔬</span>
+                        <span class="category-icon"></span>
                         Science & Innovation
                     </h2>
                     <div class="achievements-grid">
@@ -1345,7 +1353,7 @@
                 <!-- Sports Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🏆</span>
+                        <span class="category-icon"></span>
                         Sports
                     </h2>
                     <div class="achievements-grid">
@@ -1368,7 +1376,7 @@
                 <!-- Academic Skills Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon">🧮</span>
+                        <span class="category-icon"></span>
                         Academic Skills
                     </h2>
                     <div class="achievements-grid">
@@ -1459,6 +1467,11 @@
             <div class="container">
                 <h1>My Blog</h1>
                 <div class="blog-posts">
+                    <div class="blog-post" onclick="openPopup('tisbhacks2026')">
+                        <h3>TISB Hacks 2026 Experience</h3>
+                        <div class="blog-meta">Published on February 14, 2026</div>
+                        <p>My experience at TISB Hacks 2026.</p>
+                    </div>
                     <div class="blog-post" onclick="openPopup('odyssey')">
                         <h3>Leading Through Challenges: My Odyssey of the Mind Experience</h3>
                         <div class="blog-meta">Published on March 15, 2025</div>
@@ -1681,6 +1694,47 @@
       <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
 
       <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
+`
+                },
+                tisbhacks2026: {
+                    title: "TISB Hacks 2026 Experience: Building Verde",
+                    meta: "Published on February 14, 2026",
+                    body: `
+      <p>As a student at TISB, I noticed a common problem: there wasn’t a streamlined way for us to exchange textbooks, uniforms, or electronics within our own community. To solve this, I built <strong>Verde</strong>, a Flutter-based mobile marketplace designed specifically for student life. The goal was simple: create an app where students can list items they no longer need, earn "Eco-Points" for sustainable practices, and chat with buyers—all while staying within a safe, school-verified environment.</p>
+      
+      <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; justify-content: center;">
+          <img src="assets/tisbhacks1_page-0001.jpg" alt="EcoSwap UI 1" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          <img src="assets/tisbhacks1_page-0002.jpg" alt="EcoSwap UI 2" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      </div>
+
+      <h3>What I Built</h3>
+      <p>The core of the app uses <strong>Flutter</strong> for a smooth, cross-platform UI and <strong>Supabase</strong> as the backend for real-time data and authentication. However, as the user base grows, so do the risks of spam and scams. To address this, I implemented a dedicated <strong>Security & Integrity Layer</strong>:</p>
+      
+      <ul>
+          <li><strong>Anti-Spam Logic:</strong> I wrote custom PostgreSQL triggers that enforce a strict monthly limit of 5 listings per user. This ensures the feed stays high-quality and prevents bot-like behavior.</li>
+          <li><strong>Keyword Filtering:</strong> To maintain school compliance, I built a server-side "Spam Detector" that automatically flags and rejects listings containing prohibited keywords or suspicious "scammy" phrases.</li>
+          <li><strong>Student Accountability:</strong> I added a peer-to-peer reporting system. If a student encounters a "bad actor," they can flag the user directly from the item details. This lowers the user's "Trust Score" in the database and alerts moderators.</li>
+      </ul>
+      <br>
+      <h3>Key Technical Takeaways</h3>
+      <ul>
+          <li><strong>Database-First Security:</strong> I learned that the best place to enforce rules is the database, not the app. By using PostgreSQL Functions, I ensured that my security rules are "unhackable" from the frontend.</li>
+          <li><strong>Asynchronous UX:</strong> Managing real-time chats and image uploads required a deep dive into Flutter’s Future and Stream builders to keep the app responsive.</li>
+          <li><strong>The "Cold Boot" Challenge:</strong> I spent quite a bit of time debugging networking issues with the Android Emulator! I learned how to manage DNS settings and "Cold Boot" devices to ensure consistent connectivity.</li>
+      </ul>
+
+      <hr style="margin: 2rem 0; opacity: 0.1;">
+      
+      <p>This event was a fun experience that helped to learn and challenge myself. You can find the source code and a demo of the app below:</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+          <a href="https://github.com/BMWareSPEEDY/TISB-Swap.git" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #333; color: white;">
+              <i class="fab fa-github"></i> View on GitHub
+          </a>
+          <a href="https://vimeo.com/1155712588?share=copy&fl=sv&fe=ci" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #0088cc; color: white;">
+              <i class="fas fa-play"></i> Watch Demo Video
+          </a>
+      </div>
 `
                 },
             };
@@ -1937,6 +1991,7 @@
                 odyssey: "Leading Through Challenges: My Odyssey of the Mind Experience",
                 sciencefair: "Science Fair Victory",
                 TISB_Hacks: "TISB Hacks",
+                tisbhacks2026: "TISB Hacks 2026 Experience",
                 materov: "Building an Underwater Robot for MateROV",
                 techkriti: "My Techkriti IIT Kanpur Experience"
             };
