@@ -234,15 +234,18 @@
         }
 
         .hero-sidebar {
-            background: var(--primary-color);
+            background: var(--bg-secondary);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 3rem 2rem;
             text-align: center;
-            color: white;
+            color: var(--text-primary);
             position: relative;
+            border-left: 1px solid var(--border-color);
         }
 
         .hero-profile-img {
@@ -250,9 +253,20 @@
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            border: 4px solid var(--primary-color);
             margin-bottom: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-email {
+            color: var(--text-primary);
+            text-decoration: underline;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-email:hover {
+            color: var(--primary-color);
         }
 
         .hero-name {
@@ -289,25 +303,25 @@
         }
 
         .btn-white {
-            background: white;
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
         }
 
         .btn-white:hover {
-            background: #f0f0f0;
+            opacity: 0.9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn-outline {
-            border: 2px solid white;
-            color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
             background: transparent;
         }
 
         .btn-outline:hover {
-            background: white;
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
             transform: translateY(-2px);
         }
 
@@ -1093,9 +1107,9 @@
                             onclick="document.querySelector('[data-section=\'blog\']').click()">View Projects</a>
                     </div>
 
-                    <div class="footer-info" style="margin-top: 2rem;">
+                    <div class="footer-info sidebar-footer" style="margin-top: 2rem;">
                         <a href="mailto:ayanshpaliwal2012@gmail.com"
-                            style="color: white; text-decoration: underline; font-size: 0.9rem;">ayanshpaliwal2012@gmail.com</a>
+                            class="sidebar-email">ayanshpaliwal2012@gmail.com</a>
                     </div>
                 </div>
             </div>
@@ -1467,6 +1481,16 @@
             <div class="container">
                 <h1>My Blog</h1>
                 <div class="blog-posts">
+                    <div class="blog-post" onclick="openPopup('amo2026')">
+                        <h3>Securing Bronze at the American Math Olympiad</h3>
+                        <div class="blog-meta">Published on March 23, 2026</div>
+                        <p>Reflecting on my preparation and experience competing in the challenging AMO contest.</p>
+                    </div>
+                    <div class="blog-post" onclick="openPopup('techkriti26')">
+                        <h3>Returning to IIT Kanpur: Techkriti '26</h3>
+                        <div class="blog-meta">Published on April 3, 2026</div>
+                        <p>Podium finishes and engineering milestones at IIT Kanpur's Techkriti 2026.</p>
+                    </div>
                     <div class="blog-post" onclick="openPopup('tisbhacks2026')">
                         <h3>TISB Hacks 2026 Experience</h3>
                         <div class="blog-meta">Published on February 14, 2026</div>
@@ -1637,6 +1661,55 @@
         <!-- Blog JavaScript -->
         <script>
             const blogPopupData = {
+                amo2026: {
+                    title: "Securing Bronze at the American Math Olympiad",
+                    meta: "Published on March 23, 2026",
+                    body: `<p>The American Mathematics Olympiad (AMO) is an international competition for students from grades 2–12, organized by SIMCC and SIU. It’s based on US Common Core Standards and covers topics like algebra, geometry, number theory, and combinatorics. Basically, it’s not your average school math—it really pushes how you think. Signing up for AMO this year honestly felt like jumping straight into the deep end.</p>
+                     <p>For around two to three months before the test, I spent a lot of my free time grinding through textbooks and past papers. But over time, things slowly started to click. Patterns made more sense, and I got better at approaching problems. It was tough, but I just treated every mistake as part of the process and kept going.</p>
+                      <img src="assets/amo_26.JPG" alt="AMO Bronze Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px;"> 
+                      <p>Going into the exam, I didn’t really know what to expect, especially since it’s such a competitive exam globally. The questions were tricky in a different way—they needed multiple steps and a lot of logical thinking. In the end, I was honestly really happy (and kinda relieved) to find out I got a Bronze medal. For me, it wasn’t just about the result, but more about all the effort that went into it—the long hours, the frustration, and finally seeing it pay off. It definitely made me appreciate math a lot more and showed me how important persistence really is.</p>`
+                },
+                techkriti26: {
+                    title: "Returning to IIT Kanpur: Techkriti '26",
+                    meta: "Published on April 3, 2026",
+                    body: `
+      <p>Following our initial participation in 2025, our team returned to IIT Kanpur this year to compete in Techkriti ’26. Our objective for this season was to build upon our foundational knowledge by entering three distinct and technically demanding categories: <strong>IARC, Maneuver, and Hovermania</strong>. We are pleased to report podium finishes in two of these events, reflecting a significant year-over-year improvement in our engineering and programming capabilities.</p>
+      
+      <img src="assets/techkriti_2025.png" alt="Techkriti 26">
+
+      <h3>Competition Breakdown & Technical Milestones</h3>
+
+      <h4>1. IARC (International Autonomous Robotics Challenge)</h4>
+      <p>In the IARC category, our primary focus was the optimization of autonomous navigation.</p>
+      <ul>
+        <li><strong>Technical Implementation:</strong> I led the development of the Computer Vision (CV) stack, specifically focusing on enhancing node detection algorithms.</li>
+        <li><strong>Outcome:</strong> This refinement allowed for more precise line-following and decision-making during complex maneuvers.</li>
+        <li><strong>Result:</strong> 3rd Place</li>
+      </ul>
+      <br>
+
+      <h4>2. Maneuver</h4>
+      <p>The Maneuver competition required a high-torque, responsive chassis capable of navigating a rigorous obstacle course.</p>
+      <ul>
+        <li><strong>Technical Implementation:</strong> By focusing on mechanical durability and driver precision, we maintained a competitive pace throughout the heats.</li>
+        <li><strong>Result:</strong> 2nd Place</li>
+      </ul>
+      <br>
+
+      <h4>3. Hovermania</h4>
+      <p>This year marked our debut in Hovermania, a competition centered on hovercraft design and aerodynamics.</p>
+      <ul>
+        <li><strong>Technical Implementation:</strong> The project required a pivot toward lightweight structural engineering and the integration of drone-grade components. We gained extensive experience in thrust-to-weight ratios, ESC (Electronic Speed Controller) calibration, and the unique handling characteristics of amphibious vehicles.</li>
+        <li><strong>Outcome:</strong> While we did not secure a podium finish in this inaugural attempt, the technical insights gained regarding brushless motor synchronization and weight distribution were invaluable. We couldn't finish the hovermainia competetion because one of our ESCs got burned during the final run. It was an unfortunate moment but hardware errors are a part of the learning process and can occur often in robotics.</li>
+        <li><strong>Result:</strong> None </li>
+      </ul> 
+      <br>
+
+      <h3>Conclusion and Future Outlook</h3>
+      <p>Overall, Techkriti ’26 was a pivotal experience for our team. Comparing our performance to the previous year, we have demonstrated a clear trajectory of growth in both hardware integration and software development. While our results in IARC and Maneuver are a source of pride, the challenges faced in Hovermania have provided a clear roadmap for our technical objectives in the coming year.</p>
+      <p>We look forward to iterating on these designs and returning to the competition circuit with even more refined solutions.</p>
+    `
+                },
                 odyssey: {
                     title: "Leading Through Challenges: My Odyssey of the Mind Experience",
                     meta: "Published on March 15, 2025",
