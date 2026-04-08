@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayansh Paliwal - Personal Blog & Portfolio</title>
+    <title>Ayansh Paliwal</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -1064,6 +1065,7 @@
                 <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
                 <li><a href="#" class="nav-link" data-section="about">About Me</a></li>
                 <li><a href="#" class="nav-link" data-section="school">School</a></li>
+                <li><a href="#" class="nav-link" data-section="projects">Projects</a></li>
                 <li><a href="#" class="nav-link" data-section="achievements">Achievements</a></li>
                 <li><a href="#" class="nav-link" data-section="hobbies">Hobbies</a></li>
                 <li><a href="#" class="nav-link" data-section="blog">Blog</a></li>
@@ -1086,7 +1088,7 @@
                 <div class="hero-backdrop">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h2>HELLO, I'M</h2>
+                        <h2>HELLO,</h2>
                         <h1>Ayansh Paliwal.</h1>
                         <p>Student | Developer | Creator</p>
                     </div>
@@ -1104,7 +1106,7 @@
                         <a href="#" class="btn btn-white"
                             onclick="document.querySelector('[data-section=\'about\']').click()">About Me</a>
                         <a href="#" class="btn btn-outline"
-                            onclick="document.querySelector('[data-section=\'blog\']').click()">View Projects</a>
+                            onclick="document.querySelector('[data-section=\'projects\']').click()">View Projects</a>
                     </div>
 
                     <div class="footer-info sidebar-footer" style="margin-top: 2rem;">
@@ -1134,42 +1136,102 @@
                 </div>
             </section>
             <div class="container">
-                <div class="welcome-intro">
-                    <h2>Hi, I'm Ayansh!</h2>
-                    <p>Passionate about creating cutting-edge applications, competing in robotics championships, and
-                        pushing the boundaries of what's possible with technology. From mobile apps to game development,
-                        I turn ideas into reality through code. </p>
+                <h2 style="margin-top: 4rem;">Robotics Showcase</h2>
+                <div class="featured-posts">
+                    <!-- Video 1 -->
+                    <div class="post-card" style="padding: 1rem; text-align: center;">
+                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
+                            poster="assets/Maze_solver.jpeg">
+                            <source src="assets/Maze_solver.MOV" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Autonomous
+                            Maze solving</h3>
+                        <p style="font-size: 0.9rem;">Real-time maze solving using an ir array</p>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="post-card" style="padding: 1rem; text-align: center;">
+                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
+                            poster="assets/rov_underwater_poster.jpg">
+                            <source src="assets/rov_underwater.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">MateROV Maneuver
+                        </h3>
+                        <p style="font-size: 0.9rem;">Testing the 6-DOF underwater ROV for precise aquatic navigation.
+                        </p>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="post-card" style="padding: 1rem; text-align: center;">
+                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
+                            poster="assets/hovermainia_26.png">
+                            <source src="assets/Hovermania_26.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Hovermania @ IITK '26</h3>
+                        <p style="font-size: 0.9rem;">Hovermania is a competition where we have to build a hovercraft that can navigate through a given track. We were the black one in this video</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h1>Projects</h1>
+                <p style="margin-bottom: 2rem;">A deep dive into my software, hardware, and research work. I strongly
+                    believe in documenting both successes and failed attempts.</p>
+
+                <h2
+                    style="margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--primary-color); display: inline-block;">
+                    Completed</h2>
+                <div class="blog-posts" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="blog-post">
+                        <h3>Verde - Student Marketplace</h3>
+                        <p>A mobile marketplace for students to exchange textbooks and electronics.</p>
+                        <a href="https://github.com/BMWareSPEEDY/TISB-Swap" target="_blank" class="btn btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem; display: inline-block;"><i
+                                class="fab fa-github"></i> Repository & README</a>
+                    </div>
+                    <div class="blog-post">
+                        <h3>Meteor Tracking App</h3>
+                        <p>Developed an app during TISB Hacks that scrapes government databases for meteor sightings.
+                        </p>
+                        <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani"
+                            target="_blank" class="btn btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem; display: inline-block;"><i
+                                class="fab fa-github"></i> Repository & README</a>
+                    </div>
+                    <div class="blog-post">
+                        <h3>SD AI Image Generator</h3>
+                        <p>Python-based high-quality image generator using Stable Diffusion 3.5 Medium with batch inference and randomized prompt construction.</p>
+                        <a href="https://github.com/BMWareSPEEDY/SD-image-generator" target="_blank" class="btn btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem; display: inline-block;"><i
+                                class="fab fa-github"></i> Repository & README</a>
+                    </div>
                 </div>
 
-                <h2 style="margin-top: 4rem;">Featured Projects</h2>
-                <div class="featured-posts">
-                    <!-- Project 0: TISB Hacks 2026 -->
-                    <div class="post-card" onclick="openBlogFromHome('tisbhacks2026')">
-                        <h3>Verde - Student Marketplace</h3>
-                        <p>Built a Flutter-based mobile marketplace for TISB students to exchange items sustainably...
-                        </p>
-                        <small>Mobile Dev & Sustainability</small>
+                <h2
+                    style="margin-top: 4rem; margin-bottom: 1rem; border-bottom: 2px solid var(--secondary-color); display: inline-block;">
+                    In Progress & R&D</h2>
+                <div class="blog-posts" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="blog-post" style="border-left: 4px solid var(--secondary-color);">
+                        <h3 style="color: var(--secondary-color);">Autonomous Drone Navigation (WIP)</h3>
+                        <p>Currently researching and building a real-time SLAM implementation for indoor drones using
+                            ROS2 and low-cost LiDAR.</p>
+                        <a href="https://github.com/BMWareSPEEDY/drone-slam-wip" target="_blank" class="btn btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem; display: inline-block;"><i
+                                class="fab fa-github"></i> View Progress</a>
                     </div>
-
-                    <!-- Project 1: TISB Hacks (Programming) -->
-                    <div class="post-card" onclick="openBlogFromHome('TISB_Hacks')">
-                        <h3>Meteor Tracking App</h3>
-                        <p>Developed a meteor tracking app using flutter and dart for TISB Hacks...</p>
-                        <small>Programming & Mobile Dev</small>
-                    </div>
-
-                    <!-- Project 2: Science Fair (Science) -->
-                    <div class="post-card" onclick="openBlogFromHome('sciencefair')">
-                        <h3>Cas-9 Model</h3>
-                        <p>Won 1st Place at TISB Science Fair for building a detailed Cas-9 enzyme model...</p>
-                        <small>Science & Innovation</small>
-                    </div>
-
-                    <!-- Project 3: MateROV (Robotics) -->
-                    <div class="post-card" onclick="openBlogFromHome('materov')">
-                        <h3>Underwater ROV</h3>
-                        <p>Built an underwater robot for the MateROV competition, placing 28th globally...</p>
-                        <small>Robotics & Engineering</small>
+                    <div class="blog-post" style="border-left: 4px solid #e67e22;">
+                        <h3 style="color: #e67e22;">Failed Attempt: Custom Brushless ESC</h3>
+                        <p>Attempted to design an open-source high-current ESC for our hovercraft. Documenting the
+                            MOSFET thermal runaway issue that burned the board. Pivot to software modeling.</p>
+                        <a href="https://github.com/BMWareSPEEDY/failed-esc-v1" target="_blank" class="btn btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 1rem; display: inline-block;"><i
+                                class="fab fa-github"></i> Autopsy & Notes</a>
                     </div>
                 </div>
             </div>
@@ -1185,13 +1247,13 @@
                     </div>
                     <div class="about-text">
                         <h2>Hello, I'm Ayansh Paliwal</h2>
-                        <p>I'm a dedicated student with a passion for technology, programming, and creative
-                            problem-solving. Based in India, I'm constantly exploring new technologies and working on
-                            innovative projects that challenge me to grow as a developer.</p>
+                        <p>I am a high schooler focused on the intersection of robotics and machine learning, with a
+                            goal of contributing to open-source systems. My objective is to push the boundaries of
+                            intelligent systems and build solutions that have a lasting impact.</p>
                         <br>
-                        <p>My journey includes mastering all 10 levels of abacus by age 11, programming in multiple
-                            languages since age 10, and building robots for competitions. I'm also passionate about
-                            sports, holding a Red belt in Karate and winning awards in swimming.</p>
+                        <p>My journey includes mastering all 10 levels of abacus by age 11, diving into programming in
+                            multiple languages since age 10, and leading teams in competitive robotics. Beyond
+                            academics, I hold a Red belt in Karate and enjoy pushing my limits in sports.</p>
                         <br>
                         <p>I believe in the power of continuous learning and enjoy sharing my knowledge with others. My
                             goal is to use technology to create meaningful solutions that can make a positive impact on
@@ -1209,7 +1271,7 @@
                         <div class="fun-fact">
                             <h4>Fun Fact</h4>
                             <p>"Code is like humor. When you have to explain it, it's bad." - This quote by Cory House
-                                reminds me to write clean, self-explanatory code that speaks for itself!</p>
+                                reminds me to write clean, self-explanatory code that speaks for itself</p>
                         </div>
                     </div>
                 </div>
@@ -1316,27 +1378,51 @@
         <section id="achievements" class="section">
             <div class="container">
                 <h1>My Achievements</h1>
-                <!-- Robotics Category -->
+                
+                <!-- Robotics & Engineering Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon"></span>
-                        Robotics
+                        <span class="category-icon"><i class="fas fa-robot"></i></span>
+                        Robotics & Engineering
                     </h2>
                     <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('techkriti26')">
+                            <h3>Techkriti '26 - IIT Kanpur</h3>
+                            <p class="achievement-date">April 3, 2026</p>
+                            <p>Achieved podium finishes: 2nd Place in Maneuver and 3rd Place in IARC (International Autonomous Robotics Challenge). Led the development of the CV stack for autonomous node detection.</p>
+                        </div>
+
                         <div class="achievement-card" onclick="openBlogFromHome('materov')">
                             <h3>MateROV Competition</h3>
                             <p class="achievement-date">May 17–18, 2025</p>
-                            <p>Won first place in the regional MateROV competition. Built an underwater ROV capable of
-                                completing complex missions. Gained valuable exposure to underwater robotics. Competed
-                                at the international level in Alpena, Michigan, placing 28th globally.</p>
+                            <p>Responsible for autonomous vision-tracking algorithms. Qualified for International Finals in Alpena, Michigan, placing 28th globally and securing a top regional finish.</p>
                         </div>
 
                         <div class="achievement-card" onclick="openBlogFromHome('techkriti')">
-                            <h3>Techkriti at IIT Kanpur</h3>
+                            <h3>Techkriti '25 - IIT Kanpur</h3>
                             <p class="achievement-date">March 28, 2025</p>
-                            <p>Participated in three events at IIT Kanpur's Techkriti: placed 2nd in IARC, 10th in
-                                Robowars (category), and 12th in Manoeuvre. Connected with like-minded peers and
-                                explored diverse applications of robotics such as flying, combat, and racing.</p>
+                            <p>Engineered complex robotic systems for IARC, Robowars, and Manoeuvre. Secured a podium finish by implementing critical Computer Vision navigation logic.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Software & Hackathons Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-code"></i></span>
+                        Software & Hackathons
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('tisbhacks2026')">
+                            <h3>TISB Hacks 2026 - Building Verde</h3>
+                            <p class="achievement-date">February 14, 2026</p>
+                            <p>Developed 'Verde', a Flutter-based mobile marketplace. Implemented advanced security and integrity layers using PostgreSQL triggers and server-side filtering.</p>
+                        </div>
+
+                        <div class="achievement-card" onclick="openBlogFromHome('TISB_Hacks')">
+                            <h3>TISB Hacks 2025 - Meteor Tracking</h3>
+                            <p class="achievement-date">January 26, 2025</p>
+                            <p>Created an app that scrapes government databases for real-time meteor sighting data. Led the front-end development and UI/UX design under competition pressure.</p>
                         </div>
                     </div>
                 </div>
@@ -1344,22 +1430,41 @@
                 <!-- Science & Innovation Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon"></span>
+                        <span class="category-icon"><i class="fas fa-lightbulb"></i></span>
                         Science & Innovation
                     </h2>
                     <div class="achievements-grid">
                         <div class="achievement-card" onclick="openBlogFromHome('sciencefair')">
                             <h3>Science Fair Victory</h3>
                             <p class="achievement-date">March 21, 2025</p>
-                            <p>Won first place at TISB Science Fair for a Cas-9 model, demonstrating innovation,
-                                teamwork, and leadership.</p>
+                            <p>Won 1st Place with a detailed Cas-9 enzyme model. Led the 3D modeling in Blender and extensively researched CRISPR-Cas9 structural biology.</p>
                         </div>
 
                         <div class="achievement-card" onclick="openBlogFromHome('odyssey')">
                             <h3>Odyssey of the Mind – State Finals</h3>
                             <p class="achievement-date">2022–23</p>
-                            <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed
-                                qualifying for the World Finals.</p>
+                            <p>Led the team to State Finals through creative problem-solving and task management, narrowly missing the World Finals qualification.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Excellence Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-graduation-cap"></i></span>
+                        Academic Excellence
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('amo2026')">
+                            <h3>American Math Olympiad (AMO)</h3>
+                            <p class="achievement-date">March 23, 2026</p>
+                            <p>Secured a Bronze Medal in this global competition, demonstrating advanced proficiency in algebra, geometry, and logical problem-solving.</p>
+                        </div>
+
+                        <div class="achievement-card">
+                            <h3>Abacus Mastery</h3>
+                            <p class="achievement-date">Ages 7–11</p>
+                            <p>Completed all 10 levels of abacus training, mastering complex mental calculations and advanced pattern recognition techniques.</p>
                         </div>
                     </div>
                 </div>
@@ -1367,38 +1472,20 @@
                 <!-- Sports Category -->
                 <div class="category-section">
                     <h2 class="category-title">
-                        <span class="category-icon"></span>
+                        <span class="category-icon"><i class="fas fa-medal"></i></span>
                         Sports
                     </h2>
                     <div class="achievements-grid">
                         <div class="achievement-card">
                             <h3>State-Level Karate Tournament</h3>
                             <p class="achievement-date">October 2023</p>
-                            <p>Secured 2nd place in both Sparring and Form categories, reflecting over two years of
-                                dedicated training.</p>
+                            <p>Secured 2nd place in both Sparring and Form categories, representing years of dedicated training and discipline.</p>
                         </div>
 
                         <div class="achievement-card">
                             <h3>Multi-Sport Awards</h3>
                             <p class="achievement-date">Since Age 7</p>
-                            <p>Won awards at zonal and state levels in roller skating and swimming, along with
-                                achievements in school sports.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Academic Skills Category -->
-                <div class="category-section">
-                    <h2 class="category-title">
-                        <span class="category-icon"></span>
-                        Academic Skills
-                    </h2>
-                    <div class="achievements-grid">
-                        <div class="achievement-card">
-                            <h3>Abacus Mastery</h3>
-                            <p class="achievement-date">Ages 7–11</p>
-                            <p>Completed all 10 levels of abacus training, enhancing mental math and pattern recognition
-                                skills.</p>
+                            <p>Won multiple awards at zonal and state levels in roller skating, swimming, and competitive school sports.</p>
                         </div>
                     </div>
                 </div>
@@ -1828,6 +1915,7 @@
             }
         </script>
 
+
     </main>
 
     <footer>
@@ -1846,7 +1934,8 @@
 
             <div class="footer-info">
                 <p><a href="mailto:ayanshpaliwal2012@gmail.com">ayanshpaliwal2012@gmail.com</a></p>
-                <p>&copy; 2025 Ayansh Paliwal. Made with lots of hard work.</p>
+                <p>Website built with HTML, Vanilla CSS, and JavaScript.</p>
+                <p>&copy; 2026 Ayansh Paliwal. Made with lots of hard work.</p>
             </div>
         </div>
     </footer>
@@ -1976,7 +2065,7 @@
         });
 
         // Add typing effect to hero text (optional enhancement)
-        const heroTitle = document.querySelector('.hero h1');
+        const heroTitle = document.querySelector('.hero-content h1');
         const heroText = "Welcome to My Digital Space";
         let charIndex = 0;
 
@@ -2056,6 +2145,11 @@
             // Show blog section
             document.getElementById('blog').classList.add('active');
 
+            // Update nav links active state
+            document.querySelectorAll('.nav-link').forEach(nl => nl.classList.remove('active'));
+            const blogNavLink = document.querySelector('.nav-link[data-section="blog"]');
+            if (blogNavLink) blogNavLink.classList.add('active');
+
             // Scroll to blog
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -2066,14 +2160,17 @@
                 TISB_Hacks: "TISB Hacks",
                 tisbhacks2026: "TISB Hacks 2026 Experience",
                 materov: "Building an Underwater Robot for MateROV",
-                techkriti: "My Techkriti IIT Kanpur Experience"
+                techkriti: "My Techkriti IIT Kanpur Experience",
+                techkriti26: "Returning to IIT Kanpur: Techkriti '26",
+                amo2026: "Securing Bronze at the American Math Olympiad"
             };
 
             setTimeout(() => {
                 const blog = document.getElementById('blog');
                 const posts = blog.querySelectorAll('.blog-post');
                 posts.forEach(post => {
-                    if (post.querySelector('h3')?.textContent.includes(blogPosts[postId])) {
+                    const postTitle = post.querySelector('h3')?.textContent;
+                    if (postTitle && postTitle.includes(blogPosts[postId])) {
                         post.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         post.style.outline = '3px solid var(--primary-color)';
                         setTimeout(() => post.style.outline = '', 2000);
@@ -2084,5 +2181,4 @@
 
     </script>
 </body>
-
 </html>
