@@ -12,36 +12,43 @@
         :root {
             /* Modern, refined palette */
             --primary-color: #e02737;
+            --primary-rgb: 224, 39, 55;
             /* Softer, modern red */
-            --secondary-color: #009dff;
-            /* Muted, professional blue */
-            --accent-color: #a8dadc;
-            /* Soft cyan/teal for accents */
-            --text-primary: #1d3557;
-            /* Deep navy for text */
-            --text-secondary: #4a5568;
-            /* Grayish-blue for secondary text */
-            --bg-primary: #f8fafc;
-            /* Very light cool gray/white */
-            --bg-secondary: rgba(255, 255, 255, 0.8);
-            /* Glass effect base */
+            --secondary-color: #475569;
+            --secondary-rgb: 71, 85, 105;
+            /* Muted, professional accent */
+            --accent-color: #cbd5e1;
+            --accent-rgb: 203, 213, 225;
+            /* Skill groups color codes (Light Mode - high contrast) */
+            --hardware-rgb: 224, 39, 55;
+            --software-rgb: 26, 86, 219;
+            --logic-rgb: 13, 148, 136;
+            /* Text & backgrounds */
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --bg-primary: #f1f5f9;
+            --bg-secondary: rgba(255, 255, 255, 0.85);
+            /* Borders & Shadows */
             --border-color: rgba(203, 213, 225, 0.6);
-            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-            /* Softer, deeper shadow */
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            --gradient: linear-gradient(135deg, #ff0015 0%, #009dff 100%);
+            --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+            --gradient: linear-gradient(135deg, #e02737 0%, #ff5260 100%);
         }
 
 
         [data-theme="dark"] {
-            --text-primary: #f1faee;
-            --text-secondary: #a8dadc;
-            --bg-primary: #0f172a;
-            /* Deep blue-gray-black */
-            --bg-secondary: rgba(30, 41, 59, 0.7);
-            /* Dark glass */
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --bg-primary: #0b0f19;
+            /* Midnight Blue */
+            --bg-secondary: rgba(17, 24, 39, 0.7);
+            /* Navy glass */
+            --border-color: rgba(148, 163, 184, 0.12);
+            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+            /* Skill groups color codes (Dark Mode - bright neon glows) */
+            --hardware-rgb: 248, 113, 113;
+            --software-rgb: 56, 189, 248;
+            --logic-rgb: 45, 212, 191;
         }
 
 
@@ -112,11 +119,12 @@
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
+            left: 50%;
             width: 0;
             height: 2px;
             background: var(--gradient);
-            transition: width 0.3s ease;
+            transform: translateX(-50%);
+            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .nav-links a:hover::after,
@@ -343,21 +351,36 @@
             font-weight: 600;
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            --tag-rgb: var(--software-rgb);
+        }
+
+        .skill-tag.hardware {
+            --tag-rgb: var(--hardware-rgb);
+        }
+
+        .skill-tag.software {
+            --tag-rgb: var(--software-rgb);
+        }
+
+        .skill-tag.logic {
+            --tag-rgb: var(--logic-rgb);
         }
 
         .skill-tag:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
+            transform: translateY(-5px);
+            border-color: rgb(var(--tag-rgb));
+            color: rgb(var(--tag-rgb));
+            box-shadow: 0 5px 15px rgba(var(--tag-rgb), 0.25);
         }
 
         .skill-tag i {
-            color: var(--secondary-color);
+            color: rgb(var(--tag-rgb));
+            transition: color 0.3s ease;
         }
 
         /* Mobile Responsive Adjustments */
@@ -668,6 +691,85 @@
             text-decoration: none;
         }
 
+        /* Scroll-Driven Section Reveal (Fade-in & Slide-up) */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal-on-scroll.reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphic Glow & Spotlight Mouse Tracker */
+        .post-card,
+        .hobby-card,
+        .achievement-card,
+        .blog-post {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .post-card::before,
+        .hobby-card::before,
+        .achievement-card::before,
+        .blog-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+                rgba(var(--primary-rgb), 0.08),
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .post-card:hover::before,
+        .hobby-card:hover::before,
+        .achievement-card:hover::before,
+        .blog-post:hover::before {
+            opacity: 1;
+        }
+
+        .post-card > *,
+        .hobby-card > *,
+        .achievement-card > *,
+        .blog-post > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Dual-background trick for gradient borders on hover */
+        .post-card:hover,
+        .hobby-card:hover,
+        .blog-post:hover {
+            border-color: transparent;
+            background: 
+                linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+                radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--primary-rgb), 0.45), transparent 60%) border-box;
+        }
+
+        .achievement-card:hover {
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            background: 
+                linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+                radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--primary-rgb), 0.45), transparent 60%) border-box;
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -761,58 +863,30 @@
             animation: slideInRight 1s ease 0.3s both;
         }
 
-        /* Skill tag stagger animation */
-        .skill-tag {
-            animation: scaleIn 0.5s ease both;
+        /* Skill tag scroll-triggered stagger entry */
+        .skills-grid .skill-tag {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .skill-tag:nth-child(1) {
-            animation-delay: 0.1s;
+        .skills-grid.animate .skill-tag {
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .skill-tag:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-
-        .skill-tag:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        .skill-tag:nth-child(4) {
-            animation-delay: 0.25s;
-        }
-
-        .skill-tag:nth-child(5) {
-            animation-delay: 0.3s;
-        }
-
-        .skill-tag:nth-child(6) {
-            animation-delay: 0.35s;
-        }
-
-        .skill-tag:nth-child(7) {
-            animation-delay: 0.4s;
-        }
-
-        .skill-tag:nth-child(8) {
-            animation-delay: 0.45s;
-        }
-
-        .skill-tag:nth-child(9) {
-            animation-delay: 0.5s;
-        }
-
-        .skill-tag:nth-child(10) {
-            animation-delay: 0.55s;
-        }
-
-        .skill-tag:nth-child(11) {
-            animation-delay: 0.6s;
-        }
-
-        .skill-tag:nth-child(12) {
-            animation-delay: 0.65s;
-        }
+        .skills-grid.animate .skill-tag:nth-child(1) { transition-delay: 0.05s; }
+        .skills-grid.animate .skill-tag:nth-child(2) { transition-delay: 0.1s; }
+        .skills-grid.animate .skill-tag:nth-child(3) { transition-delay: 0.15s; }
+        .skills-grid.animate .skill-tag:nth-child(4) { transition-delay: 0.2s; }
+        .skills-grid.animate .skill-tag:nth-child(5) { transition-delay: 0.25s; }
+        .skills-grid.animate .skill-tag:nth-child(6) { transition-delay: 0.30s; }
+        .skills-grid.animate .skill-tag:nth-child(7) { transition-delay: 0.35s; }
+        .skills-grid.animate .skill-tag:nth-child(8) { transition-delay: 0.40s; }
+        .skills-grid.animate .skill-tag:nth-child(9) { transition-delay: 0.45s; }
+        .skills-grid.animate .skill-tag:nth-child(10) { transition-delay: 0.50s; }
+        .skills-grid.animate .skill-tag:nth-child(11) { transition-delay: 0.55s; }
+        .skills-grid.animate .skill-tag:nth-child(12) { transition-delay: 0.60s; }
 
         /* Card hover enhancements */
         .post-card,
@@ -880,14 +954,7 @@
             transform: scale(0.95);
         }
 
-        /* Popup entrance */
-        .popup {
-            animation: fadeIn 0.3s ease;
-        }
-
-        .popup-content {
-            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* Popup entrance - handled via transitions on the active class */
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -1120,62 +1187,76 @@
                 <div class="container">
                     <h1>My Skills</h1>
                     <div class="skills-grid">
-                        <div class="skill-tag"><i class="fas fa-microchip"></i> Microcontrollers</div>
-                        <div class="skill-tag"><i class="fas fa-project-diagram"></i> Project Development</div>
-                        <div class="skill-tag"><i class="fab fa-java"></i> Java</div>
-                        <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
-                        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
-                        <div class="skill-tag"><i class="fas fa-code"></i> C++</div>
-                        <div class="skill-tag"><i class="fab fa-android"></i> Kotlin</div>
-                        <div class="skill-tag"><i class="fas fa-mobile-alt"></i> Dart</div>
-                        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
-                        <div class="skill-tag"><i class="fas fa-robot"></i> Robotics</div>
-                        <div class="skill-tag"><i class="fas fa-users"></i> Leadership</div>
-                        <div class="skill-tag"><i class="fas fa-brain"></i> Problem Solving</div>
+                        <!-- Hardware -->
+                        <div class="skill-tag hardware"><i class="fas fa-microchip"></i> Microcontrollers</div>
+                        <div class="skill-tag hardware"><i class="fas fa-robot"></i> Robotics</div>
+                        
+                        <!-- Software -->
+                        <div class="skill-tag software"><i class="fab fa-java"></i> Java</div>
+                        <div class="skill-tag software"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-tag software"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-tag software"><i class="fas fa-code"></i> C++</div>
+                        <div class="skill-tag software"><i class="fab fa-android"></i> Kotlin</div>
+                        <div class="skill-tag software"><i class="fas fa-mobile-alt"></i> Dart</div>
+                        
+                        <!-- Logic & Tools -->
+                        <div class="skill-tag logic"><i class="fas fa-project-diagram"></i> Project Development</div>
+                        <div class="skill-tag logic"><i class="fab fa-git-alt"></i> Git</div>
+                        <div class="skill-tag logic"><i class="fas fa-users"></i> Leadership</div>
+                        <div class="skill-tag logic"><i class="fas fa-brain"></i> Problem Solving</div>
                     </div>
                 </div>
             </section>
             <div class="container">
-                <h2 style="margin-top: 4rem;">Robotics Showcase</h2>
-                <div class="featured-posts">
-                    <!-- Video 1 -->
-                    <div class="post-card" style="padding: 1rem; text-align: center;">
-                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
-                            poster="assets/Maze_solver.jpeg">
-                            <source src="assets/Maze_solver.MOV" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Autonomous
-                            Maze solving</h3>
-                        <p style="font-size: 0.9rem;">Real-time maze solving using an ir array</p>
-                    </div>
+                <h2 style="margin-top: 4rem;">Project Showcase</h2>
+                <div class="showcase-carousel-wrapper">
+                    <button class="carousel-control prev-btn" aria-label="Previous Project"><i class="fas fa-chevron-left"></i></button>
+                    <div class="showcase-carousel">
+                        <!-- Post 1 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('techkriti')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Autonomous Maze solving</h3>
+                            <p style="font-size: 0.9rem;">Developed an autonomous robot designed to navigate complex layouts in real-time. By programming an infrared (IR) sensor array and implementing line-following and decision-making logic, we secured 2nd place in the IARC competition at IIT Kanpur's Techkriti.</p>
+                        </div>
 
-                    <!-- Video 2 -->
-                    <div class="post-card" style="padding: 1rem; text-align: center;">
-                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
-                            poster="assets/rov_underwater_poster.jpg">
-                            <source src="assets/rov_underwater.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">MateROV Maneuver
-                        </h3>
-                        <p style="font-size: 0.9rem;">Testing the 6-DOF underwater ROV for precise aquatic navigation.
-                        </p>
-                    </div>
+                        <!-- Post 2 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('materov')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">MateROV Maneuver</h3>
+                            <p style="font-size: 0.9rem;">Engineered a 6-DOF underwater ROV for precise aquatic navigation and mission execution. Responsible for programming autonomous vision-tracking algorithms, helping our 10-member team win 1st place in the regionals and place 35th globally at the International Finals in Michigan.</p>
+                        </div>
 
-                    <!-- Video 3 -->
-                    <div class="post-card" style="padding: 1rem; text-align: center;">
-                        <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1rem;"
-                            poster="assets/hovermainia_26.png">
-                            <source src="assets/Hovermania_26.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Hovermania @
-                            IITK '26</h3>
-                        <p style="font-size: 0.9rem;">Hovermania is a competition where we have to build a hovercraft
-                            that can navigate through a given track. We were the black one in this video</p>
+                        <!-- Post 3 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('techkriti26')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Hovermania @ IITK '26</h3>
+                            <p style="font-size: 0.9rem;">Designed and built an amphibious hovercraft utilizing drone-grade components and lightweight structural engineering. Focused on optimizing thrust-to-weight ratios, calibrating ESCs, and managing the unique dynamics of high-speed track navigation at IIT Kanpur.</p>
+                        </div>
+
+                        <!-- Post 4 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('tisbhacks2026')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">Verde - Student Marketplace</h3>
+                            <p style="font-size: 0.9rem;">Built a Flutter-based mobile marketplace for students with PostgreSQL security, anti-spam limits, and keyword filtering triggers to protect community trade. Won accolades at TISB Hacks 2026.</p>
+                        </div>
+
+                        <!-- Post 5 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('norcalhacks2026')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">NorCal Hacks 2026 - Productivity Track</h3>
+                            <p style="font-size: 0.9rem;">Built Verde, a hyper-local community marketplace, secure chat, and live environmental impact tracking platform, winning the Productivity Track category at NorCal Hacks 2026.</p>
+                        </div>
+
+                        <!-- Post 6 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('hackmars2026')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">ErgoLearn AI - Hackmars 2026</h3>
+                            <p style="font-size: 0.9rem;">Architected a privacy-first, offline workspace posture tracker using Tauri, Rust, and MediaPipe to calculate biomechanical strain and coordinate AI-driven wellness advice, winning the Productivity Track Award at Hackmars 2026.</p>
+                        </div>
+
+                        <!-- Post 7 -->
+                        <div class="post-card" style="padding: 1rem; text-align: center; cursor: pointer;" onclick="openBlogFromHome('materov2026')">
+                            <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">MATE ROV 2026 - Team Orcas</h3>
+                            <p style="font-size: 0.9rem;">Redesigned subsea ROV using 6-axis vectored BLDC thrusters and submerged electronics. Developed customized real-time YOLO object detection and autonomous 3D reconstruction, placing 1st in the Indian Region.</p>
+                        </div>
                     </div>
+                    <button class="carousel-control next-btn" aria-label="Next Project"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                <div class="carousel-indicators"></div>
             </div>
         </section>
 
@@ -1390,6 +1471,12 @@
                         Robotics & Engineering
                     </h2>
                     <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('materov2026')">
+                            <h3>MATE ROV 2026 - Regional Champions</h3>
+                            <p class="achievement-date">June 2026</p>
+                            <p>Placed 1st in the Indian Region with Team Orcas. Oversaw software systems, implementing custom YOLO vision recognition and autonomous 3D shape reconstruction pipelines.</p>
+                        </div>
+
                         <div class="achievement-card" onclick="openBlogFromHome('techkriti26')">
                             <h3>Techkriti '26 - IIT Kanpur</h3>
                             <p class="achievement-date">April 3, 2026</p>
@@ -1421,6 +1508,24 @@
                         Software & Hackathons
                     </h2>
                     <div class="achievements-grid">
+                        <div class="achievement-card" onclick="openBlogFromHome('hackmars2026')">
+                            <h3>Hackmars 2026 - Track Winner</h3>
+                            <p class="achievement-date">June 15, 2026</p>
+                            <p>Won the Productivity Track Award at Hackmars 2026. Architected ErgoLearn AI, a localized 3D biomechanical sensor and workspace coach utilizing Tauri and MediaPipe.</p>
+                        </div>
+
+                        <div class="achievement-card" onclick="openBlogFromHome('norcalhacks2026')">
+                            <h3>NorCal Hacks 2026 - Track Winner</h3>
+                            <p class="achievement-date">May 10, 2026</p>
+                            <p>Won the Productivity Track at NorCal Hacks 2026. Designed and built a workspace utility optimized for student workflow management and cognitive ease.</p>
+                        </div>
+
+                        <div class="achievement-card" onclick="window.open('assets/Perse_coding_certificate.pdf', '_blank')">
+                            <h3>Perse Coding Challenge</h3>
+                            <p class="achievement-date">2026</p>
+                            <p>Competed in the Perse Coding Challenge, solving complex algorithmic problems and coding challenges under timed conditions. Click to view certificate.</p>
+                        </div>
+
                         <div class="achievement-card" onclick="openBlogFromHome('tisbhacks2026')">
                             <h3>TISB Hacks 2026 - Building Verde</h3>
                             <p class="achievement-date">February 14, 2026</p>
@@ -1584,6 +1689,21 @@
             <div class="container">
                 <h1>My Blog</h1>
                 <div class="blog-posts">
+                    <div class="blog-post" onclick="openPopup('materov2026')">
+                        <h3>MATE ROV 2026</h3>
+                        <div class="blog-meta">Published on June 28, 2026</div>
+                        <p>Returning for a second campaign, Team Orcas implemented a vectored horizontal thruster layout, subsea electronics waterproofing, and customized YOLO object recognition.</p>
+                    </div>
+                    <div class="blog-post" onclick="openPopup('hackmars2026')">
+                        <h3>Hackmars 3.0 2026</h3>
+                        <div class="blog-meta">Published on June 15, 2026</div>
+                        <p>How we built ErgoLearn AI, a privacy-first edge-computing posture tracker using Tauri and MediaPipe, and won the Productivity Track Award at Hackmars 2026.</p>
+                    </div>
+                    <div class="blog-post" onclick="openPopup('norcalhacks2026')">
+                        <h3>NorCal Hacks 2026</h3>
+                        <div class="blog-meta">Published on May 10, 2026</div>
+                        <p>Reflecting on our experience designing a student productivity workspace tool and winning the Track Winner title at NorCal Hacks 2026.</p>
+                    </div>
                     <div class="blog-post" onclick="openPopup('amo2026')">
                         <h3>Securing Bronze at the American Math Olympiad</h3>
                         <div class="blog-meta">Published on March 23, 2026</div>
@@ -1676,19 +1796,28 @@
             }
 
             .popup {
-                display: none;
+                display: flex;
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: rgba(0, 0, 0, 0.2);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(0px);
+                -webkit-backdrop-filter: blur(0px);
                 z-index: 9999;
                 justify-content: center;
                 align-items: center;
-                animation: fadeIn 0.5s ease;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+            }
+
+            .popup.active {
+                opacity: 1;
+                pointer-events: auto;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
             }
 
             .popup-content {
@@ -1701,8 +1830,15 @@
                 border-radius: 20px;
                 padding: 2rem;
                 position: relative;
-                animation: slideUp 0.4s ease;
                 box-shadow: var(--shadow);
+                transform: scale(0.95);
+                opacity: 0;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            }
+
+            .popup.active .popup-content {
+                transform: scale(1);
+                opacity: 1;
             }
 
             .popup-content h2 {
@@ -1913,6 +2049,167 @@
       </div>
 `
                 },
+                norcalhacks2026: {
+                    title: "NorCal Hacks 2026",
+                    meta: "Published on May 10, 2026",
+                    body: `
+      <p>I am thrilled to share that our team won the <strong>Productivity Track</strong> at <strong>NorCal Hacks 2026</strong>! Competing against talented student developers from all over, we designed and built <strong>Verde</strong> — a hyper-local community hub designed to facilitate sustainable interactions and optimize resource reuse.</p>
+      
+      <h3>Inspiration</h3>
+      <p>I witnessed a constant cycle of waste within my school community: seniors discarding expensive textbooks, students outgrowing uniforms, and a Lost & Found bin that resembled a graveyard of forgotten belongings. The true spark, however, was the overwhelming volume of emails I received daily from students desperate to find lost valuables.</p>
+      <p>I realized that TISB didn’t just need a marketplace; it needed a bridge. Inspired by the Human Interaction theme, I set out to create Verde — a platform that transforms recycling into a social, peer-to-peer connection that benefits both students’ wallets and the planet.</p>
+
+      <div style="text-align: center; margin: 2rem 0;">
+          <img src="assets/Norcal_hacks.pdf.png" alt="NorCal Hacks 2026 Track Winner Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+          <a href="assets/Norcal_hacks.pdf" target="_blank" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">
+              <i class="fas fa-file-pdf"></i> View Certificate PDF
+          </a>
+      </div>
+
+      <h3>What It Does</h3>
+      <p>Verde is a hyper-local community hub designed to facilitate sustainable interactions:</p>
+      <ul>
+          <li><strong>Marketplace:</strong> A gated platform to donate, swap, or “buy” (for free) school essentials like textbooks, uniforms, and electronics.</li>
+          <li><strong>Lost & Found:</strong> A dedicated module to report and reclaim missing items, fostering a campus culture of honesty and helpfulness.</li>
+          <li><strong>Live Impact Tracking:</strong> A real-time dashboard visualizing the community’s collective environmental contribution, including CO₂ saved, items recycled, and trees preserved.</li>
+          <li><strong>Secure Chat:</strong> An integrated system for peers to coordinate safe, on-campus hand-offs in verified locations like the library or school fields.</li>
+      </ul>
+
+      <h3>How I Built It</h3>
+      <p>I developed Verde using the Flutter framework to ensure a high-performance, cross-platform experience. For the infrastructure, I utilized Supabase to handle user authentication, image storage, and real-time database updates.</p>
+      <p>To give the app a premium feel, I designed a custom brand identity from scratch, implementing Adaptive Icons and a native splash screen to ensure Verde feels like a fully integrated part of a student’s mobile device.</p>
+
+      <h3>Challenges I Ran Into</h3>
+      <p>As a solo developer, I faced a steep learning curve with Supabase. Configuring the database and mastering Row-Level Security (RLS) policies was a significant hurdle in ensuring user data remained private and secure.</p>
+      <p>On the frontend, creating a seamless, lag-free search and filter system was challenging. I had to optimize the UI to update instantly as users typed while simultaneously sorting across multiple categories.</p>
+      <p>I also grappled with the nuances of Android’s Adaptive Icons, learning through trial and error how to design within safe zones to prevent branding from being cut off.</p>
+
+      <h3>Accomplishments I’m Proud Of</h3>
+      <ul>
+          <li>The Live Impact Counter, which translates a simple textbook swap into approximately 10 kg of CO₂ saved, transforming the app from a utility into a mission-driven movement.</li>
+          <li>Successfully executing a project of this scope—encompassing a marketplace, chat system, and impact tracking—within a limited hackathon timeframe.</li>
+          <li>Maintaining a clean, minimalist UI/UX throughout the app.</li>
+          <li>Implementing automated spam and scam detection, including monthly post rate limits per user.</li>
+          <li>Creating a reporting mechanism that allows users to flag false information or misuse.</li>
+          <li>Building misuse detection that blocks inappropriate listings (e.g., gift cards, vapes, or other prohibited items) before they are published.</li>
+      </ul>
+
+      <h3>What I Learned</h3>
+      <p>This project taught me that Human Interaction is the most powerful driver of sustainability. Technology is simply the facilitator; the real value is created when two students meet on campus to return a lost item or pass down a resource.</p>
+      <p>On the technical side, I significantly deepened my understanding of relational databases, security policies, and native mobile configurations.</p>
+
+      <h3>What’s Next for Verde</h3>
+      <p>Planned future improvements include:</p>
+      <ul>
+          <li>GPS-verified Safe Swap Zones to enhance campus security.</li>
+          <li>A Sustainability Leaderboard to gamify eco-friendly behavior.</li>
+          <li>A Wall of Thanks to encourage peer appreciation.</li>
+      </ul>
+      <p>To prepare for a real-world launch at TISB or within local housing societies, these features will help ensure Verde remains a trusted and secure platform for all users.</p>
+`
+                },
+                hackmars2026: {
+                    title: "Hackmars 3.0 2026",
+                    meta: "Published on June 15, 2026",
+                    body: `
+      <p>I am thrilled to announce that we won the <strong>Productivity Track Award</strong> at <strong>Hackmars 2026</strong>! We built <strong>ErgoLearn AI</strong> — a privacy-first, edge-computing biomechanical posture tracker and workspace wellness coach.</p>
+      
+      <h3>Inspiration</h3>
+      <p>As a student and software developer, I spend upwards of 8 to 10 hours a day glued to my laptop screen, hunched over lines of code and technical text. Over time, I noticed recurring shoulder fatigue, a stiff neck, and a massive drop in my mental focus during long study blocks. When I looked at existing posture tracking apps on the market, I realized they all shared the same major flaws: they were either massive resource hogs that drained laptop batteries, or they required streaming raw webcam feeds to external cloud servers. For a workspace utility, that felt like an unnecessary privacy violation. I wanted to build a solution that treated my camera as a fully localized, private biomechanical sensor—giving me deep workspace wellness insights without sacrificing my data or melting my computer's CPU.</p>
+
+      <div style="text-align: center; margin: 2rem 0;">
+          <img src="assets/Hack_mars.pdf.png" alt="Hackmars 2026 Track Winner Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+          <a href="assets/Hack_mars.pdf" target="_blank" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">
+              <i class="fas fa-file-pdf"></i> View Certificate PDF
+          </a>
+      </div>
+
+      <h3>What It Does</h3>
+      <p>ErgoLearn AI converts a standard 2D laptop webcam into a real-time, privacy-first, edge-computing biomechanical sensor suite. Operating completely offline, it strips out and deletes raw camera pixel streams to protect user privacy, projecting a minimalist 3D vector wireframe skeleton onto a clean, non-glaring Matte Obsidian grid canvas.</p>
+      <p>The application tracks vertical spine compression (Slouching), shoulder plane alignment errors (Lateral Asymmetry), and uses real-time interpupillary distance mapping to calculate the exact distance between the user's face and the monitor in centimeters. These data pipelines feed a highly responsive 10-second rolling Concentration Index sparkline chart. Additionally, the app features an integrated AI Coach panel that acts as an interactive workspace wellness companion, providing contextual posture advice and stretches based on real session logs.</p>
+
+      <h3>How We Built It</h3>
+      <p>I architected ErgoLearn AI using a lightweight, decoupled multi-process stack to keep its runtime footprint as tiny as possible.</p>
+      <ul>
+          <li><strong>The Frontend Interface:</strong> Built using standard HTML5, CSS3, and vanilla JavaScript styled with a flat, sophisticated matte slate and ink aesthetic. I wrapped the interface using Tauri, which compiles directly into the operating system's native web rendering engines (WebKit on macOS / WebView2 on Windows) instead of bundling a heavy browser core like Electron does. This keeps the frontend shell framework under a tiny 20 MB container footprint.</li>
+          <li><strong>The AI Sidecar Backend:</strong> A local background Python process managed natively by Tauri that ingests local hardware camera frames and passes them through an optimized MediaPipe skeletal pipeline.</li>
+          <li><strong>The IPC Bridge:</strong> The frontend interface and Python backend communicate locally via a high-speed, secure loopback WebSocket connection (<code>ws://localhost:8765</code>) running at up to 30 frames per second.</li>
+      </ul>
+      <p>Every frame is processed using localized vector geometry to create anatomical invariants, meaning the math scales automatically even if the user moves around. For example, vertical spine collapse is checked by calculating a normalized Slouch Fraction:</p>
+
+      <div style="text-align: center; margin: 1.5rem 0; font-size: 1.15rem; color: var(--primary-color);">
+          <strong>Slouch Fraction</strong> = 
+          <div style="display: inline-block; vertical-align: middle; text-align: center; margin-left: 8px;">
+              <span style="border-bottom: 1px solid var(--primary-color); display: block; padding-bottom: 2px;">Neck Ratio<sub>current</sub></span>
+              <span style="display: block; padding-top: 2px;">Neck Ratio<sub>calibrated</sub></span>
+          </div>
+      </div>
+
+      <p>By dividing the vertical distance between the ear and shoulder midpoints by the overall 3D shoulder width (w<sub>shoulder</sub>), the equation ensures that sitting slightly closer or further away from the lens never breaks the calculation accuracy.</p>
+
+      <h3>Challenges We Ran Into</h3>
+      <p>Building a multi-language app that spans JavaScript, Rust, and Python brought up some real engineering hurdles:</p>
+      <ul>
+          <li><strong>The Tab-Throttling Lag:</strong> Early on, when I switched away from the app to type code in another window, the OS would automatically throttle the background frontend JavaScript animation loops. The WebSocket packets from the Python backend would back up in the network buffer. Switching back to the app triggered a crazy, fast-forward "replay" lag. I solved this by stamping millisecond UTC timestamps on the backend data packets, forcing the frontend to immediately drop any frame older than 200ms upon waking up.</li>
+          <li><strong>Notification Fatigue:</strong> Posture apps can get incredibly annoying if they trigger alerts too quickly. If a developer leans forward for a single second to analyze a complex line of code, they don't want a loud alarm. I had to design a custom Hysteresis state machine with a 30-second continuous failure buffer and a strict 60-second cooldown timer so the app remains a silent, helpful companion rather than a constant desktop distraction.</li>
+          <li><strong>Hardware Constraints:</strong> I initially intended to track eye blinking using Eye Aspect Ratio (EAR) maps to prevent dry eyes, but real-world testing proved that standard laptop webcams at normal screen distances (50–70 cm) are simply too low-resolution for reliable blink data. Rather than shipping a glitchy feature, I made the engineering call to strip out the blink code entirely and focus heavily on rock-solid 3D skeletal posture layout tracking.</li>
+      </ul>
+
+      <h3>Accomplishments That We're Proud Of</h3>
+      <p>I am incredibly proud of creating a cross-platform machine learning app that values user privacy above everything else. Successfully implementing the pinhole camera approximation formula using the pixel delta between landmarks 468 and 473 (the center of human irises) allowed us to calculate absolute screen proximity in centimeters without forcing the user to own expensive depth cameras or LiDAR hardware. Additionally, re-engineering our Concentration Index from a sluggish 60-second moving average down to a responsive 10-second window means the data visualization reacts to sudden fatigue drops smoothly and dynamically in under two seconds.</p>
+
+      <h3>What We Learned</h3>
+      <p>This project completely shifted how I approach systems architecture. It taught me that building software with AI components doesn't mean you have to plug everything into expensive, cloud-hosted API endpoints that compromise user data. By leveraging highly optimized edge frameworks, local WebSockets, and on-device logic routines, you can build incredibly robust, low-latency, and highly secure software that runs completely on your own machine.</p>
+
+      <h3>What's Next for Ergolearn</h3>
+      <p>The immediate next step for ErgoLearn AI is expanding our conversational ecosystem. Our current AI Coach features a dual-tiered architecture that targets a local Ollama instance (running an optimized, quantized LLM model) or falls back to an offline rule-based NLP parser that reads the local posture_history.json logs when Ollama is closed. I want to build out custom, interactive desktop stretch routines where the neon 3D skeleton actively guides the user through shoulder rolls and cervical stretches, updating the UI in real-time as they complete each physical movement correctly.</p>
+`
+                },
+                materov2026: {
+                    title: "MATE ROV 2026",
+                    meta: "Published on June 28, 2026",
+                    body: `
+      <p>Participating in the MATE ROV competition is always an intense challenge, but returning for my second year with my team, The Orcas, gave us a massive head start. Having the experience of the previous year under our belts allowed us to think bigger, design smarter, and push the boundaries of what our underwater robot could do.</p>
+      <p>Despite a tight timeline due to a late start, this season became a journey of incredible technical growth, regional triumph, and invaluable lessons on the international stage.</p>
+
+      <h3>The Engineering Evolution: Vector Design and Subsea Electronics</h3>
+      <p>We made two massive architectural shifts in our ROV design this year, focusing heavily on mobility and structural integrity.</p>
+      
+      <h4>1. Vectored Thruster Configuration</h4>
+      <p>Last year, we relied on a standard orthogonal layout. This year, we pivoted to a vectored design using six BLDC (Brushless DC) motors: four dedicated to vectored horizontal movement and two for vertical depth control. This change unlocked unparalleled precision, allowing the bot to strafe, pivot, and maneuver seamlessly in tight underwater spaces.</p>
+
+      <h4>2. Moving Electronics Underwater</h4>
+      <p>Our biggest mechanical leap was moving all major electronics, including the Electronic Speed Controllers (ESCs), directly into the underwater chassis. Last year, these components stayed above water, resulting in a thick, heavy tether.</p>
+      <ul>
+          <li><strong>The Challenge:</strong> Mastering complex waterproofing techniques to protect critical components from high pressure and moisture.</li>
+          <li><strong>The Payoff:</strong> We drastically reduced the weight and size of our tether, minimized signal degradation, and significantly improved the bot’s overall physical integrity.</li>
+      </ul>
+      <p>To keep things efficient under our tight deadline, we opted for a robust, basic claw design. We bypassed a complex mechanical claw, steering clear of the time-consuming process of waterproofing a servo motor.</p>
+
+      <div style="text-align: center; margin: 2rem 0;">
+          <img src="assets/IMG_2333.png" alt="Team Orcas MATE ROV 2026 Competition" style="max-width: 50%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">me after winning Nationals in India</p>
+      </div>
+
+      <h3>Coding the Depths: Computer Vision and Autonomous 3D Modeling</h3>
+      <p>On the team, my primary focus was the software architecture, though I kept my hands dirty in the hardware assembly too. This season pushed my programming skills to an entirely new level.</p>
+      
+      <h4>YOLO Image Recognition</h4>
+      <p>I trained a YOLO (You Only Look Once) model specifically for real-time image recognition to identify and track crabs underwater. This allowed the ROV to detect and localize targets autonomously in challenging subsea lighting environments.</p>
+
+      <h4>Autonomous Shape and 3D Modeling</h4>
+      <p>My proudest achievement was developing a custom Python program from scratch. The software autonomously processes underwater imagery to feed visual data into our model, calculate the exact lengths of unknown object sides using camera lens geometry, and automatically generate a 3D model of the target object.</p>
+      <p>Having never built anything like this before, the learning curve was steep and took a lot of trial and error. Seeing it work autonomously with high accuracy was incredibly rewarding.</p>
+
+      <h3>From Regional Champions to International Lessons</h3>
+      <p>Our hard work paid off spectacularly at the regional level: Team Orcas placed 1st in the Indian Region! This victory punched our ticket to the International Finals.</p>
+      <p>Unfortunately, the international run did not go as smoothly as we hoped. We were hit with a cascade of technical glitches during our official run. But if there is one thing robotics teaches you, it is that hurdles are part of the process.</p>
+
+      <h3>Looking Ahead to 2027</h3>
+      <p>I am incredibly proud of what The Orcas accomplished this year. We built a highly sophisticated bot, conquered regional qualifiers, and developed cutting-edge software.</p>
+      <p>Next year, our goal is industrial-grade reliability. We want to focus on rigorous stress-testing to build a more resilient, foolproof robot that can handle the unpredictable nature of international competition. We will be back, smarter, faster, and ready for the deep end!</p>
+`
+                },
             };
 
             function openPopup(id) {
@@ -1921,12 +2218,12 @@
                 document.getElementById('popup-title').innerText = data.title;
                 document.getElementById('popup-meta').innerText = data.meta;
                 document.getElementById('popup-body').innerHTML = data.body;
-                document.getElementById('blog-popup').style.display = 'flex';
+                document.getElementById('blog-popup').classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
 
             function closePopup() {
-                document.getElementById('blog-popup').style.display = 'none';
+                document.getElementById('blog-popup').classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
         </script>
@@ -2057,28 +2354,41 @@
             lastScrollTop = scrollTop;
         });
 
-        // Add animation on scroll for timeline items
-        const observerOptions = {
-            threshold: 0.1,
+        // Unified Scroll-Driven Section & Card Reveal Observer
+        const revealObserverOptions = {
+            threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('reveal-active');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, revealObserverOptions);
 
-        // Observe timeline items and cards for animation
-        document.querySelectorAll('.timeline-item, .post-card, .hobby-card, .info-card').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(item);
+        // Dynamically register reveal class and observe cards and timeline items
+        document.querySelectorAll('.timeline-item, .post-card, .hobby-card, .info-card, .achievement-card, .blog-post').forEach(item => {
+            item.classList.add('reveal-on-scroll');
+            revealObserver.observe(item);
         });
+
+        // Skills Grid stagger reveal observer
+        const skillsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        const skillsGrid = document.querySelector('.skills-grid');
+        if (skillsGrid) {
+            skillsObserver.observe(skillsGrid);
+        }
 
         // Add typing effect to hero text (optional enhancement)
         const heroTitle = document.querySelector('.hero-content h1');
@@ -2178,7 +2488,10 @@
                 materov: "Building an Underwater Robot for MateROV",
                 techkriti: "My Techkriti IIT Kanpur Experience",
                 techkriti26: "Returning to IIT Kanpur: Techkriti '26",
-                amo2026: "Securing Bronze at the American Math Olympiad"
+                amo2026: "Securing Bronze at the American Math Olympiad",
+                norcalhacks2026: "NorCal Hacks 2026",
+                hackmars2026: "Hackmars 3.0 2026",
+                materov2026: "MATE ROV 2026"
             };
 
             setTimeout(() => {
@@ -2195,7 +2508,360 @@
             }, 500);
         }
 
+        // Custom Cursor & 3D Tilt Script
+        document.addEventListener('DOMContentLoaded', () => {
+            // Custom Cursor Elements
+            const dot = document.querySelector('.custom-cursor-dot');
+            const outline = document.querySelector('.custom-cursor-outline');
+
+            if (dot && outline) {
+                let mouseX = -100;
+                let mouseY = -100;
+                let outlineX = -100;
+                let outlineY = -100;
+
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    dot.style.opacity = '1';
+                    outline.style.opacity = '1';
+                    
+                    dot.style.left = mouseX + 'px';
+                    dot.style.top = mouseY + 'px';
+                });
+
+                // Smoothly ease the outer ring to follow the dot cursor
+                function animateOutline() {
+                    outlineX += (mouseX - outlineX) * 0.15;
+                    outlineY += (mouseY - outlineY) * 0.15;
+
+                    outline.style.left = outlineX + 'px';
+                    outline.style.top = outlineY + 'px';
+
+                    requestAnimationFrame(animateOutline);
+                }
+                requestAnimationFrame(animateOutline);
+
+                // Add Hover Morph States to Interactive Elements
+                const refreshInteractiveListeners = () => {
+                    const interactives = document.querySelectorAll('a, button, .post-card, .achievement-card, .blog-post, .nav-link, .btn, .social-links a, .close-btn, [onclick]');
+                    interactives.forEach(el => {
+                        el.addEventListener('mouseenter', () => {
+                            dot.classList.add('hover');
+                            outline.classList.add('hover');
+                        });
+                        el.addEventListener('mouseleave', () => {
+                            dot.classList.remove('hover');
+                            outline.classList.remove('hover');
+                        });
+                    });
+                };
+                refreshInteractiveListeners();
+
+                // Hide custom cursor when mouse leaves the document boundaries
+                document.addEventListener('mouseleave', () => {
+                    dot.style.opacity = '0';
+                    outline.style.opacity = '0';
+                });
+            }
+
+            // 3D Parallax Tilt Effect for Cards
+            const cards = document.querySelectorAll('.post-card, .achievement-card, .blog-post');
+            cards.forEach(card => {
+                card.style.transformStyle = 'preserve-3d';
+                card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out';
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const maxRotation = 8; // Gentle 3D rotation
+                    
+                    const rotateX = ((centerY - y) / centerY) * maxRotation;
+                    const rotateY = ((x - centerX) / centerX) * maxRotation;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+
+            // Project Showcase Carousel Navigation
+            const carousel = document.querySelector('.showcase-carousel');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+            if (carousel && prevBtn && nextBtn && indicatorsContainer) {
+                const carouselCards = carousel.querySelectorAll('.post-card');
+                const cardCount = carouselCards.length;
+                let dots = [];
+
+                const buildIndicators = () => {
+                    const style = window.getComputedStyle(carousel);
+                    const gap = parseInt(style.gap) || 0;
+                    const cardWidth = carouselCards[0].offsetWidth + gap;
+                    
+                    // Estimate number of visible cards
+                    const visibleCards = Math.round(carousel.offsetWidth / cardWidth) || 1;
+                    
+                    // Active indices range from 0 to (cardCount - visibleCards)
+                    const indicatorCount = Math.max(1, cardCount - visibleCards + 1);
+
+                    indicatorsContainer.innerHTML = '';
+                    dots = [];
+                    
+                    for (let i = 0; i < indicatorCount; i++) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('indicator-dot');
+                        if (i === 0) dot.classList.add('active');
+                        
+                        dot.addEventListener('click', () => {
+                            carousel.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+                        });
+                        
+                        indicatorsContainer.appendChild(dot);
+                        dots.push(dot);
+                    }
+                };
+
+                const updateIndicators = () => {
+                    if (dots.length === 0) return;
+                    const style = window.getComputedStyle(carousel);
+                    const gap = parseInt(style.gap) || 0;
+                    const cardWidth = carouselCards[0].offsetWidth + gap;
+                    const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
+                    
+                    dots.forEach((dot, idx) => {
+                        if (idx === activeIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                };
+
+                // Build initially
+                buildIndicators();
+                updateIndicators();
+
+                // Re-build indicators on resize because visible cards count changes
+                window.addEventListener('resize', () => {
+                    buildIndicators();
+                    updateIndicators();
+                });
+
+                carousel.addEventListener('scroll', updateIndicators);
+
+                prevBtn.addEventListener('click', () => {
+                    const style = window.getComputedStyle(carousel);
+                    const gap = parseInt(style.gap) || 0;
+                    const cardWidth = carouselCards[0].offsetWidth + gap;
+                    carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    const style = window.getComputedStyle(carousel);
+                    const gap = parseInt(style.gap) || 0;
+                    const cardWidth = carouselCards[0].offsetWidth + gap;
+                    carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                });
+            }
+
+            // Glassmorphic Card Spotlight Mouse Tracker
+            document.querySelectorAll('.post-card, .hobby-card, .achievement-card, .blog-post').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
     </script>
+
+    <!-- Custom Cursor HTML elements -->
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-outline"></div>
+
+    <!-- Styles for interactive elements -->
+    <style>
+        /* Hide system cursor on fine pointer devices */
+        @media (pointer: fine) {
+            html, body, a, button, .post-card, .achievement-card, .blog-post, .nav-link, .btn, .social-links a, .close-btn, [onclick] {
+                cursor: none !important;
+            }
+        }
+
+        .custom-cursor-dot,
+        .custom-cursor-outline {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.15s ease, width 0.15s ease, height 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .custom-cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+        }
+
+        .custom-cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Hover morph states */
+        .custom-cursor-dot.hover {
+            transform: translate(-50%, -50%) scale(0.5);
+            background-color: #fff;
+        }
+
+        .custom-cursor-outline.hover {
+            width: 46px;
+            height: 46px;
+            border-color: #fff;
+            background-color: rgba(255, 255, 255, 0.15);
+            mix-blend-mode: difference;
+        }
+
+        /* Hide elements on coarse pointer (touchscreen) devices */
+        @media (pointer: coarse) {
+            .custom-cursor-dot,
+            .custom-cursor-outline {
+                display: none !important;
+            }
+        }
+
+        /* Project Showcase Carousel Styles */
+        .showcase-carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-top: 3rem;
+            width: 100%;
+            padding: 0 4rem; /* Outer gutters to prevent button overlap */
+        }
+
+        .showcase-carousel {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: stretch;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            padding: 1.5rem 0.5rem;
+            width: 100%;
+            scroll-snap-type: x mandatory;
+        }
+
+        .showcase-carousel::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+
+        .showcase-carousel .post-card {
+            flex: 0 0 calc((100% - 4rem) / 3); /* 3 cards visible on desktop */
+            scroll-snap-align: start;
+            max-width: calc((100% - 4rem) / 3);
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .showcase-carousel .post-card {
+                flex: 0 0 calc((100% - 2rem) / 2); /* 2 cards visible on tablet */
+                max-width: calc((100% - 2rem) / 2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .showcase-carousel .post-card {
+                flex: 0 0 100%; /* 1 card visible on mobile */
+                max-width: 100%;
+            }
+            .showcase-carousel-wrapper {
+                padding: 0; /* Remove side padding on mobile as buttons are hidden */
+            }
+        }
+
+        /* Carousel Navigation Controls */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+        }
+
+        .carousel-control:hover {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .prev-btn {
+            left: 0;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-control {
+                display: none; /* Hide navigation buttons on mobile, rely on touch swipe */
+            }
+        }
+
+        /* Carousel Dot Indicators */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .indicator-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+    </style>
 </body>
 
 </html>
