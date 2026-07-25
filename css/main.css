@@ -1,0 +1,1400 @@
+/* ==========================================================================
+   Ayansh Paliwal Portfolio - Main Stylesheet
+   ========================================================================== */
+
+/* ==========================================================================
+   CSS Custom Properties (Design Tokens)
+   ========================================================================== */
+:root {
+  /* Modern, refined palette */
+  --primary-color: #e02737;
+  --primary-rgb: 224, 39, 55;
+  /* Softer, modern red */
+  --secondary-color: #475569;
+  --secondary-rgb: 71, 85, 105;
+  /* Muted, professional accent */
+  --accent-color: #cbd5e1;
+  --accent-rgb: 203, 213, 225;
+  /* Skill groups color codes (Light Mode - high contrast) */
+  --hardware-rgb: 224, 39, 55;
+  --software-rgb: 26, 86, 219;
+  --logic-rgb: 13, 148, 136;
+  /* Text & backgrounds */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --bg-primary: #f1f5f9;
+  --bg-secondary: rgba(255, 255, 255, 0.85);
+  /* Borders & Shadows */
+  --border-color: rgba(203, 213, 225, 0.6);
+  --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+  --gradient: linear-gradient(135deg, #e02737 0%, #ff5260 100%);
+}
+
+[data-theme="dark"] {
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --bg-primary: #0b0f19; /* Midnight Blue */
+  --bg-secondary: rgba(17, 24, 39, 0.7); /* Navy glass */
+  --border-color: rgba(148, 163, 184, 0.12);
+  --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+  /* Skill groups color codes (Dark Mode - bright neon glows) */
+  --hardware-rgb: 248, 113, 113;
+  --software-rgb: 56, 189, 248;
+  --logic-rgb: 45, 212, 191;
+}
+
+/* ==========================================================================
+   Reset & Base
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+header {
+  background: var(--bg-primary);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-color);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient);
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-secondary);
+  color: var(--primary-color);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Main Content
+   ========================================================================== */
+main {
+  margin-top: 80px;
+  min-height: calc(100vh - 160px);
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ==========================================================================
+   Home Section - Hero
+   ========================================================================== */
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  min-height: 100vh;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.hero-backdrop {
+  position: relative;
+  background: url('../assets/hero_bg.webp') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 600px;
+}
+
+.hero-content h2 {
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.hero-sidebar {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-primary);
+  position: relative;
+  border-left: 1px solid var(--border-color);
+}
+
+.hero-profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-color);
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-email {
+  color: var(--text-primary);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.sidebar-email:hover {
+  color: var(--primary-color);
+}
+
+.hero-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-white {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-white:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Skills Section (in Home) */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.skill-tag {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(5px);
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  --tag-rgb: var(--software-rgb);
+}
+
+.skill-tag.hardware {
+  --tag-rgb: var(--hardware-rgb);
+}
+
+.skill-tag.software {
+  --tag-rgb: var(--software-rgb);
+}
+
+.skill-tag.logic {
+  --tag-rgb: var(--logic-rgb);
+}
+
+.skill-tag:hover {
+  transform: translateY(-5px);
+  border-color: rgb(var(--tag-rgb));
+  color: rgb(var(--tag-rgb));
+  box-shadow: 0 5px 15px rgba(var(--tag-rgb), 0.25);
+}
+
+.skill-tag i {
+  color: rgb(var(--tag-rgb));
+  transition: color 0.3s ease;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-backdrop {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+}
+
+.welcome-intro {
+  background: var(--bg-secondary);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 20px;
+  margin-bottom: 4rem;
+}
+
+.welcome-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.featured-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.post-card {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.post-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+.about-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.profile-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  border: 5px solid var(--primary-color);
+}
+
+.about-text h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.interest-tag {
+  background: var(--gradient);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.fun-fact {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* ==========================================================================
+   School Section
+   ========================================================================== */
+.school-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.info-card {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.info-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.subjects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.subject-item {
+  background: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   Achievements Section
+   ========================================================================== */
+.timeline {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-right: calc(50% + 30px);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: calc(50% + 30px);
+}
+
+.timeline-content {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  border: 4px solid var(--bg-primary);
+}
+
+/* ==========================================================================
+   Hobbies Section
+   ========================================================================== */
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.hobby-card {
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.hobby-card:hover {
+  transform: scale(1.02);
+}
+
+.hobby-image {
+  width: 100%;
+  height: 200px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+}
+
+.hobby-content {
+  padding: 1.5rem;
+}
+
+.hobby-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Blog Section
+   ========================================================================== */
+.blog-posts {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-post {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.blog-post h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.blog-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer {
+  background: var(--bg-secondary);
+  padding: 3rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--gradient);
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: scale(1.1);
+}
+
+.footer-info {
+  margin-top: 1rem;
+}
+
+.footer-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Scroll-Driven Section Reveal (Fade-in & Slide-up)
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Glassmorphic Glow & Spotlight Mouse Tracker
+   ========================================================================== */
+.post-card,
+.hobby-card,
+.achievement-card,
+.blog-post {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.post-card::before,
+.hobby-card::before,
+.achievement-card::before,
+.blog-post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(var(--primary-rgb), 0.08),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.post-card:hover::before,
+.hobby-card:hover::before,
+.achievement-card:hover::before,
+.blog-post:hover::before {
+  opacity: 1;
+}
+
+.post-card > *,
+.hobby-card > *,
+.achievement-card > *,
+.blog-post > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Dual-background trick for gradient borders on hover */
+.post-card:hover,
+.hobby-card:hover,
+.blog-post:hover {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+    radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--primary-rgb), 0.45), transparent 60%) border-box;
+}
+
+.achievement-card:hover {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  background:
+    linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+    radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--primary-rgb), 0.45), transparent 60%) border-box;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scroll-triggered animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section entrance animations */
+.section {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Hero content animations */
+.hero-content h2 {
+  animation: slideInLeft 0.8s ease;
+}
+
+.hero-content h1 {
+  animation: slideInLeft 1s ease 0.2s both;
+}
+
+.hero-content p {
+  animation: slideInLeft 1.2s ease 0.4s both;
+}
+
+.hero-sidebar {
+  animation: slideInRight 1s ease 0.3s both;
+}
+
+/* Skill tag scroll-triggered stagger entry */
+.skills-grid .skill-tag {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.skills-grid.animate .skill-tag {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.skills-grid.animate .skill-tag:nth-child(1) { transition-delay: 0.05s; }
+.skills-grid.animate .skill-tag:nth-child(2) { transition-delay: 0.1s; }
+.skills-grid.animate .skill-tag:nth-child(3) { transition-delay: 0.15s; }
+.skills-grid.animate .skill-tag:nth-child(4) { transition-delay: 0.2s; }
+.skills-grid.animate .skill-tag:nth-child(5) { transition-delay: 0.25s; }
+.skills-grid.animate .skill-tag:nth-child(6) { transition-delay: 0.30s; }
+.skills-grid.animate .skill-tag:nth-child(7) { transition-delay: 0.35s; }
+.skills-grid.animate .skill-tag:nth-child(8) { transition-delay: 0.40s; }
+.skills-grid.animate .skill-tag:nth-child(9) { transition-delay: 0.45s; }
+.skills-grid.animate .skill-tag:nth-child(10) { transition-delay: 0.50s; }
+.skills-grid.animate .skill-tag:nth-child(11) { transition-delay: 0.55s; }
+.skills-grid.animate .skill-tag:nth-child(12) { transition-delay: 0.60s; }
+
+/* Card hover enhancements */
+.post-card,
+.hobby-card,
+.achievement-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.post-card:hover,
+.achievement-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hobby-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Timeline item animations */
+.timeline-item {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Navigation link hover effect */
+.nav-links a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a:hover {
+  transform: translateY(-2px);
+}
+
+/* Button animations */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Popup entrance - handled via transitions on the active class */
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-primary);
+    flex-direction: column;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 50px;
+    margin-right: 0;
+  }
+
+  .timeline-marker {
+    left: 20px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+}
+
+.category-section {
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .category-section {
+  background: var(--bg-primary);
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.category-icon {
+  font-size: 2rem;
+  margin-right: 0.75rem;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.achievement-card {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #3498db;
+  cursor: pointer;
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-card h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.achievement-date {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.achievement-card p:last-child {
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+  }
+
+  .achievement-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Add some color variations for different categories */
+.category-section:nth-child(2) .achievement-card {
+  border-left-color: #e74c3c;
+}
+
+.category-section:nth-child(3) .achievement-card {
+  border-left-color: #27ae60;
+}
+
+.category-section:nth-child(4) .achievement-card {
+  border-left-color: #f39c12;
+}
+
+.category-section:nth-child(5) .achievement-card {
+  border-left-color: #9b59b6;
+}
+
+/* ==========================================================================
+   Popup Styles (Blog)
+   ========================================================================== */
+.scaled-blog-image {
+  max-width: 100%;
+  height: auto;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.blog-post {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-post:hover {
+  transform: scale(1.02);
+}
+
+.blog-post img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.popup {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.popup-content {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.popup.active .popup-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.popup-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.popup-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.popup-body p,
+.popup-body img {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.popup-body img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Project Showcase Carousel Styles
+   ========================================================================== */
+.showcase-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  width: 100%;
+  padding: 0 4rem;
+}
+
+.showcase-carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 1.5rem 0.5rem;
+  width: 100%;
+  scroll-snap-type: x mandatory;
+}
+
+.showcase-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.showcase-carousel .post-card {
+  flex: 0 0 calc((100% - 4rem) / 3);
+  scroll-snap-align: start;
+  max-width: calc((100% - 4rem) / 3);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .showcase-carousel .post-card {
+    flex: 0 0 calc((100% - 2rem) / 2);
+    max-width: calc((100% - 2rem) / 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .showcase-carousel .post-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .showcase-carousel-wrapper {
+    padding: 0;
+  }
+}
+
+/* Carousel Navigation Controls */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+.carousel-control:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
+
+@media (max-width: 768px) {
+  .carousel-control { display: none; }
+}
+
+/* Carousel Dot Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-color);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.indicator-dot.active {
+  background: var(--primary-color);
+  transform: scale(1.3);
+}
+
+/* ==========================================================================
+   Custom Cursor & 3D Tilt Styles
+   ========================================================================== */
+@media (pointer: fine) {
+  html, body, a, button, .post-card, .achievement-card, .blog-post, .nav-link, .btn, .social-links a, .close-btn, [onclick] {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-dot,
+.custom-cursor-outline {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.15s ease, width 0.15s ease, height 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color);
+}
+
+.custom-cursor-outline {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--primary-color);
+}
+
+/* Hover morph states */
+.custom-cursor-dot.hover {
+  transform: translate(-50%, -50%) scale(0.5);
+  background-color: #fff;
+}
+
+.custom-cursor-outline.hover {
+  width: 46px;
+  height: 46px;
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+  mix-blend-mode: difference;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: none !important;
+  }
+}
