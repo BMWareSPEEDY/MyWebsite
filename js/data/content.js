@@ -18,6 +18,14 @@ export const projectsData = {
       showcaseDescription: 'Developed a privacy-first, offline workspace posture tracker using Tauri and MediaPipe, winning the Productivity Track Award at Hackmars 2026.'
     },
     {
+      id: 'ergolearn-coach',
+      title: 'ErgoLearn AI Coach — Local LLM Integration',
+      description: 'Expanding ErgoLearn with Ollama-powered conversational wellness coach reading live posture_history.json. Dual-tier: local LLM primary, offline rule-based NLP fallback. Interactive skeleton-guided stretch routines planned.',
+      tags: ['Ollama', 'Local LLM', 'Rust', 'Tauri'],
+      github: '',
+      showcase: false
+    },
+    {
       id: 'tisb-swap',
       title: 'TISB Swap (Verde) — Sustainable Student Marketplace',
       description: 'Flutter + Supabase marketplace with database-level anti-spam (PostgreSQL triggers), keyword filtering, peer reporting with trust scores, real-time chat, and live CO₂/water impact tracking. TISB email-gated auth. Won TISB Hacks 2026 and NorCal Hacks 2026 Productivity Track.',
@@ -105,22 +113,6 @@ export const projectsData = {
       borderColor: '#475569'
     },
     {
-      id: 'ergolearn-coach',
-      title: 'ErgoLearn AI Coach — Local LLM Integration',
-      description: 'Expanding ErgoLearn with Ollama-powered conversational wellness coach reading live posture_history.json. Dual-tier: local LLM primary, offline rule-based NLP fallback. Interactive skeleton-guided stretch routines planned.',
-      tags: ['Ollama', 'Local LLM', 'Rust', 'Tauri'],
-      github: '',
-      borderColor: '#e02737'
-    },
-    {
-      id: 'mate-rov-2026',
-      title: 'MATE ROV 2026 — Underwater Pipeline & Crab Detection',
-      description: 'Custom YOLOv8 for invasive European Green Crab detection + pinhole camera geometry for pipe length measurement from monocular footage. Parametric 3D model generation (STL via SolidPython/OpenSCAD). 6-BLDC vectored thruster control. Regional champions, qualified for internationals.',
-      tags: ['YOLOv8', 'OpenCV', 'SolidPython', 'BLDC'],
-      github: '',
-      borderColor: '#3498db'
-    },
-    {
       id: 'voicetrend',
       title: 'VoiceTrend — Voice-Controlled Trend Dashboard',
       description: 'Real-time voice interface for GitHub/Reddit/Tradestie trending data using faster-whisper STT + Streamlit dashboard. Hype-score normalization across platforms, voice-activated navigation (number mapping), local processing.',
@@ -143,14 +135,6 @@ export const projectsData = {
       tags: ['MLX', 'SwiftUI', 'Vision-Language', 'On-Device'],
       github: '',
       borderColor: '#f39c12'
-    },
-    {
-      id: 'classclock',
-      title: 'Classclock — Class Countdown Timer',
-      description: 'iOS countdown timer for students with live class detection from schedule, lock-screen widgets (WidgetKit), freemium model (StoreKit 2). SwiftUI + UserDefaults, iOS 26.1 target.',
-      tags: ['SwiftUI', 'WidgetKit', 'StoreKit 2', 'iOS 26'],
-      github: '',
-      borderColor: '#8e44ad'
     },
     {
       id: 'fluid-sim',
