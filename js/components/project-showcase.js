@@ -20,7 +20,7 @@ export function initProjectShowcase(projectsData) {
   };
 
   // Render showcase cards
-  carousel.innerHTML = showcaseProjects.map(project => {
+  carousel.innerHTML = showcaseProjects.map((project, index) => {
     const blogId = projectToBlogId[project.id];
     const hasPopup = blogId && blogPostsData[blogId];
     const popupTrigger = hasPopup
@@ -28,11 +28,20 @@ export function initProjectShowcase(projectsData) {
       : '';
     const cardTabindex = hasPopup ? 'tabindex="0" role="button"' : '';
     const ariaLabel = hasPopup ? `aria-label="View project details: ${sanitizeHTML(project.title)}"` : '';
+    const num = String(index + 1).padStart(2, '0');
+    const viewHint = hasPopup
+      ? '<span class="showcase-view">Read the case study <i class="fas fa-arrow-right"></i></span>'
+      : '';
 
     return `
       <div class="post-card" ${cardTabindex} ${ariaLabel} ${popupTrigger}>
-        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; color: var(--primary-color);">${sanitizeHTML(project.title)}</h3>
-        <p style="font-size: 0.9rem;">${sanitizeHTML(project.showcaseDescription)}</p>
+        <div class="showcase-card-head">
+          <span class="showcase-index">${num}</span>
+          <span class="showcase-tag">Case Study</span>
+        </div>
+        <h3>${sanitizeHTML(project.title)}</h3>
+        <p>${sanitizeHTML(project.showcaseDescription)}</p>
+        ${viewHint}
       </div>
     `;
   }).join('');

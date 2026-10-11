@@ -9,76 +9,110 @@
 export const projectsData = {
   completed: [
     {
+      id: 'urbanflow',
+      title: 'UrbanFLOW — Physics-Guided GNN Urban Flood Early-Warning',
+      status: 'Research · Complete',
+      statusClass: 'research',
+      description: 'A physics-guided graph neural network that acts as a surrogate for the SWMM flood solver. It predicts street-level inundation depth and hazard across Bengaluru catchments in milliseconds, roughly 1,000 to 8,000 times faster than numerical simulation, and powers a live emergency-dispatch dashboard. The HydroGINE model fuses 32 scale-invariant physics features, gravity-gated message passing, and a dual-head hazard-classifier plus depth-regressor trained on real storm simulations. Ships with trained checkpoints, OSM-built city graphs, DEM data, a Flask inference API, a Streamlit explorer, and a written research paper.',
+      tags: ['PyTorch', 'PyTorch Geometric', 'GNN', 'OSMnx', 'GeoPandas', 'Flask', 'Streamlit'],
+      github: 'https://github.com/BMWareSPEEDY/UrbanFlow_code_priv',
+      showcase: true,
+      showcaseDescription: 'Research-grade graph neural network that predicts urban flood depth and hazard in milliseconds, validated against SWMM simulations with a live dispatch dashboard.'
+    },
+    {
+      id: 'semsearch',
+      title: 'SemSearch — Local-First Semantic Code Search Engine',
+      status: 'Shipped · Open Source',
+      statusClass: 'shipped',
+      description: 'A local-first semantic code search engine written in Go. Point it at any repository and query it in plain English to find the exact code you need, with no cloud service and no API key. It builds an AST-aware index using tree-sitter, generates both code and natural-language description embeddings with a local ONNX model, and ranks results with hybrid BM25 plus cosine reranking. Benchmarked at 90 percent top-5 accuracy across 173 queries on five real open-source repositories, with a snapshot command-line interface and a local HTTP API.',
+      tags: ['Go', 'tree-sitter', 'ONNX Runtime', 'Embeddings', 'CLI'],
+      github: 'https://github.com/BMWareSPEEDY/semsearch',
+      showcase: true,
+      showcaseDescription: 'A fully local semantic code search engine in Go, using AST chunking and dual code/description embeddings, benchmarked at 90% top-5 accuracy.'
+    },
+    {
+      id: 'wro26',
+      title: 'WRO26 — Autonomous Competition Robot (Team Yo_Error_404)',
+      status: 'Competition Build',
+      statusClass: 'competition',
+      description: 'An autonomous competition car built for the World Robot Olympiad Future Engineers 2026 category. A Raspberry Pi 5 acts as the vision and decision master, using a wide camera, OpenCV, and a custom-trained YOLO model to classify pillars and navigate the course, while an ESP32-C3 handles real-time ToF distance sensing, an IMU, motor control, and 50 Hz telemetry. The project spans mechanical design, power, embedded firmware, computer vision, and a full engineering journal. Includes two documented vehicle generations, 31 parametric STL parts, KiCad schematics, systemd deployment scripts, and a competition runbook.',
+      tags: ['Raspberry Pi', 'ESP32', 'OpenCV', 'YOLO', 'Arduino/C++', 'KiCad', 'CAD'],
+      github: 'https://github.com/BMWareSPEEDY/WRO_yo_error_404',
+      showcase: true,
+      showcaseDescription: 'A full autonomous competition robot: Pi 5 vision, ESP32-C3 real-time control, YOLO pillar detection, and a complete engineering journal.'
+    },
+    {
+      id: 'peek',
+      title: 'PEEK — Codebase Mental Model Builder',
+      status: 'Complete',
+      statusClass: 'shipped',
+      description: 'An AI platform that builds a navigable mental model of any codebase. Give it a GitHub URL and it clones the repo, parses it across 30-plus languages, and produces file-level explanations, an interactive architecture graph, call graphs, dependency trees, security findings, and code smells. A natural-language query engine lets you ask questions about the code and receive grounded answers. Backend parsing and analysis are complete and working, and the frontend is a polished React application with a ReactFlow architecture canvas.',
+      tags: ['FastAPI', 'React 19', 'Gemini', 'tree-sitter', 'ReactFlow'],
+      github: 'https://github.com/BMWareSPEEDY/git_repository_analysis_tool',
+      showcase: true,
+      showcaseDescription: 'An AI platform that turns any GitHub repo into an interactive mental model with architecture graphs, security findings, and natural-language Q&A.'
+    },
+    {
       id: 'ergolearn-ai',
       title: 'ErgoLearn AI — Privacy-First Biomechanical Posture Coach',
-      description: 'Turns your webcam into a local, offline 3D biomechanical sensor. Tracks spine compression, shoulder asymmetry, and screen distance via interpupillary mapping. Features a 10-second rolling Concentration Index and local LLM wellness coach. Built with Tauri (Rust) + Python (MediaPipe) + WebSocket IPC.',
-      tags: ['Tauri/Rust', 'Python', 'MediaPipe', 'WebSockets'],
+      status: 'Hackathon Winner',
+      statusClass: 'hackathon',
+      description: 'A privacy-first, fully offline biomechanical posture coach that turns a standard webcam into a 3D skeletal sensor. It detects slouching, shoulder asymmetry, and screen distance in centimeters using interpupillary mapping, then feeds a responsive 10-second Concentration Index and a local LLM wellness coach. Raw pixels never leave the device. Built as a Tauri (Rust) shell with a Python MediaPipe sidecar communicating over a loopback WebSocket. Won the Productivity Track Award at Hackmars 2026.',
+      tags: ['Tauri/Rust', 'Python', 'MediaPipe', 'WebSockets', 'Ollama'],
       github: 'https://github.com/BMWareSPEEDY/Ergolearn-AI',
       showcase: true,
       showcaseDescription: 'Developed a privacy-first, offline workspace posture tracker using Tauri and MediaPipe, winning the Productivity Track Award at Hackmars 2026.'
     },
     {
-      id: 'ergolearn-coach',
-      title: 'ErgoLearn AI Coach — Local LLM Integration',
-      description: 'Expanding ErgoLearn with Ollama-powered conversational wellness coach reading live posture_history.json. Dual-tier: local LLM primary, offline rule-based NLP fallback. Interactive skeleton-guided stretch routines planned.',
-      tags: ['Ollama', 'Local LLM', 'Rust', 'Tauri'],
+      id: 'meshcraft-ai',
+      title: 'MeshCraft AI — AI Mesh-to-Code Parametric 3D Editor',
+      status: 'Complete · AI Tool',
+      statusClass: 'shipped',
+      description: 'An AI parametric 3D customizer that reverse-engineers dead STL or OBJ meshes into editable code. Upload a model and Gemini Vision reconstructs it as modular Manifold-3D JavaScript with semantic parameter sliders, then you refine it by prompt, for example to widen a feature by a few millimeters. Edits run as real-time WebAssembly constructive solid geometry inside a web worker, and exports are watertight STL. A split-screen Three.js viewport drives the full workspace.',
+      tags: ['Next.js 15', 'React 19', 'Three.js', 'WASM', 'Gemini', 'TypeScript'],
       github: '',
-      showcase: false
-    },
-    {
-      id: 'tisb-swap',
-      title: 'TISB Swap (Verde) — Sustainable Student Marketplace',
-      description: 'Flutter + Supabase marketplace with database-level anti-spam (PostgreSQL triggers), keyword filtering, peer reporting with trust scores, real-time chat, and live CO₂/water impact tracking. TISB email-gated auth. Won TISB Hacks 2026 and NorCal Hacks 2026 Productivity Track.',
-      tags: ['Flutter/Dart', 'Supabase', 'PostgreSQL', 'RLS'],
-      github: 'https://github.com/BMWareSPEEDY/TISB_Swap',
       showcase: true,
-      showcaseDescription: 'Built a Flutter-based mobile marketplace for students with PostgreSQL security, anti-spam limits, and keyword filtering triggers to protect community trade. Won accolades at TISB Hacks 2026.'
-    },
-    {
-      id: 'meteor-tracking',
-      title: 'Meteor Tracking App',
-      description: 'Developed during TISB Hacks — scrapes government meteor databases for real-time sighting data with interactive map visualization. Built with Flutter + Firebase.',
-      tags: ['Flutter/Dart', 'Firebase'],
-      github: 'https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani',
-      showcase: false
-    },
-    {
-      id: 'sd-generator',
-      title: 'SD AI Image Generator',
-      description: 'Python-based high-quality image generator using Stable Diffusion 3.5 Medium with 4-bit NF4 quantization, batch inference, and randomized prompt construction for creative variations.',
-      tags: ['Python', 'Diffusers', 'PyTorch', 'SD 3.5'],
-      github: 'https://github.com/BMWareSPEEDY/SD-image-generator',
-      showcase: false
-    },
-    {
-      id: 'verity',
-      title: 'Verity — AI Prompt Optimization Chrome Extension',
-      description: 'Browser extension (Manifest V3) that rephrases prompts for depth and clarity to reduce hallucinations. Built with React + TypeScript + Vite + Supabase. Landing page deployed separately.',
-      tags: ['React', 'TypeScript', 'Vite', 'Manifest V3'],
-      github: 'https://github.com/BMWareSPEEDY/Verity_Website_bolt',
-      showcase: false
-    },
-    {
-      id: 'terminal-velocity',
-      title: 'Terminal Velocity — Next.js Landing Page',
-      description: 'High-performance landing page built with Next.js 16, React 19, Radix UI, and Tailwind CSS. Features framer-motion animations, shadcn/ui components, and optimized for Vercel deployment.',
-      tags: ['Next.js 16', 'React 19', 'Tailwind', 'Radix UI'],
-      github: 'https://github.com/BMWareSPEEDY/terminal-velocity-landing-page',
-      showcase: false
+      showcaseDescription: 'An AI editor that reverse-engineers 3D meshes into parametric code with semantic sliders and real-time WebAssembly solid modeling.'
     },
     {
       id: 'worldcup-predictor',
       title: 'World Cup Predictor — Monte Carlo Tournament Simulator',
-      description: 'Probabilistic World Cup forecasting using Poisson regression goal models, Elo-based team ratings, and dynamic form adjustments. Runs 10,000+ Monte Carlo simulations per tournament. Features player-level strength modeling, live fixture scraping, and FastAPI backend with static frontend.',
-      tags: ['FastAPI', 'Poisson', 'Monte Carlo', 'Elo'],
+      status: 'Complete',
+      statusClass: 'shipped',
+      description: 'A probabilistic football forecasting engine that predicts match outcomes and tournament paths. It blends Elo ratings, a weighted Negative Binomial Poisson goal model, Dixon-Coles low-score correction, and 10,000-run Monte Carlo simulation, then layers in live context such as squad news, injuries, weather, altitude, and bookmaker odds. A FastAPI backend serves a static JavaScript dashboard, and the model suite includes a full test suite.',
+      tags: ['FastAPI', 'statsmodels', 'Poisson', 'Monte Carlo', 'Elo'],
       github: '',
       showcase: true,
-      showcaseDescription: 'Probabilistic World Cup forecasting using Poisson regression and Elo ratings, running 10,000+ Monte Carlo simulations per tournament.'
+      showcaseDescription: 'Probabilistic World Cup forecasting using Poisson regression, Elo ratings, and 10,000-plus Monte Carlo simulations per tournament.'
+    },
+    {
+      id: 'fluid-sim',
+      title: 'Fluid Simulation — Navier-Stokes Solver & GPU CFD Wind Tunnel',
+      status: 'Working Prototype',
+      statusClass: 'prototype',
+      description: 'Two self-contained fluid systems in one project. The first is an interactive 2D implementation of Jos Stam stable fluids with semi-Lagrangian advection, vorticity confinement, and multi-color dye. The second is a GPU-accelerated 3D CFD wind tunnel built with Taichi that voxelizes imported OBJ or STL meshes, solves the pressure field with Red-Black Gauss-Seidel, renders 80,000 tracer particles and streamlines, and estimates drag and lift.',
+      tags: ['Python', 'Taichi', 'NumPy', 'Computational Physics', 'GPU'],
+      github: '',
+      showcase: true,
+      showcaseDescription: 'A Navier-Stokes fluid solver plus a GPU-accelerated 3D CFD wind tunnel with mesh voxelization and aerodynamic force estimation.'
+    },
+    {
+      id: 'tisb-swap',
+      title: 'TISB Swap (Verde) — Sustainable Student Marketplace',
+      status: 'Hackathon Winner',
+      statusClass: 'hackathon',
+      description: 'A sustainable student marketplace that lets a school community donate, swap, and resell textbooks, uniforms, and electronics. It has email-gated authentication, real-time chat, a Lost and Found hub, peer reporting with trust scores, and live CO2 and water impact tracking. The security layer enforces database-level anti-spam through PostgreSQL triggers, keyword filtering, and rate limits. Built with Flutter and Supabase, it won the Productivity Track at both TISB Hacks 2026 and NorCal Hacks 2026.',
+      tags: ['Flutter/Dart', 'Supabase', 'PostgreSQL', 'RLS'],
+      github: 'https://github.com/BMWareSPEEDY/TISB_Swap',
+      showcase: true,
+      showcaseDescription: 'Built a Flutter and Supabase marketplace for students with PostgreSQL security, anti-spam limits, and live CO2 impact tracking. Won TISB Hacks 2026.'
     },
     {
       id: 'ble-console',
       title: 'BLE Console — Native iOS Serial Terminal for Hardware',
-      description: 'SwiftUI + CoreBluetooth (Nordic UART Service) terminal with 120 FPS real-time plotting (decimal/hex/binary), 6-slot macro system, CSV/JSON export, SwiftData persistence. Glassmorphic UI designed for hardware engineers debugging ESP32/Arduino/ARM boards.',
+      status: 'Complete · iOS',
+      statusClass: 'shipped',
+      description: 'A native iOS serial terminal for hardware engineers. It discovers Nordic UART BLE peripherals such as ESP32 and Arduino boards, streams timestamped text or hex console output, and plots incoming numeric telemetry at up to 120 FPS across decimal, hex, and binary formats. Features six configurable macro slots with looping, CSV and JSON export, SwiftData persistence, and a glassmorphic interface designed for bench debugging.',
       tags: ['SwiftUI', 'CoreBluetooth', 'SwiftData', 'Swift Charts'],
       github: '',
       showcase: true,
@@ -87,35 +121,193 @@ export const projectsData = {
     {
       id: 'openbrew',
       title: 'OpenBrew — Native macOS Homebrew Package Manager',
-      description: 'Swift 6 + SwiftUI + SQLite (FTS5) for instant 5000+ package search. Storage analytics with one-tap cleanup. Spotlight integration for direct package launch. Smart recommendations based on installed dev tools. Zero dependencies, strict concurrency.',
-      tags: ['Swift 6', 'SwiftUI', 'SQLite/FTS5', 'Spotlight'],
+      status: 'Complete · macOS',
+      statusClass: 'shipped',
+      description: 'A native macOS graphical front-end for Homebrew. It browses and searches more than 5,000 packages with instant SQLite-backed search, installs, uninstalls, and updates packages through a throttled process runner, and adds storage analytics, smart recommendations, Spotlight integration, and native notifications. Written in Swift 6 with strict concurrency, it has zero external dependencies and includes unit tests.',
+      tags: ['Swift 6', 'SwiftUI', 'SQLite', 'macOS'],
       github: '',
       showcase: true,
-      showcaseDescription: 'Native macOS Homebrew manager with instant 5000+ package search, storage analytics, and Spotlight integration.'
+      showcaseDescription: 'Native macOS Homebrew manager with instant 5,000-plus package search, storage analytics, and Spotlight integration.'
     },
     {
       id: 'peekguard',
-      title: 'PeekGuard — Shoulder-Surfing Detection',
-      description: 'iOS privacy app using Vision framework face detection to detect unauthorized screen viewers. Live camera monitoring, Live Activity lock-screen integration, haptic alerts, session statistics. SwiftUI + CoreVideo + Vision.',
-      tags: ['SwiftUI', 'Vision', 'CoreVideo', 'Live Activity'],
+      title: 'PeekGuard — Shoulder-Surfing Detection (iOS)',
+      status: 'Complete · iOS',
+      statusClass: 'shipped',
+      description: 'An iOS privacy app that detects shoulder surfers. Using the front camera and the Vision framework, it identifies when an unexpected face enters the user zone, then instantly blurs the screen and fires a haptic and Live Activity alert. Everything runs fully on-device with no network calls and no stored frames. Includes onboarding, sensitivity settings, and a WidgetKit extension.',
+      tags: ['SwiftUI', 'Vision', 'AVFoundation', 'WidgetKit'],
       github: '',
       showcase: true,
       showcaseDescription: 'iOS privacy app detecting shoulder surfers with Vision framework face detection and Live Activity integration.'
+    },
+    {
+      id: 'peekguard-mac',
+      title: 'PeekGuard for macOS — Menu-Bar Privacy Guard',
+      status: 'Complete · macOS',
+      statusClass: 'shipped',
+      description: 'The macOS companion to PeekGuard, built as a menu-bar utility. It watches the webcam in the background and blurs all connected displays the moment an unexpected face appears, even above full-screen apps, using one borderless panel per screen. It adds launch-at-login, wake-based auto-guard, a sensitivity control, and a browsing history log.',
+      tags: ['SwiftUI', 'AppKit', 'Vision', 'macOS'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'materov-toolkit',
+      title: 'MATE ROV Toolkit — Measurement, CAD & Crab Detection',
+      status: 'Competition Build',
+      statusClass: 'competition',
+      description: 'A multi-domain toolkit built for the MATE ROV 2026 underwater robotics competition. It measures the length of unknown objects from a photo using a known reference scale and a zoomed precision cursor with five-sample averaging, generates parametric 3D models and STLs for the coral-garden task, and runs a custom YOLOv8 detector to count invasive green crabs from images or a live camera. Organized as a clean Python package with firmware and a documented workflow.',
+      tags: ['OpenCV', 'YOLOv8', 'SolidPython2', 'PyVista', 'OpenSCAD'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'rsna-knee',
+      title: 'RSNA Knee Abnormality Classifier — Medical Imaging ML',
+      status: 'Competition ML',
+      statusClass: 'research',
+      description: 'A multi-label deep learning pipeline for detecting 12 knee-MRI abnormalities from DICOM studies, built for a medical-imaging competition. It decodes each MRI study, maps six anatomical series slots, and fine-tunes vision backbones such as DINOv2 and ConvNeXt with a positive-weighted smooth BCE loss. Training uses four-fold cross-validation, test-time augmentation, and pseudo-labeling, with a dedicated per-class AUC evaluator scoring the final submission.',
+      tags: ['PyTorch', 'Transformers', 'DINOv2', 'pydicom', 'Medical Imaging'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'arrohan',
+      title: 'Arrohan — Real-Time Object Detection Dashboard',
+      status: 'Complete',
+      statusClass: 'shipped',
+      description: 'A real-time object-detection system with a live browser dashboard. A webcam feed is processed by a custom-trained YOLOv8 model, and annotated frames plus incident statistics stream to a dashboard over WebSockets. Detections are graded by severity, screenshots are captured automatically, and incident history is persisted and replayable. Built with Flask, Flask-SocketIO, and OpenCV.',
+      tags: ['Flask', 'Socket.IO', 'YOLOv8', 'OpenCV'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'agy-remote',
+      title: 'Agy Remote — Go Daemon + Flutter Terminal Client',
+      status: 'Working Prototype (MVP)',
+      statusClass: 'prototype',
+      description: 'A remote-control system for an agentic command-line tool. A Go daemon spawns the CLI inside a pseudo-terminal and streams it over WebSockets with token-based QR pairing, while a Flutter mobile app renders the live terminal with native action buttons, quick commands, push notifications, and multi-session support. Both halves build to real artifacts and include unit tests.',
+      tags: ['Go', 'WebSockets', 'Flutter/Dart', 'PTY'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'explain-my-marks',
+      title: 'Explain My Marks — iOS Report-Card Analyzer',
+      status: 'Prototype · OCR complete',
+      statusClass: 'prototype',
+      description: 'An iOS app that helps students understand their report cards. It captures a card from a photo or PDF, runs optical character recognition with the Vision and PDFKit frameworks, and analyzes the results to surface insights, weak areas, recommendations, and practice questions across onboarding, home, results, and history screens. OCR and persistence are complete and working, while the LLM analysis layer is a mock ready for API integration.',
+      tags: ['SwiftUI', 'Vision', 'PDFKit', 'Supabase'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'verity',
+      title: 'Verity — AI Prompt Optimization Product Landing',
+      status: 'Complete · Landing',
+      statusClass: 'shipped',
+      description: 'A product landing page for an AI prompt-optimization Chrome extension, with a hero, animated feature slider, pricing, a waitlist that collects diagnostic answers, and privacy, cookie, and terms pages. Built with React and TypeScript, it stores waitlist data in Supabase with row-level-security migrations and ships as a production Vite build.',
+      tags: ['React', 'TypeScript', 'Vite', 'Supabase', 'Tailwind'],
+      github: 'https://github.com/BMWareSPEEDY/Verity_Website_bolt',
+      showcase: false
+    },
+    {
+      id: 'pi-camera-mount',
+      title: 'Pi Camera Mount — Parametric 3D-Printable Design',
+      status: 'Complete · Hardware',
+      statusClass: 'shipped',
+      description: 'A parametric, 3D-printable three-piece mount for the Raspberry Pi Camera Module 3 Wide, with M5-bolt tilt locking for chassis mounting. The OpenSCAD source exposes every dimension through the Customizer, and the repository ships exported STLs, a batch export script, a bill of materials, print orientation guidance, and assembly steps.',
+      tags: ['OpenSCAD', '3D Printing', 'Hardware', 'Parametric Design'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'galactic-dodger',
+      title: 'Galactic Dodger — C++ SFML Arcade Game',
+      status: 'Complete · Game',
+      statusClass: 'shipped',
+      description: 'A complete grid-based space arcade game written in C++ with SFML 3. You dodge and shoot enemies and their bullets, avoid falling obstacles, and collect triple-shot power-ups across a scaling difficulty curve, with health, high scores, and restart. Built with a clean single-file game loop and CMake.',
+      tags: ['C++', 'SFML', 'Game Dev', 'CMake'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'png-to-svg',
+      title: 'PNG to SVG — Raster-to-Vector Conversion Tool',
+      status: 'Complete · Tool',
+      statusClass: 'shipped',
+      description: 'A computer-vision tool that converts a raster PNG into a layered vector SVG. It quantizes colors into K clusters in LAB space, extracts contours per color layer, fits Bezier curves, and emits clean SVG paths, with command-line options and progress reporting. Used to feed crisp vector art into a Manim animation.',
+      tags: ['Python', 'OpenCV', 'scikit-learn', 'Vector Graphics'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'crab-counting',
+      title: 'Crab Counter — YOLOv8 Invasive Species Detection',
+      status: 'Competition ML',
+      statusClass: 'competition',
+      description: 'A YOLOv8 detector that counts invasive European green crabs for the MATE ROV 2026 competition, running on a live camera or a still image. It lets the operator freeze a frame to count and annotate, then exports CSV evidence, and it trains on Apple Silicon GPU. Later folded into the larger MATE ROV toolkit.',
+      tags: ['YOLOv8', 'PyTorch', 'OpenCV', 'ML'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'traxxas-control',
+      title: 'Traxxas Control — UDP RC-Car Control Stack',
+      status: 'Working Prototype',
+      statusClass: 'prototype',
+      description: 'A Python control stack that drives a Traxxas RC car through an ESP32 over UDP, with keyboard driving, Logitech G29 wheel support, and a pygame heads-up display. It adds cruise control, a precision mode, packet de-duplication, a heartbeat, and a fail-safe that returns the car to neutral on exit.',
+      tags: ['Python', 'pygame', 'UDP', 'Embedded', 'Robotics'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'terminalvelocity-app',
+      title: 'Terminal Velocity — On-Device Posture Reminder App',
+      status: 'Working Prototype',
+      statusClass: 'prototype',
+      description: 'A Flutter health-habit app that fires categorized posture, eye-care, and hydration reminders, and includes a live posture test that uses on-device ML Kit pose detection to compare ear-to-shoulder and torso ratios and classify good posture versus slouching. Built with Riverpod, go_router, and background services.',
+      tags: ['Flutter', 'ML Kit', 'Riverpod', 'On-Device ML'],
+      github: '',
+      showcase: false
+    },
+    {
+      id: 'potentia',
+      title: 'Potentia — Flutter Fitness Application',
+      status: 'Prototype · UI',
+      statusClass: 'prototype',
+      description: 'A broad Flutter fitness application covering login, dashboard, workout routines, diet and meal plans, calorie tracking, goals, achievements, supplements, progress, and profile across 23 screens with a consistent custom dark theme. A comprehensive product and UI prototype with an asset library and navigation service.',
+      tags: ['Flutter/Dart', 'Material', 'UI/UX'],
+      github: 'https://github.com/ayanshpaliwal/Potentia',
+      showcase: false
+    },
+    {
+      id: 'meteor-tracking',
+      title: 'Meteor Tracking App',
+      status: 'Hackathon Build',
+      statusClass: 'hackathon',
+      description: 'Developed during TISB Hacks, it scrapes government meteor databases for real-time sighting data and presents it on an interactive map visualization. Built with Flutter and Firebase.',
+      tags: ['Flutter/Dart', 'Firebase'],
+      github: 'https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani',
+      showcase: false
+    },
+    {
+      id: 'sd-generator',
+      title: 'SD Image Generator',
+      status: 'Complete',
+      statusClass: 'shipped',
+      description: 'A Python image generator built on Stable Diffusion 3.5 Medium with 4-bit NF4 quantization for efficient inference, batch generation, and randomized prompt construction for creative variations.',
+      tags: ['Python', 'Diffusers', 'PyTorch', 'SD 3.5'],
+      github: 'https://github.com/BMWareSPEEDY/SD-image-generator',
+      showcase: false
     }
   ],
   inProgress: [
     {
-      id: 'peek',
-      title: 'PEEK — Codebase Mental Model Builder',
-      description: 'AI-powered platform that analyzes GitHub repos to build interactive architecture graphs (ReactFlow), call trees, dependency maps, and security findings. 30+ language AST parsing via Python + Google Gemini 3 Flash. Natural-language query engine. Backend (FastAPI) functional, frontend (React 19 + Vite) in progress.',
-      tags: ['FastAPI', 'React', 'Gemini', 'AST'],
-      github: '',
-      borderColor: '#475569'
-    },
-    {
-      id: 'voicetrend',
+      id: 'peek-voice',
       title: 'VoiceTrend — Voice-Controlled Trend Dashboard',
-      description: 'Real-time voice interface for GitHub/Reddit/Tradestie trending data using faster-whisper STT + Streamlit dashboard. Hype-score normalization across platforms, voice-activated navigation (number mapping), local processing.',
+      status: 'In Progress',
+      statusClass: 'progress',
+      description: 'A real-time voice interface for GitHub, Reddit, and Tradestie trending data using faster-whisper speech-to-text and a Streamlit dashboard. It normalizes a cross-platform hype score and supports voice-activated navigation through number mapping, all processed locally.',
       tags: ['faster-whisper', 'Streamlit', 'STT', 'Voice'],
       github: '',
       borderColor: '#27ae60'
@@ -123,26 +315,32 @@ export const projectsData = {
     {
       id: 'chess-bot-v2',
       title: 'Chess Bot v2 — AlphaZero-Style Engine',
-      description: 'Self-play RL chess engine with LSTM policy/value heads, 20 residual blocks, 256 channels, MCTS (120 sims). ONNX export for inference. Trained on 512 batch, ~25M params. PyTorch + python-chess + Stockfish integration.',
+      status: 'In Progress · R&D',
+      statusClass: 'progress',
+      description: 'A self-play reinforcement-learning chess engine with LSTM policy and value heads, 20 residual blocks, 256 channels, and Monte Carlo tree search using 120 simulations per move. Exports to ONNX for inference and trains with PyTorch, python-chess, and Stockfish integration.',
       tags: ['PyTorch', 'RL', 'MCTS', 'ONNX'],
       github: '',
       borderColor: '#9b59b6'
     },
     {
       id: 'local-ai',
-      title: 'Local AI — Offline Visual Accessibility Assistant',
-      description: 'iOS app using MLX + LFM-2.5-VL-1.6B-4bit for on-device vision-language tasks. Zero-sight UI (full-screen tap), haptic feedback, AVFoundation TTS, offline speech-to-text follow-ups. Targets A12+ devices, <1.8GB RAM footprint.',
+      title: 'Local AI — On-Device Vision-Language Engine',
+      status: 'Engine works · App in progress',
+      statusClass: 'progress',
+      description: 'An on-device multimodal inference engine for iOS. A working MLX pipeline loads a 1.6B vision-language model, caches chat sessions, warms the Metal GPU, and streams generation at around 40 tokens per second with strict memory guardrails. The long-term goal is a fully offline visual accessibility assistant with camera capture, text to speech, and voice follow-ups; the engine is complete while the accessibility app is still under construction.',
       tags: ['MLX', 'SwiftUI', 'Vision-Language', 'On-Device'],
       github: '',
       borderColor: '#f39c12'
     },
     {
-      id: 'fluid-sim',
-      title: 'Fluid Simulation — Navier-Stokes Solver',
-      description: 'Jos Stam\'s Stable Fluids algorithm in Python/PyGame. Semi-Lagrangian advection, projection method, vorticity confinement, multi-color dye injection. Real-time parameter tuning (viscosity, diffusion). Working prototype, 3D GPU extension planned.',
-      tags: ['Python', 'PyGame', 'Navier-Stokes', 'GPU'],
+      id: 'iphone-13-ai',
+      title: 'On-Phone LLM — Hand-Written GGUF Runtime',
+      status: 'R&D · Unfinished',
+      statusClass: 'progress',
+      description: 'A from-scratch attempt to run a quantized language model locally on a phone using a hand-written GGUF parser with memory-mapped files, a custom tokenizer, and NEON-friendly math primitives, with no inference framework. Ambitious low-level research that currently stops short of end-to-end generation.',
+      tags: ['C++', 'GGUF', 'NEON', 'R&D'],
       github: '',
-      borderColor: '#1abc9c'
+      borderColor: '#95a5a6'
     }
   ]
 };

@@ -8,7 +8,9 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preload" as="image" href="assets/hero_bg.webp" type="image/webp">
     <link rel="preload" as="image" href="assets/profile_picture.webp" type="image/webp">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -44,9 +46,16 @@
                 <div class="hero-backdrop">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h2>HELLO,</h2>
+                        <p class="hero-kicker">// Student &#183; Developer &#183; Creator</p>
+                        <h2>Hello, I'm</h2>
                         <h1>Ayansh Paliwal.</h1>
-                        <p>Student | Developer | Creator</p>
+                        <p class="hero-tagline">Student | Developer | Creator</p>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><span class="stat-num">32+</span><span class="stat-label">Projects Built</span></div>
+                            <div class="hero-stat"><span class="stat-num">6+</span><span class="stat-label">Years Coding</span></div>
+                            <div class="hero-stat"><span class="stat-num">10</span><span class="stat-label">Abacus Levels</span></div>
+                            <div class="hero-stat stat-text"><span class="stat-num">Red Belt</span><span class="stat-label">Karate</span></div>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-sidebar">
@@ -69,11 +78,15 @@
                             class="sidebar-email">ayanshpaliwal2012@gmail.com</a>
                     </div>
                 </div>
+                <div class="hero-scroll" aria-hidden="true">
+                    <span>Scroll</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
 
             <!-- Skills Section (within Home) -->
             <div class="container">
-                <h1>My Skills</h1>
+                <h1 class="section-title"><span class="section-kicker">// Toolbox</span>My Skills</h1>
                 <div class="skills-grid">
                     <!-- Hardware -->
                     <div class="skill-tag hardware"><i class="fas fa-microchip"></i> Microcontrollers</div>
@@ -97,7 +110,7 @@
 
             <!-- Project Showcase Carousel -->
             <div class="container">
-                <h2 style="margin-top: 4rem;">Project Showcase</h2>
+                <h2 class="showcase-heading"><span class="section-kicker">// Featured Work</span>Project Showcase</h2>
                 <div class="showcase-carousel-wrapper">
                     <button class="carousel-control prev-btn" aria-label="Previous Project"><i class="fas fa-chevron-left"></i></button>
                     <div class="showcase-carousel" role="region" aria-label="Project showcase carousel">
@@ -112,21 +125,26 @@
         <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="container">
-                <h1>Projects</h1>
-                <p style="margin-bottom: 2rem;">A deep dive into my software, hardware, and research work. I strongly
-                    believe in documenting both successes and failed attempts.</p>
+                <h1 class="section-title"><span class="section-kicker">03 / Portfolio</span>Projects</h1>
+                <p class="section-subtitle">A deep dive into my software, hardware, and research work. I strongly
+                    believe in documenting both successes and failed attempts. Status badges show exactly where each
+                    project stands.</p>
+                <div style="margin-bottom: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.8rem;">
+                    <span class="status-badge shipped">Shipped / Complete</span>
+                    <span class="status-badge competition">Competition Build</span>
+                    <span class="status-badge hackathon">Hackathon Winner</span>
+                    <span class="status-badge prototype">Prototype</span>
+                    <span class="status-badge research">Research</span>
+                    <span class="status-badge progress">In Progress</span>
+                </div>
 
-                <h2
-                    style="margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--primary-color); display: inline-block;">
-                    Completed</h2>
-                <div class="blog-posts" id="projects-completed" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <h2 class="subsection-title">Complete &amp; Shipped</h2>
+                <div class="blog-posts project-grid" id="projects-completed">
                     <!-- Rendered by JavaScript -->
                 </div>
 
-                <h2
-                    style="margin-top: 4rem; margin-bottom: 1rem; border-bottom: 2px solid var(--secondary-color); display: inline-block;">
-                    In Progress & R&D</h2>
-                <div class="blog-posts" id="projects-inprogress" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <h2 class="subsection-title alt">In Progress &amp; R&amp;D</h2>
+                <div class="blog-posts project-grid" id="projects-inprogress">
                     <!-- Rendered by JavaScript -->
                 </div>
             </div>
@@ -135,7 +153,7 @@
         <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
-                <h1>About Me</h1>
+                <h1 class="section-title"><span class="section-kicker">01 / About Me</span>About Me</h1>
                 <div class="about-content">
                     <div>
                         <img src="assets/profile_picture.webp" alt="Ayansh Paliwal" class="profile-photo" width="300" height="300">
@@ -176,7 +194,7 @@
         <!-- School Section -->
         <section id="school" class="section">
             <div class="container">
-                <h1>School Life & Education Journey</h1>
+                <h1 class="section-title"><span class="section-kicker">02 / Education</span>School Life &amp; Education Journey</h1>
 
                 <div class="school-info">
                     <div class="info-card">
@@ -272,7 +290,7 @@
         <!-- Achievements Section -->
         <section id="achievements" class="section">
             <div class="container">
-                <h1>My Achievements</h1>
+                <h1 class="section-title"><span class="section-kicker">04 / Achievements</span>My Achievements</h1>
 
                 <!-- Robotics & Engineering Category -->
                 <div class="category-section">
@@ -334,7 +352,7 @@
         <!-- Hobbies Section -->
         <section id="hobbies" class="section">
             <div class="container">
-                <h1>My Hobbies & Interests</h1>
+                <h1 class="section-title"><span class="section-kicker">05 / Hobbies</span>My Hobbies &amp; Interests</h1>
                 <div class="hobbies-grid">
                     <div class="hobby-card">
                         <div class="hobby-image">
@@ -405,7 +423,7 @@
         <!-- Blog Section -->
         <section id="blog" class="section">
             <div class="container">
-                <h1>My Blog</h1>
+                <h1 class="section-title"><span class="section-kicker">06 / Blog</span>My Blog</h1>
                 <div class="blog-posts" id="blog-posts">
                     <!-- Rendered by JavaScript -->
                 </div>
