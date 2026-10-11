@@ -1,6 +1,7 @@
 /**
  * Project Showcase Component
- * Renders the project showcase carousel from projects data
+ * Renders the showcase carousel. Clicking (or pressing Enter/Space on) any
+ * card jumps to the Projects page and highlights that specific project.
  */
 
 import { sanitizeHTML } from '../utils/sanitize.js';
@@ -9,50 +10,77 @@ export function initProjectShowcase(projectsData) {
   const carousel = document.querySelector('.showcase-carousel');
   if (!carousel) return;
 
-  // Filter projects marked for showcase
+  // Projects marked for showcase
   const showcaseProjects = projectsData.completed.filter(p => p.showcase);
 
-  // Map project IDs to corresponding blog post IDs (if a blog post exists)
-  const projectToBlogId = {
-    'ergolearn-ai': 'hackmars2026',
-    'tisb-swap': 'tisbhacks2026',
-    // Other showcase projects don't have corresponding blog posts
-  };
-
-  // Render showcase cards
   carousel.innerHTML = showcaseProjects.map((project, index) => {
-    const blogId = projectToBlogId[project.id];
-    const hasPopup = blogId && blogPostsData[blogId];
-    const popupTrigger = hasPopup
-      ? `data-popup-trigger="blog-popup" onclick="openPopup('blog-popup', '${blogId}')"`
-      : '';
-    const cardTabindex = hasPopup ? 'tabindex="0" role="button"' : '';
-    const ariaLabel = hasPopup ? `aria-label="View project details: ${sanitizeHTML(project.title)}"` : '';
     const num = String(index + 1).padStart(2, '0');
-    const viewHint = hasPopup
-      ? '<span class="showcase-view">Read the case study <i class="fas fa-arrow-right"></i></span>'
-      : '';
-
     return `
-      <div class="post-card" ${cardTabindex} ${ariaLabel} ${popupTrigger}>
+      <div class="post-card showcase-card" data-project-id="${sanitizeHTML(project.id)}"
+           tabindex="0" role="button" aria-label="View ${sanitizeHTML(project.title)} in projects">
         <div class="showcase-card-head">
           <span class="showcase-index">${num}</span>
           <span class="showcase-tag">Case Study</span>
         </div>
         <h3>${sanitizeHTML(project.title)}</h3>
         <p>${sanitizeHTML(project.showcaseDescription)}</p>
-        ${viewHint}
+        <span class="showcase-view">View in Projects <i class="fas fa-arrow-right"></i></span>
       </div>
     `;
   }).join('');
 
-  // Add keyboard support for cards with popups
-  carousel.querySelectorAll('.post-card[onclick]').forEach((card, index) => {
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
+  // Delegate: works for every card regardless of how it was dragged/clipped.
+  carousel.addEventListener('click', (e) => {
+    const card = e.target && typeof e.target.closest === 'function' ? e.target.closest('[data-project-id]') : null;
+    if (card) openProject(card.getAttribute('data-project-id'));
   });
+
+  carousel.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest?.('[data-project-id]');
+    if (card) {
+      e.preventDefault();
+      openProject(card.getAttribute('data-project-id'));
+    }
+  });
+}
+
+let latestNav = { id: null, t: 0 };
+
+/**
+ * Navigate to the Projects section and highlight the matching card.
+ * Reuses the nav link's click handler so both instant (live) and
+ * cross-fading (fluid) section switching are supported.
+ */
+function openProject(projectId) {
+  const now = Date.now();
+  if (latestNav.id === projectId && now - latestNav.t < 450) return;
+  latestNav = { id: projectId, t: now };
+
+  const card = document.getElementById('project-' + projectId);
+  const projectsSection = document.getElementById('projects');
+  if (!card || !projectsSection) return;
+
+  const projectsLink = document.querySelector('.nav-link[data-section="projects"]');
+  if (projectsLink) {
+    projectsLink.click();
+  } else {
+    document.querySelectorAll('.nav-link').forEach(nl => nl.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    projectsSection.classList.add('active');
+  }
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Wait for the section to become active (cross-fade is async), then reveal.
+  const settle = () => {
+    if (projectsSection.classList.contains('active')) {
+      card.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+      card.classList.add('is-highlighted');
+      window.setTimeout(() => card.classList.remove('is-highlighted'), 2600);
+    } else {
+      window.setTimeout(settle, 60);
+    }
+  };
+  window.setTimeout(settle, reducedMotion ? 0 : 60);
 }

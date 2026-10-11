@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body data-theme="light">
+<body>
+    <script>
+        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
     <header>
         <nav>
             <div class="logo">Ayansh Paliwal</div>
@@ -53,8 +56,6 @@
                         <div class="hero-stats">
                             <div class="hero-stat"><span class="stat-num">32+</span><span class="stat-label">Projects Built</span></div>
                             <div class="hero-stat"><span class="stat-num">6+</span><span class="stat-label">Years Coding</span></div>
-                            <div class="hero-stat"><span class="stat-num">10</span><span class="stat-label">Abacus Levels</span></div>
-                            <div class="hero-stat stat-text"><span class="stat-num">Red Belt</span><span class="stat-label">Karate</span></div>
                         </div>
                     </div>
                 </div>

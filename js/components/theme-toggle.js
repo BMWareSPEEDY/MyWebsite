@@ -11,7 +11,7 @@ export function initThemeToggle() {
   if (!themeToggle || !themeIcon) return;
 
   // Load saved theme or default to light
-  const savedTheme = localStorage.getItem('theme') || 'light';
+  const savedTheme = localStorage.getItem('theme') || 'dark';
   body.setAttribute('data-theme', savedTheme);
   updateThemeIcon(savedTheme, themeIcon);
 

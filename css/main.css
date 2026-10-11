@@ -2114,3 +2114,94 @@ footer::before {
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   v4 — Carousel → Projects deep-link, highlight, light-mode about tint
+   ========================================================================== */
+
+.showcase-card {
+  cursor: pointer;
+}
+
+[id^="project-"] {
+  scroll-margin-top: 130px;
+  scroll-margin-bottom: 130px;
+}
+
+.project-card.is-highlighted {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.35), var(--shadow) !important;
+  animation: cardHighlight 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2;
+}
+
+@keyframes cardHighlight {
+  0%   { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.5), var(--shadow); }
+  100% { box-shadow: 0 0 0 16px rgba(var(--primary-rgb), 0), var(--shadow); }
+}
+
+/* About — light-mode tinted band (soft blush → ice blue, echoes hero gradient).
+   Default (no data-theme) is light; dark mode stays transparent. */
+#about {
+  background: linear-gradient(180deg, #fff7f8 0%, #e9f1fc 100%);
+}
+
+[data-theme="dark"] #about {
+  background: transparent;
+}
+
+/* ==========================================================================
+   v5 — Hero sidebar: theme-aware intro card
+   ========================================================================== */
+/* Light (default) — bright glass on the dark hero, text on-scheme */
+.hero-sidebar {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 50px -14px rgba(15, 23, 42, 0.28);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  color: var(--text-primary);
+}
+.hero-sidebar .hero-name,
+.hero-sidebar .sidebar-email {
+  color: var(--text-primary);
+}
+.hero-sidebar .hero-bio {
+  color: var(--text-secondary);
+}
+.hero-sidebar .hero-profile-img {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+.hero-sidebar .btn-outline {
+  border-color: rgba(15, 23, 42, 0.35);
+  color: var(--text-primary);
+}
+.hero-sidebar .btn-outline:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--text-primary);
+}
+
+/* Dark — keep the deep navy glass float */
+[data-theme="dark"] .hero-sidebar {
+  background: rgba(8, 12, 22, 0.55);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+[data-theme="dark"] .hero-sidebar .hero-name,
+[data-theme="dark"] .hero-sidebar .sidebar-email {
+  color: #fff;
+}
+[data-theme="dark"] .hero-sidebar .hero-bio {
+  color: rgba(255, 255, 255, 0.78);
+}
+[data-theme="dark"] .hero-sidebar .hero-profile-img {
+  border-color: rgba(255, 255, 255, 0.85);
+}
+[data-theme="dark"] .hero-sidebar .btn-outline {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+[data-theme="dark"] .hero-sidebar .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}

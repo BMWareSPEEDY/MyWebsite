@@ -29,7 +29,7 @@ function renderCard(project, inProgress, index) {
   const footer = repo ? `<div class="project-card-footer">${repo}</div>` : '';
 
   return `
-    <article class="${cardClass}"${borderStyle}>
+    <article id="project-${project.id}" class="${cardClass}"${borderStyle}>
       <div class="project-card-header">
         <span class="project-index">${inProgress ? 'IN' : '#' + num}</span>
         ${renderStatus(project)}
