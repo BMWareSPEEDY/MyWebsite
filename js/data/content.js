@@ -358,7 +358,7 @@ export const blogPostsData = {
 
       <div style="text-align: center; margin: 2rem 0;">
         <img src="assets/IMG_4175.jpg" alt="Me at the WRO Asia-Pacific Open Championship" style="max-width: 50%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">me at the Asia-Pacific Open Championship</p>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Me at the Asia-Pacific Open Championship</p>
       </div>
 
       <h3>Robot Design & Hardware</h3>
