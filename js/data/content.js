@@ -355,7 +355,12 @@ export const blogPostsData = {
     meta: 'Published on October 2026',
     body: `
       <p>For this competition, I was part of <strong>Team YO ERROR 404</strong>, where we developed our robot through two major versions. We finished <strong>7th in Asia</strong> at the Asia-Pacific Open Championship.</p>
-      
+
+      <div style="text-align: center; margin: 2rem 0;">
+        <img src="assets/IMG_4175.jpg" alt="Me at the WRO Asia-Pacific Open Championship" style="max-width: 50%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">me at the Asia-Pacific Open Championship</p>
+      </div>
+
       <h3>Robot Design & Hardware</h3>
       <p>Our final design used a custom laser-cut 5mm acrylic chassis with a rear-wheel differential drive and servo-actuated front steering. We used a <strong>JGB37-520 12V DC motor</strong> with an integrated encoder for precise distance control, a <strong>DS3218 high-torque servo</strong> for steering, and custom 3D-printed PETG components for the motor mounts, sensor brackets and steering linkages.</p>
       
