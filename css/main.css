@@ -29,6 +29,8 @@
   --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
   --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
   --gradient: linear-gradient(135deg, #e02737 0%, #ff5260 100%);
+  /* Height of the fixed header; kept in sync by JS to avoid gaps/overlap */
+  --header-height: 80px;
 }
 
 [data-theme="dark"] {
@@ -164,7 +166,7 @@ nav {
    Main Content
    ========================================================================== */
 main {
-  margin-top: 80px;
+  margin-top: var(--header-height, 80px);
   min-height: calc(100vh - 160px);
 }
 

@@ -83,6 +83,23 @@ export function initNavigation() {
   let lastScrollTop = 0;
   const header = document.querySelector('header');
 
+  // Keep the content offset in sync with the real (viewport-dependent) header
+  // height so there is no gap between the fixed bar and the page content.
+  const syncHeaderHeight = () => {
+    if (!header) return;
+    const height = header.offsetHeight;
+    if (height > 0) {
+      document.documentElement.style.setProperty('--header-height', `${height}px`);
+    }
+  };
+
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
+  window.addEventListener('load', syncHeaderHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncHeaderHeight).catch(() => { });
+  }
+
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
