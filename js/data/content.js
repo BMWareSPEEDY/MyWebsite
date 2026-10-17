@@ -35,11 +35,11 @@ export const projectsData = {
       title: 'WRO26 — Autonomous Competition Robot (Team Yo_Error_404)',
       status: 'Competition Build',
       statusClass: 'competition',
-      description: 'An autonomous competition car built for the World Robot Olympiad Future Engineers 2026 category. A Raspberry Pi 5 acts as the vision and decision master, using a wide camera, OpenCV, and a custom-trained YOLO model to classify pillars and navigate the course, while an ESP32-C3 handles real-time ToF distance sensing, an IMU, motor control, and 50 Hz telemetry. The project spans mechanical design, power, embedded firmware, computer vision, and a full engineering journal. Includes two documented vehicle generations, 31 parametric STL parts, KiCad schematics, systemd deployment scripts, and a competition runbook.',
-      tags: ['Raspberry Pi', 'ESP32', 'OpenCV', 'YOLO', 'Arduino/C++', 'KiCad', 'CAD'],
+      description: 'An autonomous competition car built for the World Robot Olympiad Future Engineers 2026 category. A Raspberry Pi 5 acts as the vision and decision master, using a wide camera, OpenCV, and a custom-trained YOLOv11 model to classify pillars and navigate the course, while an ESP32-C3 handles real-time ToF distance sensing (VL53L0X via TCA9548A), BNO055 IMU, motor control, and PD control for centering/alignment. Finished 7th in Asia at the Asia-Pacific Open Championship.',
+      tags: ['Raspberry Pi', 'ESP32', 'OpenCV', 'YOLOv11', 'Arduino/C++', 'KiCad', 'CAD'],
       github: 'https://github.com/BMWareSPEEDY/WRO_yo_error_404',
       showcase: true,
-      showcaseDescription: 'A full autonomous competition robot: Pi 5 vision, ESP32-C3 real-time control, YOLO pillar detection, and a complete engineering journal.'
+      showcaseDescription: 'A full autonomous competition robot: Pi 5 vision, ESP32-C3 real-time control, YOLOv11 pillar detection, 7th in Asia at Asia-Pacific Open Championship.'
     },
     {
       id: 'peek',
@@ -349,6 +349,51 @@ export const projectsData = {
 // Blog Posts Data (used by Blog Section & Popups)
 // ============================================================================
 export const blogPostsData = {
+  'wro2026': {
+    id: 'wro2026',
+    title: 'WRO 2026 Future Engineers',
+    meta: 'Published on October 2026',
+    body: `
+      <p>For this competition, I was part of <strong>Team YO ERROR 404</strong>, where we developed our robot through two major versions. We finished <strong>7th in Asia</strong> at the Asia-Pacific Open Championship.</p>
+      
+      <h3>Robot Design & Hardware</h3>
+      <p>Our final design used a custom laser-cut 5mm acrylic chassis with a rear-wheel differential drive and servo-actuated front steering. We used a <strong>JGB37-520 12V DC motor</strong> with an integrated encoder for precise distance control, a <strong>DS3218 high-torque servo</strong> for steering, and custom 3D-printed PETG components for the motor mounts, sensor brackets and steering linkages.</p>
+      
+      <p>The robot used a <strong>Raspberry Pi 5</strong> for high-level processing and an <strong>ESP32-C3</strong> for real-time control. Four <strong>VL53L0X time-of-flight sensors</strong>, connected through a <strong>TCA9548A I2C multiplexer</strong>, measured distances to the walls, while a <strong>BNO055 IMU</strong> tracked heading and helped the robot execute accurate 90-degree turns. The ESP32 combined these readings using PD control to keep the robot centred and aligned with the track.</p>
+      
+      <p>We also redesigned the power system, using separate regulated supplies for the processing hardware, drive motor and steering servo to prevent voltage drops and sensor errors caused by sudden current spikes.</p>
+      
+      <h3>Computer Vision for Obstacle Round</h3>
+      <p>For the obstacle round, we developed a computer vision system using a <strong>YOLOv11</strong> model trained on 217 hand-annotated images to detect red and green pillars and magenta parking boundaries through a Raspberry Pi Camera Module 3. The Raspberry Pi processed the camera feed and sent navigation commands to the ESP32, while the robot used finite-state machines to manage obstacle avoidance, turning, lap completion and parking.</p>
+      
+      <h3>Iterations & Improvements</h3>
+      <ul>
+        <li>Replaced ultrasonic sensors with more precise time-of-flight sensors</li>
+        <li>Improved the motor driver</li>
+        <li>Changed from Ackermann to parallel steering</li>
+        <li>Switched from PLA to PETG after parts cracked during testing</li>
+        <li>Refined the vision model and control algorithms to improve reliability</li>
+      </ul>
+      
+      <h3>My Role</h3>
+      <p>My role covered software development, hardware integration, testing and documentation. The biggest challenge was balancing development with exams around the Asia-Pacific Open Championship, which left us with limited time to prepare.</p>
+      
+      <p>Despite this, we competed and finished <strong>7th in Asia</strong>. I even had to skip my Spanish exam to attend, and after returning, I fell sick and was exhausted, affecting my exams. This project taught me how to integrate computer vision, embedded systems, mechanical design and autonomous control into a single working robot.</p>
+      
+      <h3>Resources</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+        <a href="https://github.com/BMWareSPEEDY/WRO_yo_error_404" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #333; color: white;">
+          <i class="fab fa-github"></i> View GitHub Repository
+        </a>
+        <a href="https://wro-association.org/" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #0ea5e9; color: white;">
+          <i class="fas fa-globe"></i> WRO Association
+        </a>
+        <a href="https://wro-association.org/competition/future-engineers/" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #10b981; color: white;">
+          <i class="fas fa-rocket"></i> Future Engineers Competition
+        </a>
+      </div>
+    `
+  },
   'materov2026': {
     id: 'materov2026',
     title: 'MATE ROV 2026',
@@ -513,17 +558,6 @@ export const blogPostsData = {
       <p>To prepare for a real-world launch at TISB or within local housing societies, these features will help ensure Verde remains a trusted and secure platform for all users.</p>
     `
   },
-  'amo2026': {
-    id: 'amo2026',
-    title: 'Securing Bronze at the American Math Olympiad',
-    meta: 'Published on March 23, 2026',
-    body: `
-      <p>The American Mathematics Olympiad (AMO) is an international competition for students from grades 2–12, organized by SIMCC and SIU. It's based on US Common Core Standards and covers topics like algebra, geometry, number theory, and combinatorics. Basically, it's not your average school math—it really pushes how you think. Signing up for AMO this year honestly felt like jumping straight into the deep end.</p>
-      <p>For around two to three months before the test, I spent a lot of my free time grinding through textbooks and past papers. But over time, things slowly started to click. Patterns made more sense, and I got better at approaching problems. It was tough, but I just treated every mistake as part of the process and kept going.</p>
-      <img src="assets/amo_26.JPG" alt="AMO Bronze Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px;">
-      <p>Going into the exam, I didn't really know what to expect, especially since it's such a competitive exam globally. The questions were tricky in a different way—they needed multiple steps and a lot of logical thinking. In the end, I was honestly really happy (and kinda relieved) to find out I got a Bronze medal. For me, it wasn't just about the result, but more about all the effort that went into it—the long hours, the frustration, and finally seeing it pay off. It definitely made me appreciate math a lot more and showed me how important persistence really is.</p>
-    `
-  },
   'techkriti26': {
     id: 'techkriti26',
     title: 'Returning to IIT Kanpur: Techkriti \'26',
@@ -563,67 +597,15 @@ export const blogPostsData = {
       <p>We look forward to iterating on these designs and returning to the competition circuit with even more refined solutions.</p>
     `
   },
-  'odyssey': {
-    id: 'odyssey',
-    title: 'Leading Through Challenges: My Odyssey of the Mind Experience',
-    meta: 'Published on March 15, 2025',
+  'amo2026': {
+    id: 'amo2026',
+    title: 'Securing Bronze at the American Math Olympiad',
+    meta: 'Published on March 23, 2026',
     body: `
-      <p>Odyssey of the Mind helps students unlock their creativity and become confident problem-solvers. Faced with challenges that demand original solutions, students learn to think outside the box without fear. The creative thinking and self-belief they develop in OM stays with them for life, empowering them in every area they pursue.</p>
-      <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
-      <a href="https://odysseyofthemind.com/">Official website of Odyssey of the Mind</a>
-      <br>
-      <img src="https://via.placeholder.com/800x400" alt="Odyssey Team Photo">
-      <p>I was responsible for organizing tasks, ensuring timely submissions, and keeping the team spirit alive.</p>
-    `
-  },
-  'materov': {
-    id: 'materov',
-    title: 'MATE ROV Competition',
-    meta: 'Published on June 23, 2025',
-    body: `
-      <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 35th globally — a strong showing for our first time at the event.</p>
-      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
-      <p>This competition marked my first experience in underwater robotics, providing valuable exposure and learning opportunities.</p>
-    `
-  },
-  'techkriti': {
-    id: 'techkriti',
-    title: 'Techkriti Techfest Experience',
-    meta: 'Published on March 30, 2025',
-    body: `
-      <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned 2nd place in IARC, placed 10th in our category in Robowars, and secured 12th place in Manouver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics. It also greatly expanded my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
-
-      <img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
-      <img src="assets/techkriti_2025_screenshot.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
-      <br>
-      <p>This event was a fantastic platform for learning and growth, and I look forward to participating in more such competitions in the future.</p>
-    `
-  },
-  'tisbhacks': {
-    id: 'tisbhacks',
-    title: 'TISB Hacks',
-    meta: 'Published on January 26, 2025',
-    body: `
-      <p>TISB Hacks – Senior Coding is a competitive coding challenge for school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It's designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
-      <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
-      <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani">This is the github project link for the app</a>
-      <br>
-      <a href="https://tisbhacks.tisb.org/">This is the website for the competition</a>
-      <br>
-      <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate" style="transform: rotate(90deg); max-width: 100%; height: auto;">
-      <p>This event was a fun experience that helped to learn and challenge myself</p>
-    `
-  },
-  'sciencefair': {
-    id: 'sciencefair',
-    title: 'Science Fair Victory',
-    meta: 'Published on March 21, 2025',
-    body: `
-      <p>After two months of hard work, my team of five and I won first place in the Science Fair under the Still Model category. As the team leader, I was responsible for designing the model. I used Blender, a 3D modeling software, and with some help from the internet for reference images, I created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes. This helped me expand my biology and chemistry knowledge beyond the syllabus. It was a unique experience, and I felt incredibly proud and happy when we won.</p>
-
-      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
-
-      <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
+      <p>The American Mathematics Olympiad (AMO) is an international competition for students from grades 2–12, organized by SIMCC and SIU. It's based on US Common Core Standards and covers topics like algebra, geometry, number theory, and combinatorics. Basically, it's not your average school math—it really pushes how you think. Signing up for AMO this year honestly felt like jumping straight into the deep end.</p>
+      <p>For around two to three months before the test, I spent a lot of my free time grinding through textbooks and past papers. But over time, things slowly started to click. Patterns made more sense, and I got better at approaching problems. It was tough, but I just treated every mistake as part of the process and kept going.</p>
+      <img src="assets/amo_26.JPG" alt="AMO Bronze Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px;">
+      <p>Going into the exam, I didn't really know what to expect, especially since it's such a competitive exam globally. The questions were tricky in a different way—they needed multiple steps and a lot of logical thinking. In the end, I was honestly really happy (and kinda relieved) to find out I got a Bronze medal. For me, it wasn't just about the result, but more about all the effort that went into it—the long hours, the frustration, and finally seeing it pay off. It definitely made me appreciate math a lot more and showed me how important persistence really is.</p>
     `
   },
   'tisbhacks2026': {
@@ -667,7 +649,70 @@ export const blogPostsData = {
         </a>
       </div>
     `
-  }
+  },
+  'materov': {
+    id: 'materov',
+    title: 'MATE ROV Competition',
+    meta: 'Published on June 23, 2025',
+    body: `
+      <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 35th globally — a strong showing for our first time at the event.</p>
+      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
+      <p>This competition marked my first experience in underwater robotics, providing valuable exposure and learning opportunities.</p>
+    `
+  },
+  'techkriti': {
+    id: 'techkriti',
+    title: 'Techkriti Techfest Experience',
+    meta: 'Published on March 30, 2025',
+    body: `
+      <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned 2nd place in IARC, placed 10th in our category in Robowars, and secured 12th place in Manouver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics. It also greatly expanded my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
+
+      <img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
+      <img src="assets/techkriti_2025_screenshot.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
+      <br>
+      <p>This event was a fantastic platform for learning and growth, and I look forward to participating in more such competitions in the future.</p>
+    `
+  },
+  'sciencefair': {
+    id: 'sciencefair',
+    title: 'Science Fair Victory',
+    meta: 'Published on March 21, 2025',
+    body: `
+      <p>After two months of hard work, my team of five and I won first place in the Science Fair under the Still Model category. As the team leader, I was responsible for designing the model. I used Blender, a 3D modeling software, and with some help from the internet for reference images, I created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes. This helped me expand my biology and chemistry knowledge beyond the syllabus. It was a unique experience, and I felt incredibly proud and happy when we won.</p>
+
+      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
+
+      <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
+    `
+  },
+  'odyssey': {
+    id: 'odyssey',
+    title: 'Leading Through Challenges: My Odyssey of the Mind Experience',
+    meta: 'Published on March 15, 2025',
+    body: `
+      <p>Odyssey of the Mind helps students unlock their creativity and become confident problem-solvers. Faced with challenges that demand original solutions, students learn to think outside the box without fear. The creative thinking and self-belief they develop in OM stays with them for life, empowering them in every area they pursue.</p>
+      <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
+      <a href="https://odysseyofthemind.com/">Official website of Odyssey of the Mind</a>
+      <br>
+      <img src="https://via.placeholder.com/800x400" alt="Odyssey Team Photo">
+      <p>I was responsible for organizing tasks, ensuring timely submissions, and keeping the team spirit alive.</p>
+    `
+  },
+  'tisbhacks': {
+    id: 'tisbhacks',
+    title: 'TISB Hacks',
+    meta: 'Published on January 26, 2025',
+    body: `
+      <p>TISB Hacks – Senior Coding is a competitive coding challenge for school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It's designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
+      <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
+      <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani">This is the github project link for the app</a>
+      <br>
+      <a href="https://tisbhacks.tisb.org/">This is the website for the competition</a>
+      <br>
+      <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate" style="transform: rotate(90deg); max-width: 100%; height: auto;">
+      <p>This event was a fun experience that helped to learn and challenge myself</p>
+    `
+  },
 };
 
 // ============================================================================
@@ -675,6 +720,13 @@ export const blogPostsData = {
 // ============================================================================
 export const achievementsData = {
   robotics: [
+    {
+      id: 'wro2026',
+      title: 'WRO 2026 Future Engineers - 7th in Asia',
+      date: 'October 2026',
+      description: 'Finished 7th in Asia at the Asia-Pacific Open Championship as part of Team YO ERROR 404. Built an autonomous self-driving robot with Raspberry Pi 5, ESP32-C3, YOLOv11 vision, and time-of-flight sensors.',
+      blogId: 'wro2026'
+    },
     {
       id: 'materov2026',
       title: 'MATE ROV 2026 - Regional Champions',

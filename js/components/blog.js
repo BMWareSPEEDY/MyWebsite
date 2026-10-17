@@ -14,8 +14,21 @@ export function initBlogSection(blogPostsData) {
   initBlogPostInteractions();
 }
 
+/**
+ * Parse a post's publish date from its meta string ("Published on June 28, 2026").
+ * Returns 0 when no date can be parsed so undated posts sink to the bottom.
+ */
+function getPostTimestamp(post) {
+  const match = /Published on\s+(.+)$/i.exec(post.meta || '');
+  if (!match) return 0;
+  const timestamp = Date.parse(match[1]);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
 function renderBlogPosts(container, posts) {
-  const postsArray = Object.values(posts);
+  // Newest first, so the latest post (e.g. WRO 2026) sits at the top
+  const postsArray = Object.values(posts)
+    .sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
 
   container.innerHTML = postsArray.map(post => `
     <article class="blog-post"
