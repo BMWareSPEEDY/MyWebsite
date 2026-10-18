@@ -76,14 +76,49 @@ export function initTelemetry() {
   let audioEnabled = false;
   let isLoadingAudio = false;
 
+  // Cached raw ArrayBuffers preloaded before user click
+  const audioCache = new Map();
+
+  const prefetchAudioFiles = async () => {
+    const urls = [
+      'assets/m5_layer_idle.mp3',
+      'assets/m5_layer_mid.mp3',
+      'assets/m5_layer_high.mp3',
+      'assets/m5_pop1.mp3',
+      'assets/m5_pop2.mp3',
+      'assets/m5_pop3.mp3'
+    ];
+    await Promise.all(urls.map(async (url) => {
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const buf = await res.arrayBuffer();
+          audioCache.set(url, buf);
+        }
+      } catch (_) {}
+    }));
+  };
+
+  // Prefetch audio assets immediately in background
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    window.requestIdleCallback(() => prefetchAudioFiles());
+  } else {
+    setTimeout(prefetchAudioFiles, 300);
+  }
+
   const loadBuffer = async (url) => {
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status} fetching ${url}`);
-      const arrayBuffer = await response.arrayBuffer();
-      return await audioCtx.decodeAudioData(arrayBuffer);
+      let arrayBuffer = audioCache.get(url);
+      if (!arrayBuffer) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status} fetching ${url}`);
+        arrayBuffer = await response.arrayBuffer();
+      }
+      // clone buffer because decodeAudioData detaches the arrayBuffer
+      const bufferCopy = arrayBuffer.slice(0);
+      return await audioCtx.decodeAudioData(bufferCopy);
     } catch (err) {
-      console.warn(`Failed to load engine audio sample: ${url}`, err);
+      console.warn(`Failed to decode engine audio sample: ${url}`, err);
       return null;
     }
   };
@@ -101,8 +136,8 @@ export function initTelemetry() {
         // Acoustic tone filter: warm, resonant exhaust chamber acoustics
         engineFilter = audioCtx.createBiquadFilter();
         engineFilter.type = 'lowpass';
-        engineFilter.frequency.setValueAtTime(1400, audioCtx.currentTime);
-        engineFilter.Q.setValueAtTime(1.2, audioCtx.currentTime);
+        engineFilter.frequency.setValueAtTime(2200, audioCtx.currentTime);
+        engineFilter.Q.setValueAtTime(1.1, audioCtx.currentTime);
         engineFilter.connect(masterGain);
       } catch (e) {
         console.warn('Web Audio not supported:', e);
@@ -112,8 +147,8 @@ export function initTelemetry() {
 
     if (!idleBuffer && !isLoadingAudio) {
       isLoadingAudio = true;
-      if (soundToggleBtn) {
-        soundToggleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Loading M5...</span>';
+      if (soundToggleBtn && !soundToggleBtn.classList.contains('is-active')) {
+        soundToggleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Starting M5...</span>';
       }
       try {
         const [idle, mid, high, p1, p2, p3] = await Promise.all([
@@ -291,30 +326,30 @@ export function initTelemetry() {
       wHigh = 1.0;
     }
 
-    // Smooth gain transition across layers (no abrupt steps or volume drops)
-    const baseVol = 0.40;
-    idleGain.gain.setTargetAtTime(wIdle * baseVol, now, 0.05);
-    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.08), now, 0.05);
-    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.15), now, 0.05);
+    // Instantaneous low-latency gain transition across layers (tracks needle in real time without lag)
+    const baseVol = 0.44;
+    idleGain.gain.setTargetAtTime(wIdle * baseVol, now, 0.015);
+    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.05), now, 0.015);
+    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.10), now, 0.015);
 
-    // Dynamic pitch tracking: each layer gently responds around its native recorded RPM
+    // Dynamic pitch tracking: responds instantaneously to live needle position
     // Idle layer native center ~ 4.2k
-    idleSource.playbackRate.setTargetAtTime(0.92 + ((rpm - 4.2) / 24.0) + microDrift, now, 0.04);
+    idleSource.playbackRate.setTargetAtTime(0.92 + ((rpm - 4.2) / 22.0) + microDrift, now, 0.015);
 
     // Mid layer native center ~ 8.0k
     if (midSource) {
-      midSource.playbackRate.setTargetAtTime(0.95 + ((rpm - 8.0) / 28.0) + microDrift, now, 0.04);
+      midSource.playbackRate.setTargetAtTime(0.95 + ((rpm - 8.0) / 24.0) + microDrift, now, 0.015);
     }
 
     // High layer native center ~ 13.5k
     if (highSource) {
-      highSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 13.5) / 32.0) + microDrift, now, 0.04);
+      highSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 13.5) / 28.0) + microDrift, now, 0.015);
     }
 
-    // Master acoustic tone filter: opens up smoothly with throttle
+    // Master acoustic tone filter: opens up instantaneously with needle RPM
     const fraction = clamp(rpm / MAX_RPM, 0, 1);
-    const cutoff = 1200 + Math.pow(fraction, 1.25) * 4200;
-    engineFilter.frequency.setTargetAtTime(cutoff, now, 0.05);
+    const cutoff = 1400 + Math.pow(fraction, 1.2) * 5000;
+    engineFilter.frequency.setTargetAtTime(cutoff, now, 0.02);
   };
 
   if (soundToggleBtn) {
