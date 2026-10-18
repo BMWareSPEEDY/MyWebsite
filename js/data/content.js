@@ -709,8 +709,8 @@ export const blogPostsData = {
       <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 35th globally — a strong showing for our first time at the event.</p>
       
       <div class="popup-media-figure">
-        <img src="assets/Science_Fair_Trophy.png" alt="MATE ROV Regional Award">
-        <p class="popup-media-caption">MATE ROV Regional Award Trophy</p>
+        <img src="assets/materov_2025.webp" alt="MATE ROV 2025 Team Bullsharks">
+        <p class="popup-media-caption">MATE ROV 2025 Team Bullsharks</p>
       </div>
 
       <h3>Key Achievements & Takeaways</h3>
