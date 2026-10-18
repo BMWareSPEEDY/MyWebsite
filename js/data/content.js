@@ -480,11 +480,12 @@ export const blogPostsData = {
       </ul>
       <p>Every frame is processed using localized vector geometry to create anatomical invariants, meaning the math scales automatically even if the user moves around. For example, vertical spine collapse is checked by calculating a normalized Slouch Fraction:</p>
 
-      <div style="text-align: center; margin: 1.5rem 0; font-size: 1.15rem; color: var(--primary-color);">
-        <strong>Slouch Fraction</strong> =
-        <div style="display: inline-block; vertical-align: middle; text-align: center; margin-left: 8px;">
-          <span style="border-bottom: 1px solid var(--primary-color); display: block; padding-bottom: 2px;">Neck Ratio<sub>current</sub></span>
-          <span style="display: block; padding-top: 2px;">Neck Ratio<sub>calibrated</sub></span>
+      <div class="popup-formula-card">
+        <span class="popup-formula-lhs">Slouch Fraction</span>
+        <span class="popup-formula-op">=</span>
+        <div class="popup-formula-fraction">
+          <span class="popup-formula-num">Neck Ratio<sub>current</sub></span>
+          <span class="popup-formula-den">Neck Ratio<sub>calibrated</sub></span>
         </div>
       </div>
 

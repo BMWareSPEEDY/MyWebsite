@@ -1372,6 +1372,63 @@ footer {
   font-style: italic;
 }
 
+/* Telemetry Formula Box */
+.popup-formula-card {
+  margin: 1.75rem auto;
+  max-width: 480px;
+  padding: 1.25rem 1.75rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--bmw-blue-shine);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.popup-formula-lhs {
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 0.02em;
+}
+
+.popup-formula-op {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.popup-formula-fraction {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.popup-formula-num {
+  border-bottom: 2px solid var(--primary-color);
+  padding: 0 0.5rem 0.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.popup-formula-den {
+  padding: 0.25rem 0.5rem 0;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.popup-formula-fraction sub {
+  font-size: 0.72em;
+  color: var(--bmw-blue-shine);
+  font-weight: 500;
+}
+
 .popup-resources {
   display: flex;
   flex-direction: column;
