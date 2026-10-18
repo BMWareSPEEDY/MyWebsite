@@ -1,4 +1,5 @@
 {
+  "name": "mywebsite",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
