@@ -1349,13 +1349,16 @@ footer {
 }
 
 .popup-media-figure img {
-  max-width: 55%;
+  max-width: 45%;
+  max-height: 380px;
+  width: auto;
   height: auto;
   display: block;
   margin: 0 auto;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(3, 30, 73, 0.12);
   border: 1px solid var(--border-color);
+  object-fit: contain;
 }
 
 [data-theme="dark"] .popup-media-figure img {
