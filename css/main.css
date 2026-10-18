@@ -2724,8 +2724,12 @@ header {
 
 .hero-overlay {
   background:
-    linear-gradient(100deg, rgba(2, 14, 36, 0.94) 0%, rgba(2, 14, 36, 0.82) 48%, rgba(2, 14, 36, 0.50) 80%, rgba(2, 14, 36, 0.35) 100%),
-    linear-gradient(180deg, rgba(2, 14, 36, 0.40) 0%, rgba(2, 14, 36, 0.65) 100%);
+    linear-gradient(100deg, rgba(2, 14, 36, 0.75) 0%, rgba(2, 14, 36, 0.45) 50%, rgba(2, 14, 36, 0.15) 100%),
+    linear-gradient(180deg, rgba(2, 14, 36, 0.20) 0%, rgba(2, 14, 36, 0.45) 100%);
+}
+
+.hero-content h2 {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
 }
 
 .hero-content h1 {
@@ -2733,6 +2737,7 @@ header {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.65));
 }
 
 .hero-layout {
