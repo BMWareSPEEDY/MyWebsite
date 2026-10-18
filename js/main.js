@@ -29,7 +29,6 @@ import { initCarousel } from './components/carousel.js';
 import { initAchievements } from './components/achievements.js';
 import { initProjects } from './components/projects.js';
 import { initReactionGame } from './components/reaction-game.js';
-import { initTelemetry } from './components/telemetry.js';
 
 // ============================================================================
 // Console easter egg — for anyone who opens devtools
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
 
   // Motorsport layer
-  initTelemetry();
   initReactionGame();
 
   greetPitWall();
