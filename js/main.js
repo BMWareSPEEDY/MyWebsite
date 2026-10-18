@@ -16,7 +16,6 @@ window.achievementsData = achievementsData;
 // Component Modules
 // ============================================================================
 import { initNavigation } from './components/navigation.js';
-import { initThemeToggle } from './components/theme-toggle.js';
 import { initHeroAnimations } from './components/hero.js';
 import { initSkillsAnimation } from './components/skills.js';
 import { initProjectShowcase } from './components/project-showcase.js';
@@ -60,7 +59,6 @@ function greetPitWall() {
 document.addEventListener('DOMContentLoaded', () => {
   // Core functionality
   initNavigation();
-  initThemeToggle();
   initHeroAnimations();
   initSkillsAnimation();
 

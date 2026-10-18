@@ -15,7 +15,8 @@
 
 <body>
     <script>
-        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
     </script>
 
     <main class="offtrack">

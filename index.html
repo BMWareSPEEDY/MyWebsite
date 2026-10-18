@@ -25,7 +25,8 @@
 
 <body>
     <script>
-        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
     </script>
     <header>
         <nav>
@@ -40,9 +41,6 @@
                 <li><a href="#" class="nav-link" data-section="blog">Pit Wall</a></li>
             </ul>
             <div class="nav-controls">
-                <button class="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>

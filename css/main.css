@@ -27,31 +27,32 @@
   --accent-color: #ee0405;
   --accent-rgb: 238, 4, 5;
 
-  /* Skill groups color codes (Light Mode) */
-  --hardware-rgb: 238, 4, 5;      /* Strong Red */
-  --software-rgb: 69, 153, 254;   /* Blue Shine */
-  --logic-rgb: 45, 64, 70;        /* Gunmetal */
+  /* Skill groups neon glows */
+  --hardware-rgb: 238, 4, 5;
+  --software-rgb: 69, 153, 254;
+  --logic-rgb: 184, 202, 209;
 
-  /* Text & backgrounds (Light mode - crisp Royal White with Gunmetal/Navy text) */
-  --text-primary: #031e49;
-  --text-secondary: #2d4046;
-  --bg-primary: #f5f8fa;
-  --bg-secondary: rgba(255, 253, 254, 0.92);
+  /* Text & backgrounds — Dark mode default */
+  --text-primary: #fffdfe;
+  --text-secondary: #b8cad1;
+  --bg-primary: #020e24; /* Deep BMW Oxford Navy night */
+  --bg-secondary: rgba(45, 64, 70, 0.45); /* Gunmetal glass */
 
   /* Surface tiers */
-  --surface-1: rgba(255, 253, 254, 0.92);
-  --surface-2: rgba(235, 242, 247, 0.9);
-  --surface-lift: #ffffff;
-  --hairline: rgba(184, 202, 209, 0.5);
-  --border-color: rgba(184, 202, 209, 0.6);
+  --surface-1: rgba(45, 64, 70, 0.65);
+  --surface-2: rgba(3, 30, 73, 0.7);
+  --surface-lift: rgba(69, 153, 254, 0.12);
+  --hairline: rgba(184, 202, 209, 0.22);
+  --border-color: rgba(184, 202, 209, 0.16);
 
-  --shadow: 0 10px 30px -5px rgba(3, 30, 73, 0.09);
-  --glass-shadow: 0 8px 32px 0 rgba(3, 30, 73, 0.06);
-  --gradient: linear-gradient(135deg, #4599fe 0%, #031e49 100%);
+  --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+  --gradient: linear-gradient(135deg, #4599fe 0%, #fffdfe 100%);
   --header-height: 80px;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"],
+body {
   --text-primary: #fffdfe;
   --text-secondary: #b8cad1;
   --bg-primary: #020e24; /* Deep BMW Oxford Navy night */
@@ -2501,13 +2502,7 @@ footer::before {
   100% { box-shadow: 0 0 0 16px rgba(var(--primary-rgb), 0), var(--shadow); }
 }
 
-/* About — light-mode tinted band (soft blush → ice blue, echoes hero gradient).
-   Default (no data-theme) is light; dark mode stays transparent. */
 #about {
-  background: linear-gradient(180deg, #fff7f8 0%, #e9f1fc 100%);
-}
-
-[data-theme="dark"] #about {
   background: transparent;
 }
 
@@ -2722,13 +2717,15 @@ header {
    4. Hero — driver profile + telemetry
    -------------------------------------------------------------------------- */
 .hero-backdrop {
-  background-blend-mode: normal;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .hero-overlay {
   background:
-    linear-gradient(105deg, rgba(5, 9, 26, 0.92) 0%, rgba(8, 14, 40, 0.72) 42%, rgba(10, 18, 48, 0.42) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
+    linear-gradient(100deg, rgba(2, 14, 36, 0.94) 0%, rgba(2, 14, 36, 0.82) 48%, rgba(2, 14, 36, 0.50) 80%, rgba(2, 14, 36, 0.35) 100%),
+    linear-gradient(180deg, rgba(2, 14, 36, 0.40) 0%, rgba(2, 14, 36, 0.65) 100%);
 }
 
 .hero-content h1 {
