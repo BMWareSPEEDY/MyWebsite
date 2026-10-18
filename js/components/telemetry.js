@@ -296,31 +296,31 @@ export function initTelemetry() {
     let wMid = 0;
     let wHigh = 0;
 
-    if (rpm <= 5.0) {
+    if (rpm <= 4.8) {
       wIdle = 1.0;
       wMid = 0.0;
       wHigh = 0.0;
-    } else if (rpm <= 8.5) {
+    } else if (rpm <= 8.0) {
       // Equal-power crossfade between Idle and Mid
-      const t = (rpm - 5.0) / 3.5;
+      const t = (rpm - 4.8) / 3.2;
       const angle = t * (Math.PI / 2);
       wIdle = Math.cos(angle);
       wMid = Math.sin(angle);
       wHigh = 0.0;
-    } else if (rpm <= 10.5) {
-      // Pure Mid-range
+    } else if (rpm <= 10.0) {
+      // Steady Mid-range
       wIdle = 0.0;
       wMid = 1.0;
       wHigh = 0.0;
-    } else if (rpm <= 13.5) {
-      // Equal-power crossfade between Mid and High
-      const t = (rpm - 10.5) / 3.0;
+    } else if (rpm <= 12.8) {
+      // Equal-power crossfade between Mid and High (330Hz roar rises)
+      const t = (rpm - 10.0) / 2.8;
       const angle = t * (Math.PI / 2);
       wIdle = 0.0;
       wMid = Math.cos(angle);
       wHigh = Math.sin(angle);
     } else {
-      // Extreme High redline & limiter bounce (13.5k - 15.0k)
+      // Full screaming High-RPM roar & limiter bounce (12.8k - 15.0k)
       wIdle = 0.0;
       wMid = 0.0;
       wHigh = 1.0;
@@ -329,26 +329,26 @@ export function initTelemetry() {
     // Instantaneous low-latency gain transition across layers (tracks needle in real time without lag)
     const baseVol = 0.44;
     idleGain.gain.setTargetAtTime(wIdle * baseVol, now, 0.015);
-    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.05), now, 0.015);
-    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.10), now, 0.015);
+    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.08), now, 0.015);
+    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.18), now, 0.015);
 
     // Dynamic pitch tracking: responds instantaneously to live needle position
     // Idle layer native center ~ 4.2k
-    idleSource.playbackRate.setTargetAtTime(0.92 + ((rpm - 4.2) / 22.0) + microDrift, now, 0.015);
+    idleSource.playbackRate.setTargetAtTime(0.92 + ((rpm - 4.2) / 20.0) + microDrift, now, 0.015);
 
     // Mid layer native center ~ 8.0k
     if (midSource) {
-      midSource.playbackRate.setTargetAtTime(0.95 + ((rpm - 8.0) / 24.0) + microDrift, now, 0.015);
+      midSource.playbackRate.setTargetAtTime(0.95 + ((rpm - 8.0) / 22.0) + microDrift, now, 0.015);
     }
 
     // High layer native center ~ 13.5k
     if (highSource) {
-      highSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 13.5) / 28.0) + microDrift, now, 0.015);
+      highSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 13.5) / 26.0) + microDrift, now, 0.015);
     }
 
-    // Master acoustic tone filter: opens up instantaneously with needle RPM
+    // Master acoustic tone filter: opens up into unrestricted screaming twin-turbo roar at high RPM
     const fraction = clamp(rpm / MAX_RPM, 0, 1);
-    const cutoff = 1400 + Math.pow(fraction, 1.2) * 5000;
+    const cutoff = 1500 + Math.pow(fraction, 1.25) * 6500;
     engineFilter.frequency.setTargetAtTime(cutoff, now, 0.02);
   };
 
