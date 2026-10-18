@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayansh Paliwal — Student · Developer · Creator</title>
+    <meta name="description"
+        content="Ayansh Paliwal — student, developer and creator building robots, games and software.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="preload" as="image" href="assets/hero_bg.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/profile_picture.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <script>
+        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
+    <header>
+        <nav>
+            <div class="logo">Ayansh Paliwal</div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-section="about">Driver</a></li>
+                <li><a href="#" class="nav-link" data-section="school">Academy</a></li>
+                <li><a href="#" class="nav-link" data-section="projects">Garage</a></li>
+                <li><a href="#" class="nav-link" data-section="achievements">Trophies</a></li>
+                <li><a href="#" class="nav-link" data-section="hobbies">Off Track</a></li>
+                <li><a href="#" class="nav-link" data-section="blog">Pit Wall</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active" style="padding-top: 0; max-width: 100%; margin: 0; width: 100%;">
+            <div class="hero-container">
+                <div class="hero-backdrop">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-layout">
+                        <div class="hero-content">
+                            <h2>Hello, I'm</h2>
+                            <h1 aria-label="Ayansh Paliwal."></h1>
+                            <div class="hero-stats">
+                                <div class="hero-stat"><span class="stat-num">32+</span><span
+                                        class="stat-label">Projects Built</span></div>
+                                <div class="hero-stat"><span class="stat-num">6</span><span
+                                        class="stat-label">Trophies</span></div>
+                                <div class="hero-stat"><span class="stat-num">6+</span><span class="stat-label">Years
+                                        Coding</span></div>
+                            </div>
+                        </div>
+
+                        <aside class="spec-card" aria-label="Driver telemetry">
+                            <div class="spec-head">
+                                <span class="spec-id">Car #02</span>
+                                <span class="spec-team">Paliwal Racing</span>
+                            </div>
+
+                            <div class="tacho">
+                                <svg class="tacho-svg" viewBox="0 0 200 120" role="img"
+                                    aria-label="Telemetry tachometer">
+                                    <defs>
+                                        <linearGradient id="tacho-grad" x1="26" y1="60" x2="174" y2="60"
+                                            gradientUnits="userSpaceOnUse">
+                                            <stop offset="0" stop-color="#4599fe" />
+                                            <stop offset="0.5" stop-color="#031e49" />
+                                            <stop offset="1" stop-color="#ee0405" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path class="tacho-track" d="M 26 96 A 74 74 0 0 1 174 96" />
+                                    <path class="tacho-fill" d="M 26 96 A 74 74 0 0 1 174 96" />
+                                    <g class="tacho-ticks">
+                                        <line x1="26" y1="96" x2="36" y2="96" />
+                                        <line x1="35.9" y1="59" x2="44.6" y2="64" />
+                                        <line x1="63" y1="31.9" x2="68.5" y2="40.4" />
+                                        <line x1="100" y1="22" x2="100" y2="32" />
+                                        <line x1="137" y1="31.9" x2="131.5" y2="40.4" />
+                                        <line x1="164.1" y1="59" x2="155.4" y2="64" />
+                                        <line x1="174" y1="96" x2="164" y2="96" />
+                                    </g>
+                                    <line class="tacho-needle" x1="100" y1="96" x2="100" y2="24" />
+                                    <circle class="tacho-hub" cx="100" cy="96" r="6" />
+                                </svg>
+                                <div class="tacho-readout">
+                                    <b id="tacho-value">0</b>
+                                    <span>RPM &times;1000</span>
+                                    <button type="button" class="tacho-sound-btn" id="tacho-sound-toggle" aria-label="Toggle BMW M5 engine sound" title="Toggle BMW M5 Sound">
+                                        <i class="fas fa-volume-mute"></i> <span>M5 Audio</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <dl class="spec-rows">
+                                <div class="spec-row">
+                                    <dt>Driver</dt>
+                                    <dd>Ayansh Paliwal</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Season</dt>
+                                    <dd>Grade 9<span class="spec-sep">&middot;</span>TISB Bangalore</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Power Unit</dt>
+                                    <dd>Python<span class="spec-sep">&middot;</span>C++<span
+                                            class="spec-sep">&middot;</span>Kotlin</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Aero</dt>
+                                    <dd>Robotics + Software</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Tyres</dt>
+                                    <dd>32+ projects shipped</dd>
+                                </div>
+                            </dl>
+                        </aside>
+                    </div>
+                </div>
+                <div class="hero-scroll" aria-hidden="true">
+                    <span>Scroll</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <!-- Skills Section (within Home) -->
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Toolbox</span>My Skills</h1>
+                <div class="skills-grid">
+                    <!-- Hardware -->
+                    <div class="skill-tag hardware"><i class="fas fa-microchip"></i> Microcontrollers</div>
+                    <div class="skill-tag hardware"><i class="fas fa-robot"></i> Robotics</div>
+
+                    <!-- Software -->
+                    <div class="skill-tag software"><i class="fab fa-java"></i> Java</div>
+                    <div class="skill-tag software"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill-tag software"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-tag software"><i class="fas fa-code"></i> C++</div>
+                    <div class="skill-tag software"><i class="fab fa-android"></i> Kotlin</div>
+                    <div class="skill-tag software"><i class="fas fa-mobile-alt"></i> Dart</div>
+
+                    <!-- Logic & Tools -->
+                    <div class="skill-tag logic"><i class="fas fa-project-diagram"></i> Project Development</div>
+                    <div class="skill-tag logic"><i class="fab fa-git-alt"></i> Git</div>
+                    <div class="skill-tag logic"><i class="fas fa-users"></i> Leadership</div>
+                    <div class="skill-tag logic"><i class="fas fa-brain"></i> Problem Solving</div>
+                </div>
+            </div>
+
+            <!-- Project Showcase Carousel -->
+            <div class="container">
+                <h2 class="showcase-heading"><span class="section-kicker">Featured Work</span>Project Showcase</h2>
+                <div class="showcase-carousel-wrapper">
+                    <button class="carousel-control prev-btn" aria-label="Previous Project"><i class="fas fa-chevron-left"></i></button>
+                    <div class="showcase-carousel" role="region" aria-label="Project showcase carousel">
+                        <!-- Cards rendered by JavaScript -->
+                    </div>
+                    <button class="carousel-control next-btn" aria-label="Next Project"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="carousel-indicators" aria-label="Carousel indicators"></div>
+            </div>
+
+            <!-- Lights Out — reaction test -->
+            <div class="container">
+                <h2 class="showcase-heading"><span class="section-kicker">Start Procedure</span>Lights Out</h2>
+                <section class="lights-out" aria-label="Reaction time test">
+                    <div class="lo-copy">
+                        <p class="lo-kicker">Reaction test</p>
+                        <h3>Beat the field off the line.</h3>
+                        <p>Five lights, one launch. Hit the button the instant they go out. Jump too early and it's a
+                            jump start. Your best time is saved on this device.</p>
+                        <p class="lo-verdict" id="lo-verdict" role="status" aria-live="polite">Press start to begin.</p>
+                    </div>
+                    <div class="lo-panel">
+                        <div class="lo-lights" id="lo-lights" aria-hidden="true">
+                            <span class="lo-bulb"></span>
+                            <span class="lo-bulb"></span>
+                            <span class="lo-bulb"></span>
+                            <span class="lo-bulb"></span>
+                            <span class="lo-bulb"></span>
+                        </div>
+                        <button class="lo-btn" id="lo-btn" type="button">Start</button>
+                        <div class="lo-scores">
+                            <div class="lo-score"><b id="lo-last">--</b><span>Last</span></div>
+                            <div class="lo-score"><b id="lo-best">--</b><span>Best</span></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Projects</span>Garage</h1>
+                <p class="section-subtitle">A deep dive into my software, hardware, and research builds. I strongly
+                    believe in documenting both successes and failed attempts. Status badges show exactly where each
+                    build stands.</p>
+                <div style="margin-bottom: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.8rem;">
+                    <span class="status-badge shipped">Shipped</span>
+                    <span class="status-badge competition">Competition Build</span>
+                    <span class="status-badge hackathon">Hackathon Winner</span>
+                    <span class="status-badge prototype">Prototype</span>
+                    <span class="status-badge research">R&amp;D</span>
+                    <span class="status-badge progress">In Build</span>
+                </div>
+
+                <h2 class="subsection-title">Complete &amp; Shipped</h2>
+                <div class="blog-posts project-grid" id="projects-completed">
+                    <!-- Rendered by JavaScript -->
+                </div>
+
+                <h2 class="subsection-title alt">In Progress &amp; R&amp;D</h2>
+                <div class="blog-posts project-grid" id="projects-inprogress">
+                    <!-- Rendered by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">About</span>Driver Profile</h1>
+                <div class="about-content">
+                    <div>
+                        <img src="assets/profile_picture.webp" alt="Ayansh Paliwal" class="profile-photo" width="300" height="300">
+                    </div>
+                    <div class="about-text">
+                        <h2>Hello, I'm Ayansh Paliwal</h2>
+                        <p>I am a high schooler focused on the intersection of robotics and machine learning, with a
+                            goal of contributing to open-source systems. My objective is to push the boundaries of
+                            intelligent systems and build solutions that have a lasting impact.</p>
+                        <br>
+                        <p>My journey includes mastering all 10 levels of abacus by age 11, diving into programming in
+                            multiple languages since age 10, and leading teams in competitive robotics. Beyond
+                            academics, I hold a Red belt in Karate and enjoy pushing my limits in sports.</p>
+                        <br>
+                        <p>I believe in the power of continuous learning and enjoy sharing my knowledge with others. My
+                            goal is to use technology to create meaningful solutions that can make a positive impact on
+                            the world, especially in areas like education and sustainability.</p>
+                        <br>
+                        <p>Away from the keyboard, I am an avid Formula 1 fan — proudly supporting Max Verstappen with Red Bull Racing! I am deeply passionate about motorsport telemetry, race strategy, and clean automotive engineering, and I absolutely love BMW cars. That's where a lot of my obsession with split-second decisions, peak performance, and data you can actually act on comes from.</p>
+                        <br>
+                        <h3>My Interests</h3>
+                        <div class="interests">
+                            <span class="interest-tag">Python & Java</span>
+                            <span class="interest-tag">Mobile App Development</span>
+                            <span class="interest-tag">Game Development</span>
+                            <span class="interest-tag">Competitive Programming</span>
+                            <span class="interest-tag">Competitive Robotics</span>
+                            <span class="interest-tag">Formula 1 (Max Verstappen &amp; Red Bull Racing)</span>
+                            <span class="interest-tag">BMW Cars &amp; Motorsport</span>
+                        </div>
+
+                        <div class="fun-fact">
+                            <h4>Fun Fact</h4>
+                            <p>"Code is like humor. When you have to explain it, it's bad." - This quote by Cory House
+                                reminds me to write clean, self-explanatory code that speaks for itself</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- School Section -->
+        <section id="school" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Education</span>Academy &amp; Education Journey</h1>
+
+                <div class="school-info">
+                    <div class="info-card">
+                        <h3>Current Education</h3>
+                        <p><strong>Grade:</strong> 9th Grade</p>
+                        <p><strong>School:</strong> TISB: The International School Bangalore</p>
+                        <p><strong>Location:</strong> India</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Favorite Subjects</h3>
+                        <div class="subjects-list">
+                            <div class="subject-item">
+                                <i class="fas fa-code" style="color: var(--primary-color);"></i>
+                                <h4>Computer Science</h4>
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-calculator" style="color: var(--primary-color);"></i>
+                                <h4>Mathematics</h4>
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-flask" style="color: var(--primary-color);"></i>
+                                <h4>Physics</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Timeline -->
+                <div class="timeline">
+                    <!-- TISB -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>The International School Bangalore (TISB)</h3>
+                            <p class="achievement-date">Grade 7 - Present</p>
+                            <p>Bangalore, India</p>
+                            <p>Currently pursuing middle school education with a strong focus on sciences and
+                                technology. Engaging in robotics competitions and competitive programming.</p>
+                        </div>
+                    </div>
+
+                    <!-- Millburn Middle School -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Millburn Middle School</h3>
+                            <p class="achievement-date">Grade 6</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Transitioned to middle school, participating in advanced math tracks and club activities.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Washington School Millburn -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Washington School Millburn</h3>
+                            <p class="achievement-date">Grade 5</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Completed elementary education with distinction.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wyoming School Millburn -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Wyoming Elementary School Millburn</h3>
+                            <p class="achievement-date">Grades 3 - 4</p>
+                            <p>Millburn, NJ, USA</p>
+                            <p>Foundational years in the Millburn public school system.</p>
+                        </div>
+                    </div>
+
+                    <!-- Manthan International School -->
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Manthan International School</h3>
+                            <p class="achievement-date">Pre KG - Grade 3</p>
+                            <p>Early Education</p>
+                            <p>Started educational journey in an international environment, fostering early curiosity
+                                and social skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Achievements</span>Trophies</h1>
+
+                <!-- Robotics & Engineering Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-robot"></i></span>
+                        Robotics & Engineering
+                    </h2>
+                    <div class="achievements-grid" id="achievements-robotics">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Software & Hackathons Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-code"></i></span>
+                        Software & Hackathons
+                    </h2>
+                    <div class="achievements-grid" id="achievements-software">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Science & Innovation Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-lightbulb"></i></span>
+                        Science & Innovation
+                    </h2>
+                    <div class="achievements-grid" id="achievements-science">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Academic Excellence Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-graduation-cap"></i></span>
+                        Academic Excellence
+                    </h2>
+                    <div class="achievements-grid" id="achievements-academic">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Sports Category -->
+                <div class="category-section">
+                    <h2 class="category-title">
+                        <span class="category-icon"><i class="fas fa-medal"></i></span>
+                        Sports
+                    </h2>
+                    <div class="achievements-grid" id="achievements-sports">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Hobbies</span>Off Track</h1>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Motorsport &amp; Formula 1</h3>
+                            <p>I'm a huge F1 fan &mdash; race strategy, tyre calls and pit wall decisions are basically
+                                engineering under time pressure. I follow the championship closely and love the
+                                technical side of the cars: aero, power units, telemetry. Away from the track I'm a car
+                                person through and through, with a soft spot for BMW. It's the sport that got me hooked
+                                on data, speed and precision.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Robotics & Arduino</h3>
+                            <p>I started tinkering with robots early on — from basic VEX bots to advanced custom
+                                designs. Representing Robot Revolution at the state level was a proud moment for me. I
+                                taught myself Arduino through YouTube, building cool, functional projects that solved
+                                real problems.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Programming</h3>
+                            <p>I started coding at age 10, diving into Python, and JavaScript. Since then, I have
+                                expanded my knowlange to learning kotlin and dart for app development, C++ for game
+                                development. I also taught myself the Arduino Programming Language. I love how coding
+                                turns ideas into real tools and games, and it's my favorite way to solve problems
+                                creatively.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Martial Arts</h3>
+                            <p>I trained in Karate at Moo Duk Kwan and earned my red belt after more than 2 years of
+                                consistent effort. I've competed and won at multiple regional tournaments — it's taught
+                                me resilience, focus, and confidence.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Sports & Athletics</h3>
+                            <p>Sports have always been a big part of my life. From roller skating and competitive
+                                swimming to soccer, I've trained and competed since I was 7. I've earned medals at zonal
+                                and state levels, and I enjoy pushing my physical limits.</p>
+                        </div>
+                    </div>
+
+                    <div class="hobby-card">
+                        <div class="hobby-image">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="hobby-content">
+                            <h3>Mental Mathematics</h3>
+                            <p>I completed all 10 levels of abacus training, and it unlocked crazy-fast mental math
+                                skills. I love working with numbers and solving puzzles using patterns — it's like
+                                mental gymnastics for me.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="container">
+                <h1 class="section-title"><span class="section-kicker">Blog</span>Pit Wall</h1>
+                <div class="blog-posts" id="blog-posts">
+                    <!-- Rendered by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Popup (Fullscreen) -->
+        <div id="blog-popup" class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closePopup('blog-popup')" aria-label="Close popup">&times;</button>
+                <h2 id="popup-title"></h2>
+                <div class="popup-meta" id="popup-meta"></div>
+                <div class="popup-body" id="popup-body"></div>
+            </div>
+        </div>
+
+        <!-- Custom Cursor HTML elements -->
+        <div class="custom-cursor-dot" aria-hidden="true"></div>
+        <div class="custom-cursor-outline" aria-hidden="true"></div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Ayansh Paliwal</h3>
+            <p>Student &middot; Developer &middot; Creator</p>
+
+            <div class="social-links">
+                <a href="mailto:ayanshpaliwal2012@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/BMWareSPEEDY" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="footer-info">
+                <p><a href="mailto:ayanshpaliwal2012@gmail.com">ayanshpaliwal2012@gmail.com</a></p>
+                <p>&copy; 2026 Ayansh Paliwal. Made with lots of hard work.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

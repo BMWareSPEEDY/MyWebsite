@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Off Track | Ayansh Paliwal</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <script>
+        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
+
+    <main class="offtrack">
+        <div class="offtrack-inner">
+            <p class="gravel">Off track &mdash; yellow flags</p>
+            <div class="offtrack-code">404</div>
+            <h1>You've beached it in the gravel.</h1>
+            <p>That URL isn't on the timing sheet. It may have been retired, renamed, or it never made it out of
+                the garage in the first place.</p>
+            <p>
+                <a class="btn btn-white" href="/">Back to the grid</a>
+            </p>
+            <p class="telemetry">Race control has been notified.</p>
+        </div>
+    </main>
+
+    <!-- Custom Cursor HTML elements -->
+    <div class="custom-cursor-dot" aria-hidden="true"></div>
+    <div class="custom-cursor-outline" aria-hidden="true"></div>
+
+    <script type="module">
+        import { initCustomCursor } from './js/components/custom-cursor.js';
+        initCustomCursor();
+    </script>
+
+    <script>
+        const badge = 'background:linear-gradient(90deg,#031e49,#4599fe,#ee0405);color:#fff;padding:3px 12px;border-radius:4px;font-weight:700;letter-spacing:0.08em;';
+        console.log('%cAYANSH PALIWAL  ·  CAR #02', badge);
+        console.log('%cYou went off track. Recovery vehicle dispatched.', 'color:#ee0405;font-weight:700;');
+    </script>
+</body>
+
+</html>
