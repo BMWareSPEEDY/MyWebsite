@@ -1222,16 +1222,19 @@ footer {
 }
 
 .popup-content {
-  background: var(--bg-primary);
+  background:
+    linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+    var(--livery-stripe) border-box;
   color: var(--text-primary);
   width: 90%;
   max-width: 900px;
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
-  padding: 2rem;
+  border: 3px solid transparent;
+  padding: 2.25rem 2rem 2rem;
   position: relative;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), 0 0 35px rgba(69, 153, 254, 0.12);
   transform: scale(0.95);
   opacity: 0;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
@@ -3041,8 +3044,7 @@ header {
    7. Popups, footer and cursor
    -------------------------------------------------------------------------- */
 .popup-content {
-  border-top: 4px solid transparent;
-  border-image: var(--livery-stripe) 1;
+  border: 3px solid transparent;
 }
 
 footer::before {
