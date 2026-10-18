@@ -356,9 +356,9 @@ export const blogPostsData = {
     body: `
       <p>For this competition, I was part of <strong>Team YO ERROR 404</strong>, where we developed our robot through two major versions. We finished <strong>7th in Asia</strong> at the Asia-Pacific Open Championship.</p>
 
-      <div style="text-align: center; margin: 2rem 0;">
-        <img src="assets/IMG_4175.jpg" alt="Me at the WRO Asia-Pacific Open Championship" style="max-width: 50%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Me at the Asia-Pacific Open Championship</p>
+      <div class="popup-media-figure">
+        <img src="assets/IMG_4175.jpg" alt="Me at the WRO Asia-Pacific Open Championship">
+        <p class="popup-media-caption">Me at the Asia-Pacific Open Championship</p>
       </div>
 
       <h3>Robot Design & Hardware</h3>
@@ -386,14 +386,14 @@ export const blogPostsData = {
       <p>Despite this, we competed and finished <strong>7th in Asia</strong>. I even had to skip my Spanish exam to attend, and after returning, I fell sick and was exhausted, affecting my exams. This project taught me how to integrate computer vision, embedded systems, mechanical design and autonomous control into a single working robot.</p>
       
       <h3>Resources</h3>
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
-        <a href="https://github.com/BMWareSPEEDY/WRO_yo_error_404" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #333; color: white;">
+      <div class="popup-resources">
+        <a href="https://github.com/BMWareSPEEDY/WRO_yo_error_404" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-dark">
           <i class="fab fa-github"></i> View GitHub Repository
         </a>
-        <a href="https://wro-association.org/" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #0ea5e9; color: white;">
+        <a href="https://wro-association.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
           <i class="fas fa-globe"></i> WRO Association
         </a>
-        <a href="https://wro-association.org/competition/future-engineers/" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #10b981; color: white;">
+        <a href="https://wro-association.org/competition/future-engineers/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-green">
           <i class="fas fa-rocket"></i> Future Engineers Competition
         </a>
       </div>
@@ -421,9 +421,9 @@ export const blogPostsData = {
       </ul>
       <p>To keep things efficient under our tight deadline, we opted for a robust, basic claw design. We bypassed a complex mechanical claw, steering clear of the time-consuming process of waterproofing a servo motor.</p>
 
-      <div style="text-align: center; margin: 2rem 0;">
-        <img src="assets/IMG_2333.png" alt="Team Orcas MATE ROV 2026 Competition" style="max-width: 50%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">me after winning Nationals in India</p>
+      <div class="popup-media-figure">
+        <img src="assets/IMG_2333.png" alt="Team Orcas MATE ROV 2026 Competition">
+        <p class="popup-media-caption">Me after winning Nationals in India</p>
       </div>
 
       <h3>Coding the Depths: Computer Vision and Autonomous 3D Modeling</h3>
@@ -443,6 +443,13 @@ export const blogPostsData = {
       <h3>Looking Ahead to 2027</h3>
       <p>I am incredibly proud of what The Orcas accomplished this year. We built a highly sophisticated bot, conquered regional qualifiers, and developed cutting-edge software.</p>
       <p>Next year, our goal is industrial-grade reliability. We want to focus on rigorous stress-testing to build a more resilient, foolproof robot that can handle the unpredictable nature of international competition. We will be back, smarter, faster, and ready for the deep end!</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://materovcompetition.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-water"></i> MATE ROV Official Site
+        </a>
+      </div>
     `
   },
   'hackmars2026': {
@@ -455,11 +462,9 @@ export const blogPostsData = {
       <h3>Inspiration</h3>
       <p>As a student and software developer, I spend upwards of 8 to 10 hours a day glued to my laptop screen, hunched over lines of code and technical text. Over time, I noticed recurring shoulder fatigue, a stiff neck, and a massive drop in my mental focus during long study blocks. When I looked at existing posture tracking apps on the market, I realized they all shared the same major flaws: they were either massive resource hogs that drained laptop batteries, or they required streaming raw webcam feeds to external cloud servers. For a workspace utility, that felt like an unnecessary privacy violation. I wanted to build a solution that treated my camera as a fully localized, private biomechanical sensor—giving me deep workspace wellness insights without sacrificing my data or melting my computer's CPU.</p>
 
-      <div style="text-align: center; margin: 2rem 0;">
-        <img src="assets/Hack_mars.pdf.png" alt="Hackmars 2026 Track Winner Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <a href="assets/Hack_mars.pdf" target="_blank" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">
-          <i class="fas fa-file-pdf"></i> View Certificate PDF
-        </a>
+      <div class="popup-media-figure">
+        <img src="assets/Hack_mars.pdf.png" alt="Hackmars 2026 Track Winner Certificate">
+        <p class="popup-media-caption">Hackmars 2026 Track Winner Certificate</p>
       </div>
 
       <h3>What It Does</h3>
@@ -501,6 +506,13 @@ export const blogPostsData = {
 
       <h3>What's Next for Ergolearn</h3>
       <p>The immediate next step for ErgoLearn AI is expanding our conversational ecosystem. Our current AI Coach features a dual-tiered architecture that targets a local Ollama instance (running an optimized, quantized LLM model) or falls back to an offline rule-based NLP parser that reads the local posture_history.json logs when Ollama is closed. I want to build out custom, interactive desktop stretch routines where the neon 3D skeleton actively guides the user through shoulder rolls and cervical stretches, updating the UI in real-time as they complete each physical movement correctly.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="assets/Hack_mars.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> View Certificate PDF
+        </a>
+      </div>
     `
   },
   'norcalhacks2026': {
@@ -514,11 +526,9 @@ export const blogPostsData = {
       <p>I witnessed a constant cycle of waste within my school community: seniors discarding expensive textbooks, students outgrowing uniforms, and a Lost & Found bin that resembled a graveyard of forgotten belongings. The true spark, however, was the overwhelming volume of emails I received daily from students desperate to find lost valuables.</p>
       <p>I realized that TISB didn't just need a marketplace; it needed a bridge. Inspired by the Human Interaction theme, I set out to create Verde — a platform that transforms recycling into a social, peer-to-peer connection that benefits both students' wallets and the planet.</p>
 
-      <div style="text-align: center; margin: 2rem 0;">
-        <img src="assets/Norcal_hacks.pdf.png" alt="NorCal Hacks 2026 Track Winner Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <a href="assets/Norcal_hacks.pdf" target="_blank" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">
-          <i class="fas fa-file-pdf"></i> View Certificate PDF
-        </a>
+      <div class="popup-media-figure">
+        <img src="assets/Norcal_hacks.pdf.png" alt="NorCal Hacks 2026 Track Winner Certificate">
+        <p class="popup-media-caption">NorCal Hacks 2026 Track Winner Certificate</p>
       </div>
 
       <h3>What It Does</h3>
@@ -561,6 +571,13 @@ export const blogPostsData = {
         <li>A Wall of Thanks to encourage peer appreciation.</li>
       </ul>
       <p>To prepare for a real-world launch at TISB or within local housing societies, these features will help ensure Verde remains a trusted and secure platform for all users.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="assets/Norcal_hacks.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> View Certificate PDF
+        </a>
+      </div>
     `
   },
   'techkriti26': {
@@ -570,7 +587,10 @@ export const blogPostsData = {
     body: `
       <p>Following our initial participation in 2025, our team returned to IIT Kanpur this year to compete in Techkriti '26. Our objective for this season was to build upon our foundational knowledge by entering three distinct and technically demanding categories: <strong>IARC, Maneuver, and Hovermania</strong>. We are pleased to report podium finishes in two of these events, reflecting a significant year-over-year improvement in our engineering and programming capabilities.</p>
 
-      <img src="assets/techkriti_2025.png" alt="Techkriti 26">
+      <div class="popup-media-figure">
+        <img src="assets/techkriti_2025.png" alt="Techkriti 26 Competition">
+        <p class="popup-media-caption">Our team at IIT Kanpur Techkriti</p>
+      </div>
 
       <h3>Competition Breakdown & Technical Milestones</h3>
 
@@ -594,12 +614,19 @@ export const blogPostsData = {
       <ul>
         <li><strong>Technical Implementation:</strong> The project required a pivot toward lightweight structural engineering and the integration of drone-grade components. We gained extensive experience in thrust-to-weight ratios, ESC (Electronic Speed Controller) calibration, and the unique handling characteristics of amphibious vehicles.</li>
         <li><strong>Outcome:</strong> While we did not secure a podium finish in this inaugural attempt, the technical insights gained regarding brushless motor synchronization and weight distribution were invaluable. We couldn't finish the hovermania competition because one of our ESCs got burned during the final run. It was an unfortunate moment but hardware errors are a part of the learning process and can occur often in robotics.</li>
-        <li><strong>Result:</strong> None</li>
+        <li><strong>Result:</strong> Participation & Key Learnings</li>
       </ul>
 
       <h3>Conclusion and Future Outlook</h3>
       <p>Overall, Techkriti '26 was a pivotal experience for our team. Comparing our performance to the previous year, we have demonstrated a clear trajectory of growth in both hardware integration and software development. While our results in IARC and Maneuver are a source of pride, the challenges faced in Hovermania have provided a clear roadmap for our technical objectives in the coming year.</p>
       <p>We look forward to iterating on these designs and returning to the competition circuit with even more refined solutions.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://techkriti.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-globe"></i> Techkriti IIT Kanpur
+        </a>
+      </div>
     `
   },
   'amo2026': {
@@ -608,9 +635,24 @@ export const blogPostsData = {
     meta: 'Published on March 23, 2026',
     body: `
       <p>The American Mathematics Olympiad (AMO) is an international competition for students from grades 2–12, organized by SIMCC and SIU. It's based on US Common Core Standards and covers topics like algebra, geometry, number theory, and combinatorics. Basically, it's not your average school math—it really pushes how you think. Signing up for AMO this year honestly felt like jumping straight into the deep end.</p>
+      
       <p>For around two to three months before the test, I spent a lot of my free time grinding through textbooks and past papers. But over time, things slowly started to click. Patterns made more sense, and I got better at approaching problems. It was tough, but I just treated every mistake as part of the process and kept going.</p>
-      <img src="assets/amo_26.JPG" alt="AMO Bronze Certificate" style="max-width: 90%; height: auto; display: block; margin: 1.5rem auto; border-radius: 10px;">
-      <p>Going into the exam, I didn't really know what to expect, especially since it's such a competitive exam globally. The questions were tricky in a different way—they needed multiple steps and a lot of logical thinking. In the end, I was honestly really happy (and kinda relieved) to find out I got a Bronze medal. For me, it wasn't just about the result, but more about all the effort that went into it—the long hours, the frustration, and finally seeing it pay off. It definitely made me appreciate math a lot more and showed me how important persistence really is.</p>
+
+      <div class="popup-media-figure">
+        <img src="assets/amo_26.JPG" alt="AMO Bronze Certificate">
+        <p class="popup-media-caption">American Mathematics Olympiad Bronze Medal Certificate</p>
+      </div>
+
+      <h3>The Examination & Reflections</h3>
+      <p>Going into the exam, I didn't really know what to expect, especially since it's such a competitive exam globally. The questions were tricky in a different way—they needed multiple steps and a lot of logical thinking.</p>
+      <p>In the end, I was honestly really happy (and kinda relieved) to find out I got a Bronze medal. For me, it wasn't just about the result, but more about all the effort that went into it—the long hours, the frustration, and finally seeing it pay off. It definitely made me appreciate math a lot more and showed me how important persistence really is.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://simcc.org/competitions/amo/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-award"></i> AMO Competition Details
+        </a>
+      </div>
     `
   },
   'tisbhacks2026': {
@@ -620,9 +662,15 @@ export const blogPostsData = {
     body: `
       <p>As a student at TISB, I noticed a common problem: there wasn't a streamlined way for us to exchange textbooks, uniforms, or electronics within our own community. To solve this, I built <strong>Verde</strong>, a Flutter-based mobile marketplace designed specifically for student life. The goal was simple: create an app where students can list items they no longer need, earn "Eco-Points" for sustainable practices, and chat with buyers—all while staying within a safe, school-verified environment.</p>
 
-      <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; justify-content: center;">
-        <img src="assets/tisbhacks1_page-0001.jpg" alt="EcoSwap UI 1" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-        <img src="assets/tisbhacks1_page-0002.jpg" alt="EcoSwap UI 2" style="max-width: 45%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <div style="display: flex; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center;">
+        <div style="flex: 1 1 300px; max-width: 360px; text-align: center;">
+          <img src="assets/tisbhacks1_page-0001.jpg" alt="Verde UI Screen 1" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); border: 1px solid var(--border-color);">
+          <p class="popup-media-caption">Verde Marketplace Feed & Categories</p>
+        </div>
+        <div style="flex: 1 1 300px; max-width: 360px; text-align: center;">
+          <img src="assets/tisbhacks1_page-0002.jpg" alt="Verde UI Screen 2" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); border: 1px solid var(--border-color);">
+          <p class="popup-media-caption">Listing Detail & Direct Chat</p>
+        </div>
       </div>
 
       <h3>What I Built</h3>
@@ -641,15 +689,12 @@ export const blogPostsData = {
         <li><strong>The "Cold Boot" Challenge:</strong> I spent quite a bit of time debugging networking issues with the Android Emulator! I learned how to manage DNS settings and "Cold Boot" devices to ensure consistent connectivity.</li>
       </ul>
 
-      <hr style="margin: 2rem 0; opacity: 0.1;">
-
-      <p>This event was a fun experience that helped to learn and challenge myself. You can find the source code and a demo of the app below:</p>
-
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
-        <a href="https://github.com/BMWareSPEEDY/TISB-Swap.git" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #333; color: white;">
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://github.com/BMWareSPEEDY/TISB-Swap.git" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-dark">
           <i class="fab fa-github"></i> View on GitHub
         </a>
-        <a href="https://vimeo.com/1155712588?share=copy&fl=sv&fe=ci" target="_blank" class="btn" style="display: inline-block; width: fit-content; margin: 0; padding: 0.8rem 1.5rem; background: #0088cc; color: white;">
+        <a href="https://vimeo.com/1155712588?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
           <i class="fas fa-play"></i> Watch Demo Video
         </a>
       </div>
@@ -661,8 +706,26 @@ export const blogPostsData = {
     meta: 'Published on June 23, 2025',
     body: `
       <p>Secured first place at the MateROV regional competition as part of a 10-member team. Together, we engineered an underwater ROV capable of executing complex underwater missions. We later qualified for the international finals held in Alpena, Michigan, USA, where we proudly placed 35th globally — a strong showing for our first time at the event.</p>
-      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
-      <p>This competition marked my first experience in underwater robotics, providing valuable exposure and learning opportunities.</p>
+      
+      <div class="popup-media-figure">
+        <img src="assets/Science_Fair_Trophy.png" alt="MATE ROV Regional Award">
+        <p class="popup-media-caption">MATE ROV Regional Award Trophy</p>
+      </div>
+
+      <h3>Key Achievements & Takeaways</h3>
+      <ul>
+        <li>Collaborated in a 10-member multidisciplinary engineering squad.</li>
+        <li>Engineered underwater thrust vectoring and tethered communications.</li>
+        <li>Qualified for and competed in the International Finals in Alpena, Michigan.</li>
+        <li>Gained foundational underwater robotics experience that powered our 2026 build.</li>
+      </ul>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://materovcompetition.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-water"></i> MATE ROV Official Site
+        </a>
+      </div>
     `
   },
   'techkriti': {
@@ -670,11 +733,28 @@ export const blogPostsData = {
     title: 'Techkriti Techfest Experience',
     meta: 'Published on March 30, 2025',
     body: `
-      <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned 2nd place in IARC, placed 10th in our category in Robowars, and secured 12th place in Manouver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics. It also greatly expanded my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
+      <p>My team and I participated in three competitions at IIT Kanpur's annual techfest. We earned <strong>2nd place in IARC</strong>, placed 10th in our category in Robowars, and secured 12th place in Maneuver. The experience was both enriching and inspiring, as I had the opportunity to connect with like-minded peers from across the country who share a passion for robotics.</p>
 
-      <img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate" style="max-width: 90%; height: auto; display: block; margin: auto; border-radius: 10px;">
-      <br>
-      <p>This event was a fantastic platform for learning and growth, and I look forward to participating in more such competitions in the future.</p>
+      <div class="popup-media-figure">
+        <img src="assets/techkriti_2025.png" alt="Techkriti Competition Certificate">
+        <p class="popup-media-caption">Techkriti Competition Certificate & Team Recognition</p>
+      </div>
+
+      <h3>Competition Highlights</h3>
+      <ul>
+        <li><strong>IARC (International Autonomous Robotics Challenge):</strong> 2nd Place Podium Finish</li>
+        <li><strong>Robowars:</strong> 10th Place in category</li>
+        <li><strong>Maneuver:</strong> 12th Place in high-speed agility testing</li>
+      </ul>
+
+      <p>This event was a fantastic platform for learning and growth, expanding my understanding of the diverse capabilities of robots—from aerial navigation to combat and high-speed maneuvering.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://techkriti.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-globe"></i> Techkriti IIT Kanpur
+        </a>
+      </div>
     `
   },
   'sciencefair': {
@@ -682,9 +762,21 @@ export const blogPostsData = {
     title: 'Science Fair Victory',
     meta: 'Published on March 21, 2025',
     body: `
-      <p>After two months of hard work, my team of five and I won first place in the Science Fair under the Still Model category. As the team leader, I was responsible for designing the model. I used Blender, a 3D modeling software, and with some help from the internet for reference images, I created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes. This helped me expand my biology and chemistry knowledge beyond the syllabus. It was a unique experience, and I felt incredibly proud and happy when we won.</p>
+      <p>After two months of hard work, my team of five and I won first place in the Science Fair under the <strong>Still Model category</strong>. As the team leader, I was responsible for designing the model.</p>
 
-      <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Model">
+      <div class="popup-media-figure">
+        <img src="assets/Science_Fair_Trophy.png" alt="Science Fair Winning Trophy">
+        <p class="popup-media-caption">1st Place Science Fair Trophy</p>
+      </div>
+
+      <h3>Project Execution</h3>
+      <p>I used Blender, a 3D modeling software, and with reference images, created a model that turned out almost perfectly. I also helped prepare the presentation and conducted research on key information about enzymes, expanding my biology and chemistry knowledge beyond the syllabus.</p>
+
+      <ul>
+        <li>Led a team of five students from concept design to final exhibition.</li>
+        <li>Modeled complex anatomical enzyme structures using 3D modeling tools.</li>
+        <li>Delivered the primary technical presentation to the judge panel.</li>
+      </ul>
 
       <p>This experience reinforced how dividing tasks and leveraging everyone's strengths leads to the best possible outcome.</p>
     `
@@ -695,11 +787,22 @@ export const blogPostsData = {
     meta: 'Published on March 15, 2025',
     body: `
       <p>Odyssey of the Mind helps students unlock their creativity and become confident problem-solvers. Faced with challenges that demand original solutions, students learn to think outside the box without fear. The creative thinking and self-belief they develop in OM stays with them for life, empowering them in every area they pursue.</p>
-      <p>Led the team to State Finals, managing tasks and boosting morale. Narrowly missed qualifying for the World Finals.</p>
-      <a href="https://odysseyofthemind.com/">Official website of Odyssey of the Mind</a>
-      <br>
-      <img src="https://via.placeholder.com/800x400" alt="Odyssey Team Photo">
-      <p>I was responsible for organizing tasks, ensuring timely submissions, and keeping the team spirit alive.</p>
+      
+      <h3>Leading the Team</h3>
+      <p>Led the team to the <strong>State Finals</strong>, managing tasks, ensuring timely submissions, and boosting team morale under tight competition deadlines. We narrowly missed qualifying for the World Finals, but the problem-solving and leadership skills gained were invaluable.</p>
+
+      <ul>
+        <li>Organized task allocation and sprint milestones across the team.</li>
+        <li>Coordinated creative problem-solving exercises and spontaneous challenges.</li>
+        <li>Fostered team resilience through high-pressure judging rounds.</li>
+      </ul>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://odysseyofthemind.com/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-globe"></i> Official Odyssey of the Mind Website
+        </a>
+      </div>
     `
   },
   'tisbhacks': {
@@ -708,13 +811,23 @@ export const blogPostsData = {
     meta: 'Published on January 26, 2025',
     body: `
       <p>TISB Hacks – Senior Coding is a competitive coding challenge for school students that tests algorithmic thinking, problem-solving, and programming skills under time pressure. It's designed for experienced coders ready to flex their skills in a fast-paced environment.</p>
-      <p>My friend and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
-      <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani">This is the github project link for the app</a>
-      <br>
-      <a href="https://tisbhacks.tisb.org/">This is the website for the competition</a>
-      <br>
-      <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate" style="transform: rotate(90deg); max-width: 100%; height: auto;">
-      <p>This event was a fun experience that helped to learn and challenge myself</p>
+      
+      <p>My teammate and I developed an app that tracks meteors, allowing users to view detailed information and locations of meteor sightings. I was responsible for the front-end and overall app development, while my teammate handled the backend, which scraped a government database for relevant meteor data. Despite the tight deadline of the hackathon, I successfully built a user-friendly interface that effectively presented the extracted data in a clear and accessible format.</p>
+
+      <div class="popup-media-figure">
+        <img src="assets/tisb_Hacks_2025.png" alt="TISB Hacks Competition Certificate">
+        <p class="popup-media-caption">TISB Hacks Certificate of Participation</p>
+      </div>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="https://github.com/BMWareSPEEDY/meteor-Tracking-app-by-Ayansh-Paliwal-and-Sidharth-Banglani" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-dark">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+        <a href="https://tisbhacks.tisb.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-globe"></i> Competition Website
+        </a>
+      </div>
     `
   },
 };
