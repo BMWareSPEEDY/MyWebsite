@@ -171,19 +171,28 @@ export function initTelemetry() {
     }
   };
 
+  let activeSources = [];
+
+  const cleanupSources = () => {
+    activeSources.forEach((src) => {
+      try {
+        src.stop(0);
+        src.disconnect();
+      } catch (_) {}
+    });
+    activeSources = [];
+    idleSource = null;
+    midSource = null;
+    highSource = null;
+  };
+
   const startEnginePlayback = () => {
     if (!audioCtx || !idleBuffer) return;
     try {
-      // Clean up previous sources if any
-      [idleSource, midSource, highSource].forEach((src) => {
-        if (src) {
-          try { src.stop(); src.disconnect(); } catch (_) {}
-        }
-      });
-
+      cleanupSources();
       const now = audioCtx.currentTime;
 
-      // 1. Idle Layer (3.6s loop)
+      // 1. Idle Layer
       idleGain = audioCtx.createGain();
       idleGain.gain.setValueAtTime(0.42, now);
       idleGain.connect(engineFilter);
@@ -194,8 +203,9 @@ export function initTelemetry() {
       idleSource.playbackRate.setValueAtTime(1.0, now);
       idleSource.connect(idleGain);
       idleSource.start(0, 0);
+      activeSources.push(idleSource);
 
-      // 2. Mid Layer (3.5s loop, phase-offset 0.8s)
+      // 2. Mid Layer
       if (midBuffer) {
         midGain = audioCtx.createGain();
         midGain.gain.setValueAtTime(0, now);
@@ -206,10 +216,11 @@ export function initTelemetry() {
         midSource.loop = true;
         midSource.playbackRate.setValueAtTime(1.0, now);
         midSource.connect(midGain);
-        midSource.start(0, 0.8);
+        midSource.start(0, 0.4);
+        activeSources.push(midSource);
       }
 
-      // 3. High Redline Layer (loop with phase offset)
+      // 3. High Redline Layer
       if (highBuffer) {
         highGain = audioCtx.createGain();
         highGain.gain.setValueAtTime(0, now);
@@ -220,13 +231,14 @@ export function initTelemetry() {
         highSource.loop = true;
         highSource.playbackRate.setValueAtTime(1.0, now);
         highSource.connect(highGain);
-        highSource.start(0, 1.2);
+        highSource.start(0, 0.8);
+        activeSources.push(highSource);
       }
 
-      // Update crossfade weights immediately for current RPM
       updateEngineAudio(currentRpm);
-
-      masterGain.gain.setTargetAtTime(0.50, now, 0.08);
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setValueAtTime(0, now);
+      masterGain.gain.linearRampToValueAtTime(0.50, now + 0.08);
     } catch (err) {
       console.warn('Error starting engine playback:', err);
     }
@@ -234,19 +246,13 @@ export function initTelemetry() {
 
   const stopEnginePlayback = () => {
     if (!audioCtx || !masterGain) return;
-    masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.08);
+    const now = audioCtx.currentTime;
+    masterGain.gain.cancelScheduledValues(now);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+    masterGain.gain.linearRampToValueAtTime(0, now + 0.05);
     window.setTimeout(() => {
-      if (!audioEnabled) {
-        [idleSource, midSource, highSource].forEach((src) => {
-          if (src) {
-            try { src.stop(); src.disconnect(); } catch (_) {}
-          }
-        });
-        idleSource = null;
-        midSource = null;
-        highSource = null;
-      }
-    }, 120);
+      cleanupSources();
+    }, 60);
   };
 
   const triggerPopCrackle = () => {
@@ -256,17 +262,24 @@ export function initTelemetry() {
       const buffer = popBuffers[popIndex % popBuffers.length];
       popIndex++;
 
-      // Pristine unclipped recorded BMW M exhaust pop with natural acoustic clarity
+      // Duck continuous engine volume slightly for 70ms so gunshot pop punches through cleanly
+      if (masterGain) {
+        masterGain.gain.cancelScheduledValues(now);
+        masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+        masterGain.gain.linearRampToValueAtTime(0.28, now + 0.012);
+        masterGain.gain.linearRampToValueAtTime(0.50, now + 0.085);
+      }
+
       const popSource = audioCtx.createBufferSource();
       popSource.buffer = buffer;
-      popSource.playbackRate.value = 0.96 + Math.random() * 0.08;
+      popSource.playbackRate.value = 0.97 + Math.random() * 0.06;
 
       const popFilter = audioCtx.createBiquadFilter();
       popFilter.type = 'highpass';
       popFilter.frequency.setValueAtTime(70, now);
 
       const popGain = audioCtx.createGain();
-      popGain.gain.setValueAtTime(0.55 + Math.random() * 0.08, now);
+      popGain.gain.setValueAtTime(0.58 + Math.random() * 0.08, now);
 
       popSource.connect(popFilter);
       popFilter.connect(popGain);
@@ -282,92 +295,118 @@ export function initTelemetry() {
     if (!audioCtx || !audioEnabled || !idleSource) return;
     const now = audioCtx.currentTime;
 
-    // Organic micro-drift: ensures parked/sustained RPMs never sound like a static repeating tape loop
-    const microDrift = Math.sin(now * 0.8) * 0.007 + Math.cos(now * 1.3) * 0.004;
+    // Organic micro-drift: ensures parked/sustained RPMs never sound static
+    const microDrift = Math.sin(now * 0.8) * 0.005 + Math.cos(now * 1.3) * 0.003;
 
-    // ------------------------------------------------------------------
-    // Equal-Power 3-Layer Crossfading:
-    //  - Idle Layer (3.8k - 7.5k)
-    //  - Mid Layer  (5.5k - 11.5k)
-    //  - High Layer (10.0k - 15.0k)
-    // At all times: wIdle² + wMid² + wHigh² = 1.0 (constant acoustic power!)
-    // ------------------------------------------------------------------
+    // Detect throttle lift / deceleration:
+    // When target is below current by > 0.6k RPM, throttle is closed and engine is winding down
+    const isDecel = (targetRpm < currentRpm - 0.6);
+
     let wIdle = 0;
     let wMid = 0;
     let wHigh = 0;
 
-    if (rpm <= 4.8) {
-      wIdle = 1.0;
-      wMid = 0.0;
-      wHigh = 0.0;
-    } else if (rpm <= 8.2) {
-      // Equal-power crossfade between Idle and Mid
-      const t = (rpm - 4.8) / 3.4;
-      const angle = t * (Math.PI / 2);
-      wIdle = Math.cos(angle);
-      wMid = Math.sin(angle);
-      wHigh = 0.0;
-    } else if (rpm <= 10.5) {
-      // Steady Mid-range
-      wIdle = 0.0;
-      wMid = 1.0;
-      wHigh = 0.0;
-    } else if (rpm <= 13.2) {
-      // Equal-power crossfade between Mid and High
-      const t = (rpm - 10.5) / 2.7;
-      const angle = t * (Math.PI / 2);
-      wIdle = 0.0;
-      wMid = Math.cos(angle);
-      wHigh = Math.sin(angle);
+    if (isDecel) {
+      // Deceleration overrun: High winds down directly into Idle without Mid rev flare
+      if (rpm >= 11.0) {
+        wIdle = 0.0;
+        wMid = 0.0;
+        wHigh = 1.0;
+      } else if (rpm >= 5.5) {
+        const t = (rpm - 5.5) / 5.5;
+        wHigh = t;
+        wIdle = 1.0 - t;
+        wMid = 0.0;
+      } else {
+        wIdle = 1.0;
+        wMid = 0.0;
+        wHigh = 0.0;
+      }
     } else {
-      // Full screaming High-RPM roar & limiter bounce (13.2k - 15.0k)
-      wIdle = 0.0;
-      wMid = 0.0;
-      wHigh = 1.0;
+      // Acceleration / Steady: Tight handover zones so only ONE engine layer dominates
+      if (rpm <= 5.2) {
+        wIdle = 1.0;
+        wMid = 0.0;
+        wHigh = 0.0;
+      } else if (rpm <= 7.2) {
+        const t = (rpm - 5.2) / 2.0;
+        const angle = t * (Math.PI / 2);
+        wIdle = Math.cos(angle);
+        wMid = Math.sin(angle);
+        wHigh = 0.0;
+      } else if (rpm <= 11.8) {
+        wIdle = 0.0;
+        wMid = 1.0;
+        wHigh = 0.0;
+      } else if (rpm <= 13.2) {
+        const t = (rpm - 11.8) / 1.4;
+        const angle = t * (Math.PI / 2);
+        wIdle = 0.0;
+        wMid = Math.cos(angle);
+        wHigh = Math.sin(angle);
+      } else {
+        wIdle = 0.0;
+        wMid = 0.0;
+        wHigh = 1.0;
+      }
     }
 
-    // Ultra-low latency gain transition across layers (tracks needle smoothly at 60/120fps)
-    const baseVol = 0.44;
-    idleGain.gain.setTargetAtTime(wIdle * baseVol, now, 0.008);
-    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.06), now, 0.008);
-    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.15), now, 0.008);
+    // Closed-throttle attenuation during deceleration
+    const loadFactor = isDecel ? 0.78 : 1.0;
+    const baseVol = 0.44 * loadFactor;
 
-    // Dynamic pitch tracking: responds instantaneously to live needle position
-    idleSource.playbackRate.setTargetAtTime(0.94 + ((rpm - 4.2) / 18.0) + microDrift, now, 0.008);
+    idleGain.gain.setTargetAtTime(wIdle * baseVol, now, 0.005);
+    if (midGain) midGain.gain.setTargetAtTime(wMid * (baseVol * 1.04), now, 0.005);
+    if (highGain) highGain.gain.setTargetAtTime(wHigh * (baseVol * 1.12), now, 0.005);
+
+    // Dynamic pitch tracking: clamped strictly within natural acoustic boundaries
+    const rateIdle = clamp(0.94 + ((rpm - 4.2) / 16.0) + microDrift, 0.90, 1.25);
+    idleSource.playbackRate.setTargetAtTime(rateIdle, now, 0.005);
 
     if (midSource) {
-      midSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 8.5) / 20.0) + microDrift, now, 0.008);
+      const rateMid = clamp(0.96 + ((rpm - 9.0) / 18.0) + microDrift, 0.88, 1.22);
+      midSource.playbackRate.setTargetAtTime(rateMid, now, 0.005);
     }
 
     if (highSource) {
-      highSource.playbackRate.setTargetAtTime(0.96 + ((rpm - 13.5) / 24.0) + microDrift, now, 0.008);
+      const rateHigh = clamp(0.96 + ((rpm - 13.5) / 20.0) + microDrift, 0.85, 1.15);
+      highSource.playbackRate.setTargetAtTime(rateHigh, now, 0.005);
     }
 
-    // Master acoustic tone filter: opens up into unrestricted screaming twin-turbo roar at high RPM
+    // Acoustic tone filter: opens up into unrestricted screaming twin-turbo roar at high RPM
     const fraction = clamp(rpm / MAX_RPM, 0, 1);
-    const cutoff = 1800 + Math.pow(fraction, 1.2) * 7500;
-    engineFilter.frequency.setTargetAtTime(cutoff, now, 0.010);
+    const filterMax = isDecel ? 5000 : 8500;
+    const cutoff = 1800 + Math.pow(fraction, 1.2) * (filterMax - 1800);
+    engineFilter.frequency.setTargetAtTime(cutoff, now, 0.008);
   };
+
+  let isTogglingSound = false;
 
   if (soundToggleBtn) {
     soundToggleBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
-      await initAudio();
-      if (!audioCtx) return;
+      if (isTogglingSound) return;
+      isTogglingSound = true;
+      try {
+        await initAudio();
+        if (!audioCtx) return;
 
-      if (audioCtx.state === 'suspended') {
-        await audioCtx.resume();
-      }
+        if (audioCtx.state === 'suspended') {
+          await audioCtx.resume();
+        }
 
-      audioEnabled = !audioEnabled;
-      if (audioEnabled) {
-        soundToggleBtn.classList.add('is-active');
-        soundToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span>M5 V8 ON</span>';
-        startEnginePlayback();
-      } else {
-        soundToggleBtn.classList.remove('is-active');
-        soundToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i> <span>M5 Audio</span>';
-        stopEnginePlayback();
+        audioEnabled = !audioEnabled;
+        if (audioEnabled) {
+          soundToggleBtn.classList.add('is-active');
+          soundToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span>M5 V8 ON</span>';
+          startEnginePlayback();
+        } else {
+          soundToggleBtn.classList.remove('is-active');
+          soundToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i> <span>M5 Audio</span>';
+          stopEnginePlayback();
+        }
+      } finally {
+        setTimeout(() => { isTogglingSound = false; }, 200);
       }
     });
   }
@@ -411,9 +450,9 @@ export function initTelemetry() {
    * 3. Ignition-cut Hard Rev Limiter Bounce right at the extreme end:
    *    Needle hits 15.0, ECU cuts ignition -> needle dips to 14.5k -> raw fuel detonates
    *    in exhaust tract -> LOUD POP/BANG -> needle kicks back to 15.0k limiter!
-   * 4. Clean, smooth engine decel (throttle release) from 15.0k down to 4.2k idle (no pops)
-   * 5. Low idle breathing (4.0 - 4.4k)
-   * 6. Mid-range cruising pull (7.2 - 8.2k)
+   * 4. Clean, smooth engine overrun decel (throttle release) from 15.0k down to 4.1k idle
+   * 5. Low idle breathing (3.9 - 4.4k)
+   * 6. Mid-range cruising pull (7.4 - 8.2k)
    * 7. Rapid twin downshift blips & smooth return to sweet idle
    */
   const runSequence = () => {
@@ -427,24 +466,20 @@ export function initTelemetry() {
       { target: 3.9, hold: 800, speed: 4 },
 
       // 2. Wide-open throttle pull to the extreme end of the dial (15.0k RPM)
-      { target: 15.0, hold: 550, speed: 11 }, // aggressive climb to extreme redline!
+      { target: 15.0, hold: 550, speed: 11 },
 
-      // 3. Ignition-cut Hard Rev Limiter Bounce right at the extreme end (15.0k):
-      // Each time the needle bounces off the 15.0k limiter, the ignition cut fires an authentic gunshot pop/bang!
-      { target: 14.5, hold: 150, speed: 15, pop: true }, // Limiter bounce 1 & Pop!
-      { target: 15.0, hold: 200, speed: 16 },            // Needle surges back to 15.0k
-      { target: 14.4, hold: 150, speed: 15, pop: true }, // Limiter bounce 2 & Pop!
-      { target: 15.0, hold: 200, speed: 16 },            // Needle surges back to 15.0k
-      { target: 14.6, hold: 150, speed: 15, pop: true }, // Limiter bounce 3 & Pop!
-      { target: 15.0, hold: 220, speed: 16 },            // Needle surges back to 15.0k
+      // 3. Ignition-cut Hard Rev Limiter Bounce (15.0k):
+      { target: 14.5, hold: 160, speed: 16, pop: true }, // Limiter bounce 1 & Pop!
+      { target: 15.0, hold: 200, speed: 16 },
+      { target: 14.4, hold: 160, speed: 16, pop: true }, // Limiter bounce 2 & Pop!
+      { target: 15.0, hold: 200, speed: 16 },
+      { target: 14.6, hold: 160, speed: 16, pop: true }, // Limiter bounce 3 & Pop!
+      { target: 15.0, hold: 220, speed: 16 },
       { target: 14.5, hold: 180, speed: 14, pop: true }, // Final limiter bang & throttle lift!
 
-      // 4. Smooth throttle lift & clean engine overrun deceleration (NO pops on drop down):
-      // The needle glides smoothly from 15.0 down through 10.2 -> 7.2 -> 5.2 -> 4.1
-      { target: 10.2, hold: 320, speed: 6 },
-      { target: 7.2, hold: 340, speed: 5 },
-      { target: 5.2, hold: 360, speed: 4.5 },
-      { target: 4.1, hold: 1200, speed: 4 }, // settles into sweet warm idle
+      // 4. Smooth throttle lift & clean engine overrun deceleration:
+      // Single continuous natural descent all the way from redline to warm idle
+      { target: 4.1, hold: 1900, speed: 4.2 },
 
       // 5. Low idle breathing
       { target: 4.4, hold: 800, speed: 3.5 },
@@ -456,10 +491,10 @@ export function initTelemetry() {
       { target: 7.6, hold: 600, speed: 4.5 },
 
       // 7. Rapid twin downshift blips (blip... blip!)
-      { target: 10.6, hold: 240, speed: 11 }, // first blip
+      { target: 10.6, hold: 240, speed: 11 },
       { target: 6.8, hold: 220, speed: 8 },
-      { target: 11.2, hold: 260, speed: 11 }, // second blip
-      { target: 4.2, hold: 1500, speed: 4.5 }, // smooth glide down to idle
+      { target: 11.2, hold: 260, speed: 11 },
+      { target: 4.2, hold: 1500, speed: 4.5 },
       { target: 4.0, hold: 1200, speed: 3.5 }
     ];
 
