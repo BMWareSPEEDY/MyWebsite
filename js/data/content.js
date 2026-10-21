@@ -387,6 +387,9 @@ export const blogPostsData = {
       
       <h3>Resources</h3>
       <div class="popup-resources">
+        <a href="assets/Engineering_Journal.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-book"></i> Read Engineering Journal (PDF)
+        </a>
         <a href="https://github.com/BMWareSPEEDY/WRO_yo_error_404" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-dark">
           <i class="fab fa-github"></i> View GitHub Repository
         </a>
