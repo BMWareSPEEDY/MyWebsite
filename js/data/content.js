@@ -891,6 +891,18 @@ export const achievementsData = {
   ],
   software: [
     {
+      id: 'youthcodexai2026',
+      title: 'YouthCodeXAI Hackathon',
+      date: 'July 18, 2026',
+      description: 'Competed in the YouthCodeXAI Hackathon organized by the YouthCodeFoundation, building AI-driven solutions using modern intelligent systems and collaborative software engineering.'
+    },
+    {
+      id: 'buildwithpython2026',
+      title: 'Build with Python Hackathon - 1st Place',
+      date: 'July 16, 2026',
+      description: 'Awarded 1st Place Winner in the Build with Python Hackathon presented by CS4Everyone for ErgoLearn AI, a privacy-first computer vision posture and ergonomics tracker.'
+    },
+    {
       id: 'hackmars2026',
       title: 'Hackmars 2026 - Track Winner',
       date: 'June 15, 2026',
