@@ -591,13 +591,13 @@ export const blogPostsData = {
     body: `
       <p>Following our initial participation in 2025, our team returned to IIT Kanpur this year to compete in Techkriti '26. Our objective for this season was to build upon our foundational knowledge by entering three distinct and technically demanding categories: <strong>IARC, Maneuver, and Hovermania</strong>. We are pleased to report podium finishes in two of these events, reflecting a significant year-over-year improvement in our engineering and programming capabilities.</p>
 
-      <div style="display: flex; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center;">
-        <div style="flex: 1 1 300px; max-width: 360px; text-align: center;">
-          <img src="assets/IITK-manoeuver.pdf.png" alt="Techkriti '26 Maneuver 2nd Place Certificate" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(3, 30, 73, 0.12); border: 1px solid var(--border-color); object-fit: contain;">
+      <div class="popup-media-grid">
+        <div class="popup-media-card">
+          <img src="assets/IITK-manoeuver.pdf.png" alt="Techkriti '26 Maneuver 2nd Place Certificate">
           <p class="popup-media-caption">Maneuver – 2nd Place Certificate</p>
         </div>
-        <div style="flex: 1 1 300px; max-width: 360px; text-align: center;">
-          <img src="assets/IITK-IARC.pdf.png" alt="Techkriti '26 IARC 3rd Place Certificate" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(3, 30, 73, 0.12); border: 1px solid var(--border-color); object-fit: contain;">
+        <div class="popup-media-card">
+          <img src="assets/IITK-IARC.pdf.png" alt="Techkriti '26 IARC 3rd Place Certificate">
           <p class="popup-media-caption">IARC – 3rd Place Certificate</p>
         </div>
       </div>
