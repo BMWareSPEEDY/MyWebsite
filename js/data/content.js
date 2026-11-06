@@ -349,6 +349,85 @@ export const projectsData = {
 // Blog Posts Data (used by Blog Section & Popups)
 // ============================================================================
 export const blogPostsData = {
+  'icsc2026': {
+    id: 'icsc2026',
+    title: 'Top 7% at ICSC 2026',
+    meta: 'Published on September 21, 2026',
+    body: `
+      <p>This year I competed in the <strong>International Computer Science Competition (ICSC) 2026</strong>.</p>
+
+      <p>I finished in the <strong>top 7% of all participants</strong> and reached the <strong>Final Round</strong>. Getting that far was never the plan — I signed up mostly because I wanted to see how I would hold up against a problem set I had never seen before.</p>
+
+      <p>ICSC runs across three rounds: a qualification round, a pre-final round, and a supervised final exam. Each one raised the bar, and each one taught me something different about how I think.</p>
+
+      <div class="popup-media-grid">
+        <div class="popup-media-card">
+          <img src="assets/ICSC_participation.pdf.png" alt="ICSC 2026 Participation Certificate">
+          <p class="popup-media-caption">Qualification Round — Participation Certificate</p>
+        </div>
+        <div class="popup-media-card">
+          <img src="assets/ICSC_26_pre_final.pdf.png" alt="ICSC 2026 Pre-Final Certificate">
+          <p class="popup-media-caption">Pre-Final Round — Certificate of Completion</p>
+        </div>
+        <div class="popup-media-card">
+          <img src="assets/ICSC_final_round.pdf.png" alt="ICSC 2026 Finalist Certificate">
+          <p class="popup-media-caption">Final Round — Finalist Certificate (Top 7%)</p>
+        </div>
+        <div class="popup-media-card">
+          <img src="assets/ICSC_performance_report.pdf.png" alt="ICSC 2026 Performance Report">
+          <p class="popup-media-caption">Official 2026 Performance Report</p>
+        </div>
+      </div>
+
+      <h3>How the competition worked</h3>
+      <p>The <strong>Qualification Round</strong> was pure competitive programming. We were given algorithmic problems and judged against hidden test cases, and the certificate notes a special honour for submitting code that was evaluated and passed every one of them. That round was a reminder that a solution only counts once it survives edge cases you did not think of.</p>
+      <p>The <strong>Pre-Final Round</strong> in August pushed the difficulty up another level and decided who advanced. Clearing it put me in the <strong>Final Round</strong> in September: a supervised, 40-minute exam worth 8 points, open to finalists from around the world.</p>
+
+      <h3>The final exam was not a normal coding test</h3>
+      <p>The final was split into two very different halves.</p>
+      <p>The first half was built around a real research paper — <em>“Laser writing in glass for dense, fast and efficient archival data storage”</em>, the Microsoft Research paper on <strong>Project Silica</strong> published in <em>Nature</em> earlier this year. Instead of asking us to write code, the paper asked us to understand a full engineered system: how femtosecond lasers write voxels inside fused silica, how data density and write efficiency are calculated, how the readout pipeline uses polarisation microscopy and a CNN decoder, and how accelerated ageing and the Arrhenius equation are used to claim a storage lifetime of more than 10,000 years.</p>
+      <p>The second half was classic computer science under time pressure: algorithm and complexity analysis, bitwise manipulation, and discrete mathematics and combinatorics.</p>
+
+      <h3>The hardest part: reading a paper written for researchers</h3>
+      <p>By far the biggest challenge was understanding the research paper. It is not written for a high-school student. Every paragraph assumes familiarity with optics, information theory, materials science, and machine learning, and the vocabulary is dense enough that a single sentence can take ten minutes to unpack.</p>
+      <p>My approach was to stop reading it like a textbook and start reading it like a system. I sketched the pipeline first — user data, preprocessing, symbol mapping, laser writing, glass storage, microscopy readout, CNN inference, error correction, output — and only then went back to the details inside each stage. Once I knew where a formula belonged, the formula made far more sense than it did in isolation.</p>
+      <p>The second difficulty was the wording of the questions themselves. They were phrased very differently from the problems I am used to solving in school or on practice platforms: less “implement this algorithm” and more “given this system and these constraints, what follows?”. I had to slow down, restate each question in my own words, and work out exactly what was being asked before reaching for any technique.</p>
+
+      <h3>What I took away from it</h3>
+      <ul>
+        <li><strong>Problem solving matters more than syntax.</strong> Knowing a programming language is only one part of being a good programmer. The real work is understanding the problem, choosing an approach, and knowing why it is correct.</li>
+        <li><strong>Reading technical literature is a skill of its own.</strong> The paper was harder than any single problem on the exam, and working through it was the most valuable part of the whole experience.</li>
+        <li><strong>Unfamiliar framing is the point.</strong> Real problems do not arrive labelled with the technique they need. Being comfortable with that discomfort is something I am still learning.</li>
+        <li><strong>Time pressure changes how you think.</strong> Forty supervised minutes forces you to commit to an approach and move, instead of polishing a solution forever.</li>
+      </ul>
+
+      <h3>Final thoughts</h3>
+      <p>Finishing in the top 7% is a result I am genuinely proud of, but the experience mattered just as much as the number. ICSC pushed me into material I would never have read on my own, and it made me a more careful reader and a more deliberate problem-solver.</p>
+      <p>I am looking forward to trying again next year — this time with a better idea of what the paper is going to ask of me.</p>
+
+      <h3>Resources</h3>
+      <div class="popup-resources">
+        <a href="assets/ICSC_participation.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> Participation Certificate
+        </a>
+        <a href="assets/ICSC_26_pre_final.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> Pre-Final Certificate
+        </a>
+        <a href="assets/ICSC_final_round.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> Finalist Certificate
+        </a>
+        <a href="assets/ICSC_performance_report.pdf" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-red">
+          <i class="fas fa-file-pdf"></i> Performance Report
+        </a>
+        <a href="https://icscompetition.org/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-blue">
+          <i class="fas fa-globe"></i> ICSC Official Site
+        </a>
+        <a href="https://www.microsoft.com/en-us/research/project/project-silica/" target="_blank" rel="noopener noreferrer" class="popup-btn popup-btn-dark">
+          <i class="fas fa-flask"></i> Project Silica (Microsoft Research)
+        </a>
+      </div>
+    `
+  },
   'wro2026': {
     id: 'wro2026',
     title: 'WRO 2026 Future Engineers',
@@ -890,6 +969,13 @@ export const achievementsData = {
     }
   ],
   software: [
+    {
+      id: 'icsc2026',
+      title: 'ICSC 2026 - Top 7% & Finalist',
+      date: 'September 21, 2026',
+      description: 'Placed in the top 7% of all participants in the International Computer Science Competition 2026 and reached the supervised Final Round, scoring 8 points across a research-paper analysis and algorithmic exam.',
+      blogId: 'icsc2026'
+    },
     {
       id: 'youthcodexai2026',
       title: 'YouthCodeXAI Hackathon',
